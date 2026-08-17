@@ -1,0 +1,57 @@
+<div class="dev-page">
+  <header class="dev-head">
+    <span class="dev-eyebrow">// 02 — experience</span>
+    <h1 class="dev-title">Experience</h1>
+    <p class="dev-lede">
+      {{ total }} roles across research, applied data science, developer advocacy, and
+      community leadership — three of them running at the same time.
+    </p>
+  </header>
+
+  <div class="filters" role="group" aria-label="Filter roles">
+    @for (kind of kinds; track kind) {
+      <button
+        type="button"
+        class="filter"
+        [class.is-on]="filter() === kind"
+        (click)="select(kind)"
+        [attr.aria-pressed]="filter() === kind"
+      >
+        {{ kind }}
+        <span class="filter__count">{{ countFor(kind) }}</span>
+      </button>
+    }
+  </div>
+
+  <ol class="roles">
+    @for (role of roles(); track role.org + role.title; let i = $index) {
+      <li class="role" [style.--stagger]="i">
+        <span class="role__spine" aria-hidden="true"></span>
+        <span class="role__node" aria-hidden="true"></span>
+
+        <div class="role__head">
+          <span class="dev-chip">{{ role.kind }}</span>
+          <span class="dev-meta">{{ role.window }}</span>
+        </div>
+
+        <h2 class="role__title">{{ role.title }}</h2>
+        <p class="role__org dev-wire">{{ role.org }}</p>
+        <p class="dev-meta">{{ role.place }}</p>
+
+        <ul class="dev-bullets">
+          @for (bullet of role.bullets; track bullet) {
+            <li>{{ bullet }}</li>
+          }
+        </ul>
+
+        @if (role.assets?.length) {
+          <app-asset-strip [assets]="role.assets!" label="certificates & photos" />
+        }
+      </li>
+    }
+  </ol>
+
+  @if (!roles().length) {
+    <p class="empty">No roles in this category.</p>
+  }
+</div>

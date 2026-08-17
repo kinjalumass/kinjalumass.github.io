@@ -1,0 +1,82 @@
+<div class="dev-page">
+  <header class="dev-head">
+    <span class="dev-eyebrow">// 05 — resume</span>
+    <h1 class="dev-title">Resume</h1>
+    <p class="dev-lede">
+      Three versions, each weighted for a different track. Pick one to preview it here,
+      or download the PDF directly.
+    </p>
+  </header>
+
+  <div class="switch">
+    <div class="switch__tabs" role="tablist" aria-label="Resume version">
+      @for (doc of docs; track doc.id) {
+        <button
+          type="button"
+          role="tab"
+          class="tab"
+          [class.is-on]="activeId() === doc.id"
+          [attr.aria-selected]="activeId() === doc.id"
+          (click)="select(doc.id)"
+        >
+          <span class="tab__dot" aria-hidden="true"></span>
+          {{ doc.label }}
+        </button>
+      }
+    </div>
+
+    <div class="switch__actions">
+      <a class="action" [href]="active().file" target="_blank" rel="noopener">
+        Open <span aria-hidden="true">↗</span>
+      </a>
+      <a class="action action--primary" [href]="active().file" [attr.download]="active().download">
+        Download <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+
+  <p class="note">{{ active().note }}</p>
+
+  <!-- ========================================================
+       Viewer
+       ======================================================== -->
+
+  <section class="viewer" [attr.data-doc]="activeId()">
+    <header class="viewer__bar">
+      <span class="viewer__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="viewer__file">{{ active().download }}</span>
+      <span class="viewer__badge">pdf</span>
+    </header>
+
+    @if (canEmbed()) {
+      <div class="viewer__stage">
+        @if (loading()) {
+          <div class="viewer__shade">
+            <span class="viewer__scan" aria-hidden="true"></span>
+            <span class="viewer__loading">loading document…</span>
+          </div>
+        }
+
+        <iframe
+          class="viewer__frame"
+          [src]="src()"
+          [title]="active().label + ' resume preview'"
+          (load)="onLoaded()"
+        ></iframe>
+      </div>
+    } @else {
+      <div class="viewer__fallback">
+        <span class="viewer__glyph" aria-hidden="true">▤</span>
+        <p class="viewer__fallback-text">
+          Inline preview is unreliable on small screens. Open or download the PDF instead.
+        </p>
+        <div class="viewer__fallback-actions">
+          <a class="action" [href]="active().file" target="_blank" rel="noopener">Open PDF ↗</a>
+          <a class="action action--primary" [href]="active().file" [attr.download]="active().download">
+            Download ↓
+          </a>
+        </div>
+      </div>
+    }
+  </section>
+</div>

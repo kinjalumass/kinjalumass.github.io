@@ -1,0 +1,127 @@
+<div
+  class="ent-page"
+  [style.--v1]="v.palette.a"
+  [style.--v2]="v.palette.b"
+  [style.--v3]="v.palette.c"
+>
+  <!-- ===== Hero: centred type, offset image collage below ===== -->
+  <section class="hero">
+    <div class="ent-wrap hero__inner">
+      <span class="ent-sticker hero__sticker">{{ v.index }} · {{ v.sector }}</span>
+      <h1 class="ent-h1 hero__title">
+        <span class="hero__cal">Calend</span><span class="ent-stroke">AI</span>
+      </h1>
+      <p class="hero__tagline">{{ v.tagline }}</p>
+      <p class="ent-lede hero__lede">{{ v.lede }}</p>
+      <div class="hero__actions">
+        <a class="ent-btn ent-btn--solid" href="mailto:kinjalpandey18&#64;gmail.com">
+          Talk about it <span aria-hidden="true">→</span>
+        </a>
+        <a class="ent-btn ent-btn--ghost" routerLink="/entrepreneur">All ventures</a>
+      </div>
+    </div>
+
+    <div class="collage">
+      <div class="ent-shot collage__a"><img [src]="v.images.a" alt="" /></div>
+      <div class="ent-shot collage__b"><img [src]="v.images.hero" alt="" /></div>
+      <div class="ent-shot collage__c"><img [src]="v.images.b" alt="" /></div>
+    </div>
+  </section>
+
+  <!-- ===== The problem, as a single big statement ===== -->
+  <section class="ent-section statement">
+    <div class="ent-wrap ent-wrap--tight">
+      <span class="ent-eyebrow reveal" appReveal>The problem</span>
+      <h2 class="ent-h2 statement__title reveal" appReveal [revealDelay]="80">
+        {{ v.problem.title }}
+      </h2>
+      <p class="ent-body statement__lead reveal" appReveal [revealDelay]="140">
+        {{ v.problem.lead }}
+      </p>
+
+      <ul class="pains">
+        @for (point of v.problem.points; track point; let i = $index) {
+          <li class="reveal" appReveal [revealDelay]="i * 80">{{ point }}</li>
+        }
+      </ul>
+
+      <blockquote class="thesis reveal" appReveal>
+        <p class="ent-serif thesis__text">{{ v.thesis }}</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== The workflow — alternating timeline, this page's signature ===== -->
+  <section class="ent-section flow">
+    <div class="ent-wrap">
+      <header class="flow__head reveal" appReveal>
+        <span class="ent-eyebrow">The loop</span>
+        <h2 class="ent-h2 flow__title">Archive in, calendar out</h2>
+      </header>
+
+      <ol class="steps">
+        @for (step of v.steps; track step.n; let i = $index) {
+          <li class="step reveal" appReveal [revealDelay]="i * 60">
+            <span class="step__rail" aria-hidden="true">
+              <span class="step__dot"></span>
+            </span>
+            <div class="step__body">
+              <span class="step__n">{{ step.n }}</span>
+              <h3 class="ent-h3 step__title">{{ step.title }}</h3>
+              <p class="step__text">{{ step.body }}</p>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Features as a mosaic ===== -->
+  <section class="ent-section mosaic-wrap">
+    <div class="ent-wrap">
+      <header class="mosaic__head reveal" appReveal>
+        <span class="ent-eyebrow">Inside</span>
+        <h2 class="ent-h2 mosaic__title">What is actually doing the work</h2>
+      </header>
+
+      <div class="mosaic">
+        @for (feature of v.features; track feature.title; let i = $index) {
+          <article
+            class="tile reveal"
+            appReveal
+            [revealDelay]="i * 70"
+            [class.tile--wide]="i === 0"
+          >
+            <span class="tile__n">{{ i + 1 }}</span>
+            <h3 class="ent-h3">{{ feature.title }}</h3>
+            <p class="ent-body tile__body">{{ feature.body }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Close ===== -->
+  <section class="ent-band">
+    <img class="ent-band__bg" [src]="v.images.b" alt="" loading="lazy" />
+    <div class="ent-wrap ent-band__inner reveal" appReveal>
+      <h2 class="ent-h2 close__title">{{ v.closing }}</h2>
+      <dl class="ent-metrics">
+        @for (metric of v.metrics; track metric.label) {
+          <div class="ent-metric">
+            <dt class="ent-metric__value ent-grad">{{ metric.value }}</dt>
+            <dd class="ent-metric__label">{{ metric.label }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </section>
+
+  <nav class="ent-next">
+    <a class="ent-wrap ent-next__link" [routerLink]="['/entrepreneur', next.id]">
+      <span class="ent-next__label">Next venture</span>
+      <span class="ent-next__name">{{ next.name }}</span>
+      <span class="ent-next__arrow" aria-hidden="true">→</span>
+    </a>
+  </nav>
+</div>

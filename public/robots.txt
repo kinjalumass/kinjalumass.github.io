@@ -1,0 +1,8 @@
+# Keep documents out of search results.
+# Transcripts and certificates are reachable from the site but should not be
+# indexed or surfaced in search. Honoured by Google, Bing, and other major
+# crawlers — it is a request, not access control.
+
+User-agent: *
+Disallow: /docs/
+Allow: /

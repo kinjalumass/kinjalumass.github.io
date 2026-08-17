@@ -1,0 +1,34 @@
+@if (assets().length) {
+  <div class="strip">
+    @if (label()) {
+      <span class="strip__label">{{ label() }}</span>
+    }
+
+    <div class="strip__row">
+      @for (asset of assets(); track asset.src; let i = $index) {
+        <button
+          type="button"
+          class="tile"
+          [attr.data-kind]="asset.kind"
+          (click)="open(i)"
+          [attr.aria-label]="'View ' + asset.title"
+        >
+          @if (asset.kind === 'image') {
+            <span class="tile__thumb">
+              <img [src]="asset.src" alt="" loading="lazy" />
+              <span class="tile__scan" aria-hidden="true"></span>
+            </span>
+          } @else {
+            <span class="tile__doc" aria-hidden="true">
+              <span class="tile__doc-glyph">▤</span>
+              <span class="tile__doc-ext">pdf</span>
+            </span>
+          }
+
+          <span class="tile__title">{{ asset.title }}</span>
+          <span class="tile__cue" aria-hidden="true">view</span>
+        </button>
+      }
+    </div>
+  </div>
+}

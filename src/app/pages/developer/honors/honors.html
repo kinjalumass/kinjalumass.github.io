@@ -1,0 +1,62 @@
+<div class="dev-page">
+  <header class="dev-head">
+    <span class="dev-eyebrow">// 04 — honors &amp; awards</span>
+    <h1 class="dev-title">Honors &amp; Awards</h1>
+    <p class="dev-lede">
+      Academic distinction, scholarships and grants, a publication, and a run of
+      competitive program selections.
+    </p>
+  </header>
+
+  <section class="dev-section">
+    <span class="dev-label">// honors</span>
+
+    <div class="grid">
+      @for (honor of honors; track honor.title; let i = $index) {
+        <article
+          class="award dev-panel"
+          [class.award--major]="honor.weight === 'major'"
+          [style.--stagger]="i"
+        >
+          <span class="dev-panel__corner" aria-hidden="true"></span>
+          <div class="award__top">
+            <span class="award__issuer dev-wire">{{ honor.issuer }}</span>
+            <span class="dev-meta">{{ honor.window }}</span>
+          </div>
+          <h2 class="award__title">{{ honor.title }}</h2>
+          <p class="award__note">{{ honor.note }}</p>
+
+          @if (honor.assets?.length) {
+            <app-asset-strip [assets]="honor.assets!" />
+          }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="dev-section">
+    <span class="dev-label">// competitive selections</span>
+
+    <ol class="picks">
+      @for (pick of selections; track pick.title) {
+        <li class="pick">
+          <span class="pick__mark" aria-hidden="true">◆</span>
+          <div class="pick__body">
+            <h3 class="pick__title">{{ pick.title }}</h3>
+            <p class="pick__meta dev-meta">{{ pick.issuer }} · {{ pick.window }}</p>
+            <p class="pick__note">{{ pick.note }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="dev-section">
+    <span class="dev-label">// certifications</span>
+    <ul class="dev-tags">
+      @for (cert of certifications; track cert.name) {
+        <li>{{ cert.name }}</li>
+      }
+    </ul>
+  </section>
+</div>

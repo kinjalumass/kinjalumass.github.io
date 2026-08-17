@@ -1,0 +1,41 @@
+@if (viewer.isOpen()) {
+  @if (viewer.current(); as asset) {
+    <div class="box" (click)="onBackdrop($event)" role="dialog" aria-modal="true" [attr.aria-label]="asset.title">
+      <div class="frame">
+        <header class="frame__bar">
+          <span class="frame__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="frame__title">{{ asset.title }}</span>
+
+          @if (viewer.count() > 1) {
+            <span class="frame__count">{{ viewer.index() + 1 }} / {{ viewer.count() }}</span>
+          }
+
+          @if (asset.shareable !== false) {
+            <a class="frame__act" [href]="asset.src" target="_blank" rel="noopener">open ↗</a>
+          } @else {
+            <span class="frame__locked" title="Viewable here only">view only</span>
+          }
+
+          <button type="button" class="frame__close" (click)="viewer.close()" aria-label="Close viewer">✕</button>
+        </header>
+
+        <div class="frame__stage">
+          @if (asset.kind === 'image') {
+            <img class="frame__img" [src]="asset.src" [alt]="asset.title" />
+          } @else {
+            <iframe class="frame__pdf" [src]="pdfSrc()" [title]="asset.title"></iframe>
+          }
+
+          @if (viewer.count() > 1) {
+            <button type="button" class="nav nav--prev" (click)="viewer.step(-1)" aria-label="Previous">←</button>
+            <button type="button" class="nav nav--next" (click)="viewer.step(1)" aria-label="Next">→</button>
+          }
+        </div>
+
+        @if (asset.caption) {
+          <footer class="frame__foot">{{ asset.caption }}</footer>
+        }
+      </div>
+    </div>
+  }
+}

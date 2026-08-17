@@ -1,0 +1,59 @@
+<div class="cursor" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <a class="masthead__mark" routerLink="/">
+    <span class="masthead__name">Kinjal Pandey</span>
+  </a>
+  <nav class="masthead__nav" aria-label="Sections">
+    @for (panel of panels; track panel.id; let i = $index) {
+      <a
+        class="masthead__link"
+        [class.is-on]="hovered() === i"
+        [routerLink]="'/' + panel.id"
+        (pointerenter)="onEnter(i)"
+        (pointerleave)="onLeave(i)"
+      >
+        {{ panel.title }}
+      </a>
+    }
+  </nav>
+</header>
+
+<main class="stage" [class.is-ready]="ready()">
+  @for (panel of panels; track panel.id; let i = $index) {
+    <article
+      class="panel"
+      [attr.data-state]="panelState(i)"
+      [attr.data-panel]="panel.id"
+      [style.--accent]="panel.accent"
+      [style.--stagger]="i"
+      (pointerenter)="onEnter(i)"
+      (pointerleave)="onLeave(i)"
+      (pointermove)="onPanelMove($event)"
+    >
+      <img class="panel__photo" [src]="panel.image" alt="" aria-hidden="true" />
+      <span class="panel__wash" aria-hidden="true"></span>
+      <span class="panel__spot" aria-hidden="true"></span>
+      <span class="panel__glow" aria-hidden="true"></span>
+
+      <div class="panel__frame">
+        <span class="panel__ordinal">{{ panel.ordinal }}</span>
+        <span class="panel__edge">{{ panel.eyebrow }}</span>
+
+        <div class="panel__core">
+          <h2 class="panel__title">{{ panel.title }}</h2>
+          <p class="panel__kicker">{{ panel.kicker }}</p>
+          <span class="panel__cta">
+            <span class="panel__cta-line" aria-hidden="true"></span>
+            <span class="panel__cta-text">Enter</span>
+          </span>
+        </div>
+      </div>
+
+      <a class="panel__hit" [routerLink]="'/' + panel.id">
+        <span class="sr-only">Open {{ panel.title }}</span>
+      </a>
+    </article>
+  }
+</main>

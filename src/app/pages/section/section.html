@@ -1,0 +1,56 @@
+@if (panel(); as p) {
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="page" [style.--accent]="p.accent" [class.is-ready]="ready()">
+    <span class="page__wash" aria-hidden="true"></span>
+
+    <header class="masthead">
+      <a class="masthead__mark" routerLink="/">
+        <span class="masthead__name">Kinjal Pandey</span>
+      </a>
+      <a class="masthead__back" routerLink="/">
+        <span class="masthead__back-line" aria-hidden="true"></span>
+        Index
+      </a>
+    </header>
+
+    <main class="body">
+      <div class="hero">
+        <span class="hero__meta">{{ p.ordinal }} — {{ p.eyebrow }}</span>
+        <h1 class="hero__title">{{ p.title }}</h1>
+        <p class="hero__kicker">{{ p.kicker }}</p>
+      </div>
+
+      <div class="content">
+        <p class="content__lead">{{ p.blurb }}</p>
+
+        <section class="block">
+          <h2 class="block__label">Focus</h2>
+          <ul class="block__list">
+            @for (item of p.focus; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2 class="block__label">Elsewhere</h2>
+          <div class="block__links">
+            @for (link of p.links; track link.label) {
+              <a [href]="link.href">{{ link.label }}<span aria-hidden="true"> ↗</span></a>
+            }
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="pager" aria-label="Other sections">
+      @for (sibling of siblings(); track sibling.id) {
+        <a class="pager__link" [routerLink]="'/' + sibling.id" [style.--accent]="sibling.accent">
+          <span class="pager__meta">{{ sibling.ordinal }}</span>
+          <span class="pager__title">{{ sibling.title }}</span>
+        </a>
+      }
+    </nav>
+  </div>
+}

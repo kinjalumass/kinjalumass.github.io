@@ -1,0 +1,63 @@
+<div class="sky" aria-hidden="true">
+  <span class="sky__blob sky__blob--1"></span>
+  <span class="sky__blob sky__blob--2"></span>
+  <span class="sky__blob sky__blob--3"></span>
+  <span class="sky__grain"></span>
+</div>
+
+<header class="nav">
+  <a class="nav__mark" routerLink="/entrepreneur">
+    <span class="nav__dot" aria-hidden="true"></span>
+    Kinnovation
+  </a>
+
+  <nav class="nav__links" aria-label="Ventures">
+    <a routerLink="/entrepreneur" routerLinkActive="is-on" [routerLinkActiveOptions]="{ exact: true }">
+      Studio
+    </a>
+    @for (venture of ventures; track venture.id) {
+      <a
+        [routerLink]="['/entrepreneur', venture.id]"
+        routerLinkActive="is-on"
+        [style.--hue]="venture.palette.a"
+      >
+        {{ venture.name }}
+      </a>
+    }
+  </nav>
+
+  <a class="nav__back" routerLink="/">
+    <span aria-hidden="true">←</span> Index
+  </a>
+</header>
+
+<router-outlet />
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__brand">
+      <h2 class="foot__name">Kinnovation</h2>
+      <p class="foot__promise">Innovation without boundaries</p>
+    </div>
+
+    <nav class="foot__nav" aria-label="Footer">
+      <span class="foot__label">Ventures</span>
+      @for (venture of ventures; track venture.id) {
+        <a [routerLink]="['/entrepreneur', venture.id]">{{ venture.name }}</a>
+      }
+    </nav>
+
+    <nav class="foot__nav" aria-label="Elsewhere">
+      <span class="foot__label">Kinjal</span>
+      <a routerLink="/">Index</a>
+      <a routerLink="/developer">Developer</a>
+      <a href="mailto:kinjalpandey18&#64;gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/kinjalpandey" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
+
+  <div class="foot__base">
+    <span>© {{ year }} Kinjal Pandey</span>
+    <span>Amherst, MA</span>
+  </div>
+</footer>

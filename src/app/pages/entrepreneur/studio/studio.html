@@ -1,0 +1,136 @@
+<div class="ent-page">
+  <!-- ========================================================
+       Hero — broken grid, type left, images bleeding right
+       ======================================================== -->
+
+  <section class="hero">
+    <div class="ent-wrap ent-wrap--wide hero__grid">
+      <div class="hero__type">
+        <span class="ent-sticker hero__sticker">{{ studio.promise }}</span>
+
+        <h1 class="ent-h1 hero__title">
+          <span class="hero__line-a">Kin</span>
+          <span class="hero__line-b ent-stroke">novation</span>
+        </h1>
+
+        <p class="hero__lede">
+          Five ventures, one conviction:
+          <span class="ent-mark">the hardest problems are the ones worth building for.</span>
+        </p>
+
+        <div class="hero__actions">
+          <a class="ent-btn ent-btn--solid" href="#ventures">
+            See the ventures <span aria-hidden="true">↓</span>
+          </a>
+          <a class="ent-btn ent-btn--ghost" routerLink="/developer">The engineering side</a>
+        </div>
+      </div>
+
+      <div class="hero__stack">
+        <div class="ent-shot hero__img">
+          <img [src]="studio.images.hero" alt="" />
+        </div>
+        <span class="hero__badge">06<small>ventures</small></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       Thesis — offset columns, portrait breaking the grid
+       ======================================================== -->
+
+  <section class="ent-section thesis">
+    <div class="ent-wrap thesis__grid">
+      <figure class="thesis__figure reveal" appReveal>
+        <div class="ent-shot ent-shot--tilt thesis__shot">
+          <img [src]="studio.images.portrait" alt="" loading="lazy" />
+        </div>
+        <figcaption class="thesis__cap">Kinnovation — a venture studio</figcaption>
+      </figure>
+
+      <div class="thesis__copy reveal" appReveal [revealDelay]="100">
+        <span class="ent-eyebrow">The studio</span>
+        <h2 class="ent-h2 thesis__title">
+          The evidence already exists.<br />
+          <span class="ent-serif thesis__ital">It is just nowhere useful.</span>
+        </h2>
+        <p class="ent-body thesis__lede">{{ studio.lede }}</p>
+        @for (para of studio.body; track para) {
+          <p class="ent-body thesis__para">{{ para }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       Venture index — staggered cards, alternating sides
+       ======================================================== -->
+
+  <section class="ventures" id="ventures">
+    <div class="ent-wrap">
+      <header class="ventures__head reveal" appReveal>
+        <span class="ent-eyebrow">Portfolio</span>
+        <h2 class="ent-h2 ventures__title">Six ventures</h2>
+        <p class="ent-body ventures__body">
+          Each one begins with the same question: where is the decision being made blind,
+          and what signal would make it clear?
+        </p>
+      </header>
+    </div>
+
+    <ol class="deck">
+      @for (venture of ventures; track venture.id; let i = $index; let odd = $odd) {
+        <li
+          class="slot reveal"
+          appReveal
+          [revealDelay]="i * 60"
+          [class.slot--alt]="odd"
+          [style.--v1]="venture.palette.a"
+          [style.--v2]="venture.palette.b"
+          [style.--v3]="venture.palette.c"
+        >
+          <span class="ent-ghost slot__ghost" aria-hidden="true">{{ venture.index }}</span>
+
+          <a class="slot__card ent-offset" [routerLink]="['/entrepreneur', venture.id]">
+            <div class="slot__media">
+              <img [src]="venture.images.a" alt="" loading="lazy" />
+            </div>
+
+            <div class="slot__body">
+              <span class="slot__sector">{{ venture.sector }}</span>
+              <h3 class="slot__name">{{ venture.name }}</h3>
+              <p class="slot__tagline">{{ venture.tagline }}</p>
+              <p class="slot__card-text">{{ venture.card }}</p>
+              <span class="slot__go">
+                Open <span class="slot__arrow" aria-hidden="true">→</span>
+              </span>
+            </div>
+          </a>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- ========================================================
+       Close — loud colour block
+       ======================================================== -->
+
+  <section class="ent-block close">
+    <div class="ent-wrap ent-wrap--tight close__inner reveal" appReveal>
+      <span class="ent-sticker close__sticker">Say hello</span>
+      <h2 class="ent-h2 close__title">
+        Building the future,<br />one venture at a time.
+      </h2>
+      <p class="ent-body close__body">
+        If any of this overlaps with what you are working on — as a collaborator, an
+        operator, or someone who has lived one of these problems — that is the most
+        useful conversation there is.
+      </p>
+      <div class="close__actions">
+        <a class="ent-btn ent-btn--light" href="mailto:kinjalpandey18&#64;gmail.com">
+          Start a conversation <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

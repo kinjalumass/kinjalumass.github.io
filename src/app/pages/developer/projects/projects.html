@@ -1,0 +1,63 @@
+<div class="dev-page">
+  <header class="dev-head">
+    <span class="dev-eyebrow">// 03 — projects</span>
+    <h1 class="dev-title">Projects</h1>
+    <p class="dev-lede">
+      Research, prototypes, and applied work — from privacy leakage in model reasoning
+      to bike-safety data for the city of Boston.
+    </p>
+  </header>
+
+  <div class="list">
+    @for (project of projects; track project.index; let i = $index) {
+      <article
+        class="proj"
+        [class.proj--media]="!!project.image"
+        [style.--stagger]="i"
+        (pointermove)="onMove($event)"
+      >
+        <span class="proj__glow" aria-hidden="true"></span>
+        <span class="proj__rule" aria-hidden="true"></span>
+
+        <div class="proj__index">
+          <span>{{ project.index }}</span>
+        </div>
+
+        <div class="proj__main">
+          <div class="proj__head">
+            <span class="dev-chip">{{ project.kind }}</span>
+            <span class="dev-meta">{{ project.window }}</span>
+          </div>
+
+          <h2 class="proj__name">{{ project.name }}</h2>
+          <p class="proj__context dev-wire">{{ project.context }}</p>
+          <p class="proj__summary">{{ project.summary }}</p>
+
+          <ul class="dev-bullets">
+            @for (bullet of project.bullets; track bullet) {
+              <li>{{ bullet }}</li>
+            }
+          </ul>
+
+          <ul class="dev-tags proj__stack">
+            @for (item of project.stack; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+
+          @if (project.assets?.length) {
+            <app-asset-strip [assets]="project.assets!" label="certificates & photos" />
+          }
+        </div>
+
+        @if (project.image) {
+          <div class="proj__media">
+            <img [src]="project.image" alt="" loading="lazy" />
+            <span class="proj__media-grid" aria-hidden="true"></span>
+            <span class="proj__media-tick" aria-hidden="true"></span>
+          </div>
+        }
+      </article>
+    }
+  </div>
+</div>

@@ -1,0 +1,113 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 2.5rem 0 3rem;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(var(--signal), 0.18);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-faint);
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+
+  &:hover {
+    color: var(--bone);
+    border-color: rgba(var(--signal), 0.45);
+  }
+
+  &.is-on {
+    color: rgb(var(--signal));
+    border-color: rgba(var(--signal), 0.65);
+    background: rgba(var(--signal), 0.08);
+  }
+}
+
+.filter__count {
+  font-size: 0.58rem;
+  opacity: 0.6;
+}
+
+/* --- timeline ------------------------------------------------------------- */
+
+.roles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.role {
+  position: relative;
+  padding: 0 0 2.5rem 2rem;
+  animation: rise 0.6s var(--ease-out) both;
+  animation-delay: calc(var(--stagger) * 0.05s);
+
+  &:last-child { padding-bottom: 0; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: none; }
+}
+
+.role__spine {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.29rem;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(var(--signal), 0.35), rgba(var(--signal), 0.05));
+}
+
+.role:last-child .role__spine { display: none; }
+
+.role__node {
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 1px solid rgba(var(--signal), 0.7);
+  background: #06080a;
+  transition: background 0.35s, box-shadow 0.35s;
+}
+
+.role:hover .role__node {
+  background: rgb(var(--signal));
+  box-shadow: 0 0 12px rgba(var(--signal), 0.8);
+}
+
+.role__head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.role__title {
+  margin-top: 0.9rem;
+  font-family: var(--ui);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--bone);
+}
+
+.role__org {
+  margin-top: 0.35rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+}
+
+.empty {
+  padding: 3rem 0;
+  font-size: 0.8rem;
+  color: var(--bone-faint);
+}

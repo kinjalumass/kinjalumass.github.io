@@ -1,0 +1,36 @@
+<div class="scan" aria-hidden="true"></div>
+<div class="vign" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="nav__back" routerLink="/">
+    <span class="nav__arrow" aria-hidden="true">←</span>
+    <span>index</span>
+  </a>
+
+  <nav class="nav__links" aria-label="Developer sections">
+    @for (item of items; track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="is-on"
+        [routerLinkActiveOptions]="{ exact: item.exact }"
+      >
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+
+  <span class="nav__state">
+    <span class="nav__led" aria-hidden="true"></span>
+    online
+  </span>
+</header>
+
+<router-outlet />
+
+<app-asset-lightbox />
+
+<footer class="foot">
+  <a routerLink="/">← index</a>
+  <span class="foot__mid">kinjal pandey // developer</span>
+  <span>© {{ year }}</span>
+</footer>

@@ -1,0 +1,152 @@
+<div
+  class="ent-page"
+  [style.--v1]="v.palette.a"
+  [style.--v2]="v.palette.b"
+  [style.--v3]="v.palette.c"
+>
+  <!-- ===== Hero: type over a full-bleed wash, image offset low ===== -->
+  <section class="hero">
+    <div class="ent-wrap hero__grid">
+      <div class="hero__copy">
+        <span class="ent-sticker hero__sticker">{{ v.index }} · {{ v.sector }}</span>
+        <h1 class="ent-h1 hero__title">
+          Trend<span class="ent-stroke">ify</span>
+        </h1>
+        <p class="hero__tagline">{{ v.tagline }}</p>
+        <p class="ent-lede hero__lede">{{ v.lede }}</p>
+        <div class="hero__actions">
+          <a class="ent-btn ent-btn--solid" href="mailto:kinjalpandey18&#64;gmail.com">
+            Talk about it <span aria-hidden="true">→</span>
+          </a>
+          <a class="ent-btn ent-btn--ghost" routerLink="/entrepreneur">All ventures</a>
+        </div>
+      </div>
+
+      <div class="hero__stack">
+        <div class="ent-shot hero__img hero__img--a"><img [src]="v.images.hero" alt="" /></div>
+        <div class="ent-shot hero__img hero__img--b"><img [src]="v.images.a" alt="" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The problem ===== -->
+  <section class="ent-section problem">
+    <div class="ent-wrap problem__grid">
+      <div class="reveal" appReveal>
+        <span class="ent-eyebrow">The problem</span>
+        <h2 class="ent-h2 problem__title">{{ v.problem.title }}</h2>
+        <p class="ent-body problem__lead">{{ v.problem.lead }}</p>
+      </div>
+
+      <ul class="frictions">
+        @for (point of v.problem.points; track point; let i = $index) {
+          <li class="reveal" appReveal [revealDelay]="i * 70">
+            <span class="frictions__n">{{ '0' + (i + 1) }}</span>
+            <span>{{ point }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== The swap — this page's signature ===== -->
+  <section class="ent-section swap">
+    <div class="ent-wrap">
+      <header class="swap__head reveal" appReveal>
+        <span class="ent-eyebrow">The match</span>
+        <h2 class="ent-h2">What you have <span class="ent-serif">becomes</span> what is working</h2>
+      </header>
+
+      <ol class="pairs">
+        @for (m of matches; track m.have; let i = $index) {
+          <li class="pair reveal" appReveal [revealDelay]="i * 80">
+            <span class="pair__have">{{ m.have }}</span>
+            <span class="pair__arrow" aria-hidden="true">⟶</span>
+            <span class="pair__becomes">{{ m.becomes }}</span>
+            <span class="pair__signal">{{ m.signal }}</span>
+          </li>
+        }
+      </ol>
+
+      <blockquote class="thesis reveal" appReveal>
+        <p class="ent-serif thesis__text">{{ v.thesis }}</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== Signals ticker strip ===== -->
+  <section class="ent-block signals">
+    <div class="ent-wrap">
+      <span class="ent-eyebrow">What the engine watches</span>
+      <ul class="signals__list">
+        @for (s of signals; track s; let i = $index) {
+          <li class="reveal" appReveal [revealDelay]="i * 55">{{ s }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="ent-section build">
+    <div class="ent-wrap">
+      <header class="build__head reveal" appReveal>
+        <span class="ent-eyebrow">Inside</span>
+        <h2 class="ent-h2 build__title">Five moving parts</h2>
+      </header>
+
+      <div class="build__grid">
+        @for (feature of v.features; track feature.title; let i = $index) {
+          <article class="brick reveal" appReveal [revealDelay]="i * 70">
+            <span class="brick__n">{{ '0' + (i + 1) }}</span>
+            <h3 class="ent-h3">{{ feature.title }}</h3>
+            <p class="ent-body brick__body">{{ feature.body }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pipeline ===== -->
+  <section class="ent-band">
+    <img class="ent-band__bg" [src]="v.images.b" alt="" loading="lazy" />
+    <div class="ent-wrap ent-band__inner">
+      <header class="reveal" appReveal>
+        <span class="ent-eyebrow">The loop</span>
+        <h2 class="ent-h2 flow__title">Index, match, assemble, learn</h2>
+      </header>
+
+      <ol class="flow">
+        @for (step of v.steps; track step.n; let i = $index) {
+          <li class="flow__step reveal" appReveal [revealDelay]="i * 70">
+            <span class="flow__n">{{ step.n }}</span>
+            <h3 class="ent-h3 flow__step-title">{{ step.title }}</h3>
+            <p class="flow__body">{{ step.body }}</p>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Guardrails as the close ===== -->
+  <section class="ent-section close">
+    <div class="ent-wrap ent-wrap--tight close__inner reveal" appReveal>
+      <h2 class="ent-h2">{{ v.closing }}</h2>
+      <dl class="ent-metrics">
+        @for (metric of v.metrics; track metric.label) {
+          <div class="ent-metric">
+            <dt class="ent-metric__value ent-grad">{{ metric.value }}</dt>
+            <dd class="ent-metric__label">{{ metric.label }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </section>
+
+  <nav class="ent-next">
+    <a class="ent-wrap ent-next__link" [routerLink]="['/entrepreneur', next.id]">
+      <span class="ent-next__label">Next venture</span>
+      <span class="ent-next__name">{{ next.name }}</span>
+      <span class="ent-next__arrow" aria-hidden="true">→</span>
+    </a>
+  </nav>
+</div>

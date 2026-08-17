@@ -1,0 +1,69 @@
+<div class="dev-page">
+  <header class="dev-head">
+    <span class="dev-eyebrow">// 06 — contact</span>
+    <h1 class="dev-title">Contact</h1>
+    <p class="dev-lede">
+      No form, no middleman. Every channel below goes straight to her — pick whichever
+      suits what you want to say.
+    </p>
+  </header>
+
+  <section class="dev-section">
+    <span class="dev-label">// channels</span>
+
+    <ul class="channels">
+      @for (channel of channels; track channel.key; let i = $index) {
+        <li class="channel" [style.--stagger]="i">
+          <a class="channel__link" [href]="channel.href" target="_blank" rel="noopener">
+            <span class="channel__label">{{ channel.label }}</span>
+            <span class="channel__value">{{ channel.value }}</span>
+            <span class="channel__note">{{ channel.note }}</span>
+            <span class="channel__arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <button
+            type="button"
+            class="channel__copy"
+            (click)="copy(channel.key, channel.value, $event)"
+            [attr.aria-label]="'Copy ' + channel.label"
+          >
+            {{ copied() === channel.key ? 'copied' : 'copy' }}
+          </button>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="dev-section">
+    <div class="dev-split">
+      <div class="status dev-panel">
+        <span class="dev-panel__corner" aria-hidden="true"></span>
+        <span class="dev-label">// availability</span>
+        <p class="status__line">
+          <span class="status__led" aria-hidden="true"></span>
+          {{ availability.status }}
+        </p>
+        <dl class="status__meta">
+          <div>
+            <dt>Location</dt>
+            <dd>{{ availability.location }}</dd>
+          </div>
+          <div>
+            <dt>Timezone</dt>
+            <dd>{{ availability.timezone }}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="note">
+        <span class="dev-label">// what lands best</span>
+        <ul class="dev-bullets">
+          <li>Research collaborations, particularly around privacy, security, and applied ML.</li>
+          <li>Internship and full-time engineering, data science, and research roles.</li>
+          <li>Speaking, workshops, and student-community programming.</li>
+          <li>Anything where the technical side and the human side both matter.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

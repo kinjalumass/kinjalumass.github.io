@@ -1,0 +1,157 @@
+<!-- ============================================================
+     Hero — name left, portrait right, reactive lattice behind
+     ============================================================ -->
+
+<section class="hero" [class.is-ready]="ready()">
+  <app-node-field class="hero__field" />
+  <div class="hero__vignette" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__id">
+      <span class="hero__tag">
+        <span class="hero__tag-led" aria-hidden="true"></span>
+        {{ hero.location }} // &#64;{{ hero.handle }}
+      </span>
+
+      <h1 class="hero__name" [attr.data-text]="hero.name">{{ hero.name }}</h1>
+
+      <p class="hero__role" [class.is-settled]="settled()">
+        <span class="hero__bracket" aria-hidden="true">[</span>
+        <span class="hero__role-text">{{ role() }}</span>
+        <span class="hero__bracket" aria-hidden="true">]</span>
+        <span class="hero__cursor" aria-hidden="true"></span>
+      </p>
+
+      <p class="sr-only">
+        AI Researcher, Tech Leader, Software Engineer, Innovation Advocate
+      </p>
+
+      <div class="hero__rule" aria-hidden="true"></div>
+    </div>
+
+    <figure class="shot">
+      <app-matrix-rain
+        class="shot__wall"
+        [fontSize]="13"
+        [density]="0.95"
+        [fade]="0.085"
+        [speed]="0.55"
+        backdrop="5, 9, 8"
+      />
+      <img class="shot__img" [src]="hero.portrait" [alt]="'Portrait of ' + hero.name" />
+      <span class="shot__lines" aria-hidden="true"></span>
+      <span class="shot__ticks" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <figcaption class="shot__slug">
+        <span>SUBJECT // {{ hero.name }}</span>
+        <span class="shot__ok">● LIVE</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <span class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-line"></span>
+    scroll
+  </span>
+</section>
+
+<!-- ============================================================
+     Assistant
+     ============================================================ -->
+
+<section class="ask">
+  <div class="ask__head">
+    <span class="label">// ask about her</span>
+    <p class="ask__note">
+      Runs entirely in your browser against a written profile. No model, no network,
+      nothing invented.
+    </p>
+  </div>
+  <app-console-bot />
+</section>
+
+<!-- ============================================================
+     Summary
+     ============================================================ -->
+
+<section class="intro">
+  <span class="label">// summary</span>
+  <h2 class="intro__headline">{{ intro.headline }}</h2>
+  <p class="intro__body">{{ intro.body }}</p>
+</section>
+
+<!-- ============================================================
+     Tracks
+     ============================================================ -->
+
+<section class="tracks">
+  <span class="label">// selected work</span>
+
+  <div class="tracks__grid">
+    @for (track of tracks; track track.title; let i = $index) {
+      <article
+        class="card"
+        [class.card--wide]="!!track.image"
+        [style.--stagger]="i"
+        (pointermove)="onCardMove($event)"
+        (pointerleave)="onCardLeave($event)"
+      >
+        <span class="card__glow" aria-hidden="true"></span>
+        <span class="card__edge" aria-hidden="true"></span>
+
+        @if (track.image) {
+          <div class="card__media">
+            <img [src]="track.image" alt="" loading="lazy" />
+            <span class="card__media-grid" aria-hidden="true"></span>
+          </div>
+        }
+
+        <div class="card__body">
+          <span class="card__tag">{{ track.tag }}</span>
+          <h3 class="card__title">{{ track.title }}</h3>
+          <p class="card__org">{{ track.org }}</p>
+          <p class="card__window">{{ track.window }}</p>
+          <ul class="card__lines">
+            @for (line of track.lines; track line) {
+              <li>{{ line }}</li>
+            }
+          </ul>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- ============================================================
+     Timeline + stack
+     ============================================================ -->
+
+<section class="ledger">
+  <div class="ledger__col">
+    <span class="label">// timeline</span>
+    <ol class="rows">
+      @for (row of timeline; track row.org + row.year) {
+        <li class="row">
+          <span class="row__year">{{ row.year }}</span>
+          <span class="row__org">{{ row.org }}</span>
+          <span class="row__role">{{ row.role }}</span>
+        </li>
+      }
+    </ol>
+  </div>
+
+  <div class="ledger__col">
+    <span class="label">// stack</span>
+    <ul class="tags">
+      @for (item of stack; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+
+    <span class="label label--spaced">// elsewhere</span>
+    <ul class="tags tags--links">
+      @for (link of links; track link.label) {
+        <li><a [href]="link.href" target="_blank" rel="noopener">{{ link.label }}</a></li>
+      }
+    </ul>
+  </div>
+</section>

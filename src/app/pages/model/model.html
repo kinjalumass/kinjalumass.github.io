@@ -1,0 +1,158 @@
+<div class="page">
+  <div class="wash" aria-hidden="true">
+    <span class="wash__a"></span><span class="wash__b"></span><span class="wash__c"></span>
+  </div>
+
+  <header class="nav">
+    <a class="nav__back" routerLink="/"><span aria-hidden="true">←</span> Index</a>
+    <span class="nav__mid">Portfolio · {{ shoots.length }} stories</span>
+    <a class="nav__mail" [href]="'mailto:' + booking.email">Book</a>
+  </header>
+
+  <!-- ========================================================
+       Overture — the name, one frame, nothing else
+       ======================================================== -->
+  <section class="overture">
+    <div class="overture__type">
+      <h1 class="name" aria-label="Kinjal Pandey">
+        <span class="name__a">{{ id.first }}</span>
+        <span class="name__b">{{ id.last }}</span>
+      </h1>
+
+      <p class="overture__status">{{ id.status }}</p>
+
+      <div class="overture__foot">
+        <span class="overture__where">{{ id.based }}</span>
+        <span class="overture__rule" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <figure class="portrait" (click)="open(id.hero[0])">
+      <img [src]="id.hero[0]" alt="" />
+      <figcaption class="portrait__cue">View</figcaption>
+    </figure>
+  </section>
+
+  <!-- ========================================================
+       Spec — stats and digitals side by side on a colour block
+       ======================================================== -->
+  <section class="spec">
+    <div class="spec__inner">
+      <div class="spec__stats">
+        <span class="spec__label">Statistics</span>
+        <dl class="stats">
+          @for (stat of stats; track stat.key; let i = $index) {
+            <div class="stat">
+              <dt>{{ stat.key }}</dt>
+              <dd>
+                {{ stat.value }}
+                @if (stat.unit) { <small>{{ stat.unit }}</small> }
+              </dd>
+            </div>
+          }
+        </dl>
+        <p class="spec__note">Unretouched digitals, shot in natural light.</p>
+      </div>
+
+      <div class="spec__digitals">
+        <span class="spec__label">Digitals</span>
+        <div class="sheet">
+          @for (digital of digitals; track digital.slug; let i = $index) {
+            <figure class="card" [style.--i]="i" (click)="open(digital.src)">
+              <div class="card__img">
+                <img [src]="digital.src" [alt]="digital.label" loading="lazy" />
+              </div>
+              <figcaption>
+                <span class="card__label">{{ digital.label }}</span>
+                <span class="card__note">{{ digital.note }}</span>
+              </figcaption>
+            </figure>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       The book — six shoots, expandable
+       ======================================================== -->
+  <section class="book">
+    <header class="book__head">
+      <h2 class="book__title">The <span class="book__ital">Book</span></h2>
+      <span class="book__count">{{ shoots.length }} stories</span>
+    </header>
+
+    @for (shoot of shoots; track shoot.slug; let s = $index) {
+      <article class="story" [style.--accent]="shoot.accent" [class.story--flip]="$odd">
+        <div class="story__meta">
+          <span class="story__index">{{ shoot.index }}</span>
+          <h3 class="story__title">{{ shoot.title }}</h3>
+          <p class="story__kind">{{ shoot.kind }}</p>
+          <p class="story__where">{{ shoot.place }} · {{ shoot.year }}</p>
+          <p class="story__note">{{ shoot.note }}</p>
+          <span class="story__tally">{{ shoot.images.length }} frames</span>
+        </div>
+
+        <div class="story__grid" [class.is-open]="isOpen(shoot.slug)">
+          @for (src of shown(shoot.slug, shoot.images); track src; let i = $index) {
+            <figure class="plate" [style.--i]="i" (click)="open(src)">
+              <img [src]="src" [alt]="shoot.title" loading="lazy" />
+              <figcaption class="plate__n">{{ i + 1 < 10 ? '0' : '' }}{{ i + 1 }}</figcaption>
+            </figure>
+          }
+        </div>
+
+        @if (hidden(shoot.slug, shoot.images)) {
+          <button type="button" class="more" (click)="toggle(shoot.slug)">
+            <span class="more__rule" aria-hidden="true"></span>
+            <span class="more__text">
+              {{ isOpen(shoot.slug)
+                  ? 'Show less'
+                  : 'Show all ' + shoot.images.length + ' frames' }}
+            </span>
+            <span class="more__rule" aria-hidden="true"></span>
+          </button>
+        }
+      </article>
+    }
+  </section>
+
+  <!-- ========================================================
+       Booking — the loud one
+       ======================================================== -->
+  <footer class="holler">
+    <span class="holler__eyebrow">{{ booking.line }}</span>
+
+    <button type="button" class="holler__mail" (click)="copyEmail($event)">
+      <span class="holler__mail-text">{{ booking.email }}</span>
+      <span class="holler__hint">{{ copied() ? 'Copied' : 'Click to copy' }}</span>
+    </button>
+
+    <div class="holler__side">
+      <span class="chit chit--a">{{ booking.location }}</span>
+      <span class="chit chit--b">{{ booking.travel }}</span>
+      <a class="chit chit--c" [href]="'mailto:' + booking.email">Or just email →</a>
+    </div>
+
+    <nav class="holler__links">
+      <a routerLink="/">Index</a>
+      <a routerLink="/developer">Developer</a>
+      <a routerLink="/entrepreneur">Entrepreneur</a>
+    </nav>
+  </footer>
+</div>
+
+<!-- ========================================================
+     Lightbox
+     ======================================================== -->
+@if (lightboxOpen()) {
+  @if (frame(); as f) {
+    <div class="view" (click)="onBackdrop($event)" role="dialog" aria-modal="true">
+      <button type="button" class="view__close" (click)="close()" aria-label="Close">✕</button>
+      <button type="button" class="view__nav view__nav--prev" (click)="step(-1)" aria-label="Previous">←</button>
+      <img class="view__img" [src]="f.src" [alt]="f.caption" />
+      <button type="button" class="view__nav view__nav--next" (click)="step(1)" aria-label="Next">→</button>
+      <div class="view__bar"><span>{{ f.caption }}</span></div>
+    </div>
+  }
+}

@@ -1,0 +1,124 @@
+<div
+  class="ent-page"
+  [style.--v1]="v.palette.a"
+  [style.--v2]="v.palette.b"
+  [style.--v3]="v.palette.c"
+>
+  <!-- ===== Hero: split, image right ===== -->
+  <section class="hero">
+    <div class="ent-wrap hero__grid">
+      <div class="hero__copy">
+        <span class="ent-sticker hero__sticker">{{ v.index }} · {{ v.sector }}</span>
+        <h1 class="ent-h1 hero__title">{{ v.name }}</h1>
+        <p class="hero__tagline">{{ v.tagline }}</p>
+        <p class="ent-lede hero__lede">{{ v.lede }}</p>
+        <div class="hero__actions">
+          <a class="ent-btn ent-btn--solid" href="mailto:kinjalpandey18&#64;gmail.com">
+            Talk about it <span aria-hidden="true">→</span>
+          </a>
+          <a class="ent-btn ent-btn--ghost" routerLink="/entrepreneur">All ventures</a>
+        </div>
+      </div>
+
+      <div class="hero__media">
+        <div class="ent-shot hero__shot">
+          <img [src]="v.images.hero" alt="" />
+        </div>
+        <span class="ent-pill hero__stage">{{ v.stage }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The problem, as a contrast ===== -->
+  <section class="ent-section problem">
+    <div class="ent-wrap">
+      <div class="problem__head reveal" appReveal>
+        <span class="ent-eyebrow">The problem</span>
+        <h2 class="ent-h2 problem__title">{{ v.problem.title }}</h2>
+        <p class="ent-body problem__lead">{{ v.problem.lead }}</p>
+      </div>
+
+      <div class="split">
+        <div class="split__col split__col--now reveal" appReveal>
+          <span class="split__label">Today</span>
+          <ul class="split__list">
+            @for (point of v.problem.points; track point) {
+              <li>{{ point }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="split__col split__col--next reveal" appReveal [revealDelay]="140">
+          <span class="split__label">With MeAsmi</span>
+          <ul class="split__list split__list--good">
+            <li>Outcome data attached to every referral you consider.</li>
+            <li>Families matched on profile, finding each other by default.</li>
+            <li>What worked recorded once and reusable by everyone after.</li>
+            <li>Therapists tuning practice against field-wide evidence.</li>
+          </ul>
+        </div>
+      </div>
+
+      <blockquote class="thesis reveal" appReveal>
+        <p class="ent-serif thesis__text">{{ v.thesis }}</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== Features as numbered rows with a sticky image ===== -->
+  <section class="ent-section how">
+    <div class="ent-wrap how__grid">
+      <aside class="how__media reveal" appReveal>
+        <div class="ent-shot how__shot">
+          <img [src]="v.images.a" alt="" loading="lazy" />
+          <span class="ent-shot__tag">Collective intelligence</span>
+        </div>
+      </aside>
+
+      <div class="how__list">
+        <span class="ent-ghost how__ghost" aria-hidden="true">{{ v.index }}</span>
+        <header class="reveal" appReveal>
+          <span class="ent-eyebrow">How it works</span>
+          <h2 class="ent-h2 how__title">Five moving parts</h2>
+        </header>
+
+        <ol class="feats">
+          @for (feature of v.features; track feature.title; let i = $index) {
+            <li class="feat reveal" appReveal [revealDelay]="i * 70">
+              <span class="feat__n">{{ i + 1 }}</span>
+              <div>
+                <h3 class="ent-h3">{{ feature.title }}</h3>
+                <p class="ent-body feat__body">{{ feature.body }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Impact band over imagery ===== -->
+  <section class="ent-band">
+    <img class="ent-band__bg" [src]="v.images.b" alt="" loading="lazy" />
+    <div class="ent-wrap ent-band__inner reveal" appReveal>
+      <h2 class="ent-h2 impact__title">{{ v.closing }}</h2>
+      <dl class="ent-metrics">
+        @for (metric of v.metrics; track metric.label) {
+          <div class="ent-metric">
+            <dt class="ent-metric__value ent-grad">{{ metric.value }}</dt>
+            <dd class="ent-metric__label">{{ metric.label }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== Next ===== -->
+  <nav class="ent-next">
+    <a class="ent-wrap ent-next__link" [routerLink]="['/entrepreneur', next.id]">
+      <span class="ent-next__label">Next venture</span>
+      <span class="ent-next__name">{{ next.name }}</span>
+      <span class="ent-next__arrow" aria-hidden="true">→</span>
+    </a>
+  </nav>
+</div>

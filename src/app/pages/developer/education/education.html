@@ -1,0 +1,111 @@
+<div class="dev-page">
+  <header class="dev-head">
+    <span class="dev-eyebrow">// 01 — education</span>
+    <h1 class="dev-title">Education</h1>
+    <p class="dev-lede">
+      Two degrees, one finished early, and an interdisciplinary path that puts AI policy
+      and ethics next to the mathematics rather than after it.
+    </p>
+  </header>
+
+  <section class="dev-section">
+    <span class="dev-label">// degrees</span>
+
+    <div class="degrees">
+      @for (degree of degrees; track degree.school; let i = $index) {
+        <article class="degree" [style.--stagger]="i">
+          <span class="dev-panel__corner" aria-hidden="true"></span>
+
+          <header class="degree__head">
+            <span class="degree__logo">
+              <img [src]="degree.logo" [alt]="degree.school + ' logo'" />
+            </span>
+
+            <div class="degree__ident">
+              <div class="degree__top">
+                <span class="dev-chip">{{ i === 0 ? 'current' : 'complete' }}</span>
+                <span class="dev-meta">{{ degree.window }}</span>
+              </div>
+              <h2 class="degree__credential">{{ degree.credential }}</h2>
+              <p class="degree__school">{{ degree.school }}</p>
+              <p class="dev-meta degree__detail">{{ degree.detail }} · {{ degree.place }}</p>
+            </div>
+          </header>
+
+          <ul class="dev-bullets">
+            @for (note of degree.notes; track note) {
+              <li>{{ note }}</li>
+            }
+          </ul>
+
+          <div class="degree__courses">
+            <span class="degree__sub">// coursework</span>
+
+            @for (group of degree.courses; track group.label) {
+              <div class="cgroup">
+                <span class="cgroup__label">{{ group.label }}</span>
+                <ul class="courses">
+                  @for (course of group.courses; track course.code) {
+                    <li>
+                      <a
+                        class="course"
+                        [href]="course.url"
+                        target="_blank"
+                        rel="noopener"
+                        [attr.title]="course.code + ' — ' + course.title + ' (opens the course catalog)'"
+                      >
+                        <span class="course__code">{{ course.code }}</span>
+                        <span class="course__title">{{ course.title }}</span>
+                        <span class="course__out" aria-hidden="true">↗</span>
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+
+          @if (degree.transcript; as transcript) {
+            <button type="button" class="transcript" (click)="openTranscript(transcript)">
+              <span class="transcript__glyph" aria-hidden="true">▤</span>
+              <span class="transcript__text">
+                <span class="transcript__title">View transcript</span>
+                <span class="transcript__note">Opens in-page · redacted copy</span>
+              </span>
+              <span class="transcript__cue" aria-hidden="true">→</span>
+            </button>
+          }
+
+          @if (degree.certificates?.length) {
+            <app-asset-strip [assets]="degree.certificates!" label="certificates" />
+          }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="dev-section">
+    <div class="dev-split">
+      <div>
+        <span class="dev-label">// focus areas</span>
+        <ul class="dev-tags">
+          @for (area of focus; track area) {
+            <li>{{ area }}</li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <span class="dev-label">// certifications</span>
+        <ul class="certs">
+          @for (cert of certifications; track cert.name) {
+            <li class="cert">
+              <span class="cert__name">{{ cert.name }}</span>
+              <span class="cert__issuer dev-wire">{{ cert.issuer }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

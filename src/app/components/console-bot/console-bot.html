@@ -1,0 +1,67 @@
+<div class="term">
+  <header class="term__bar">
+    <span class="term__dots" aria-hidden="true">
+      <i></i><i></i><i></i>
+    </span>
+    <span class="term__title">kinjal@amherst : ~/ask</span>
+    <span class="term__status" [class.is-live]="live">
+      <span class="term__pulse" aria-hidden="true"></span>
+      {{ live ? 'model' : 'offline' }}
+    </span>
+  </header>
+
+  <div class="term__log" #log role="log" aria-live="polite" aria-label="Assistant transcript">
+    @for (message of messages(); track message.id) {
+      <div class="msg" [attr.data-role]="message.role">
+        <p class="msg__line">
+          @if (message.role === 'user') {
+            <span class="msg__caret" aria-hidden="true">&gt;</span>
+          }
+          {{ message.text }}@if (message.streaming) {
+            <span class="msg__caretblink" aria-hidden="true"></span>
+          }
+        </p>
+
+        @if (message.sources?.length && !message.streaming) {
+          <p class="msg__sources">
+            <span class="msg__sources-label">
+              {{ message.mode === 'live' ? 'read from' : 'matched' }}
+            </span>
+            @for (source of message.sources; track source) {
+              <span class="msg__chip">{{ source }}</span>
+            }
+          </p>
+        }
+      </div>
+    }
+
+    @if (thinking()) {
+      <div class="msg" data-role="bot">
+        <p class="msg__line msg__line--wait">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </p>
+      </div>
+    }
+  </div>
+
+  <div class="term__chips">
+    @for (item of suggestions; track item.id) {
+      <button type="button" class="chip" (click)="ask(item.question)">{{ item.question }}</button>
+    }
+  </div>
+
+  <form class="term__input" (submit)="submit($event)">
+    <span class="term__prompt" aria-hidden="true">&gt;</span>
+    <input
+      type="text"
+      name="query"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="ask about kinjal…"
+      aria-label="Ask a question about Kinjal"
+      [ngModel]="draft()"
+      (ngModelChange)="draft.set($event)"
+    />
+    <button type="submit" [disabled]="!draft().trim() || thinking()">Run</button>
+  </form>
+</div>
