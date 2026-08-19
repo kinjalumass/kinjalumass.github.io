@@ -21,7 +21,7 @@
       </div>
 
       <div class="ent-shot hero__shot">
-        <img [src]="v.images.hero" alt="" />
+        <img [src]="v.art" alt="" />
         <span class="ent-shot__tag">{{ v.stage }}</span>
       </div>
     </div>
@@ -87,8 +87,7 @@
   </section>
 
   <!-- ===== Features over image ===== -->
-  <section class="ent-band">
-    <img class="ent-band__bg" [src]="v.images.a" alt="" loading="lazy" />
+  <section class="ent-band ent-band--tint">
     <div class="ent-wrap ent-band__inner">
       <header class="reveal" appReveal>
         <span class="ent-eyebrow">How it reads you</span>
@@ -119,9 +118,6 @@
             </div>
           }
         </dl>
-      </div>
-      <div class="ent-shot close__shot reveal" appReveal [revealDelay]="120">
-        <img [src]="v.images.b" alt="" loading="lazy" />
       </div>
     </div>
   </section>

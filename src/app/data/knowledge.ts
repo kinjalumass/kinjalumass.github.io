@@ -142,18 +142,52 @@ export const ENTRIES: Entry[] = [
     ],
   },
   {
+    id: 'microsoft',
+    question: 'What did she do at Microsoft?',
+    keywords: ['microsoft', 'azure', 'learn', 'msla'],
+    answer: [
+      'She was a Microsoft Learn Student Ambassador through 2024, running peer workshops and training on Azure cloud, AI fundamentals, and portfolio building.',
+      'She also built reusable starter projects and hands-on resources so students could keep exploring Microsoft technologies after the sessions ended.',
+    ],
+  },
+  {
+    id: 'ibm',
+    question: 'What did she do at IBM?',
+    keywords: ['ibm', 'mainframe', 'zxplore', 'batch'],
+    answer: [
+      'She was an IBM Z Student Ambassador from late 2023 to mid 2024, designing and delivering workshops on mainframe security, data pipelines, and batch processing.',
+      'Her angle was connecting mainframe principles to modern AI/ML workflows — showing how legacy systems underpin scalable data handling.',
+    ],
+  },
+  {
+    id: 'google',
+    question: 'What did she do at Google?',
+    keywords: ['google', 'dsc', 'gdsc', 'club', 'hackathon', 'bootcamp'],
+    answer: [
+      'She was Team Leader of the Google Developer Student Club at Virginia Tech from late 2023 to mid 2024.',
+      'She directed hackathons, coding bootcamps, and workshops on Google Cloud and APIs, mentored peers through real projects, and built faculty and industry partnerships for the club.',
+    ],
+  },
+  {
     id: 'ambassadorships',
-    question: 'What are her Google, Microsoft, and IBM roles?',
+    question: 'What are her developer advocacy roles?',
     suggest: true,
+    keywords: ['ambassador', 'ambassadorship', 'advocate', 'advocacy', 'community', 'developer relations'],
+    answer: [
+      'Three at once, roughly 2023 to 2024: Team Leader of the Google Developer Student Club at Virginia Tech, Microsoft Learn Student Ambassador, and IBM Z Student Ambassador.',
+      'Ask about any one of them for detail.',
+    ],
+  },
+  {
+    id: 'backend',
+    question: 'Has she done software engineering work?',
     keywords: [
-      'google', 'microsoft', 'ibm', 'ambassador', 'ambassadorship', 'dsc', 'gdsc',
-      'developer', 'student', 'club', 'learn', 'azure', 'cloud', 'mainframe', 'z',
-      'advocate', 'advocacy', 'community', 'lead', 'leader',
+      'backend', 'software', 'engineer', 'engineering', 'developer', 'django', 'firebase',
+      'javascript', 'api', 'skyit', 'consulting', 'fisher', 'intern',
     ],
     answer: [
-      'Three at once, roughly 2023 to 2024. Team Leader of the Google Developer Student Club at Virginia Tech, where she directed hackathons, coding bootcamps, and workshops on Google Cloud and APIs.',
-      'Microsoft Learn Student Ambassador, running peer workshops on Azure, AI fundamentals, and portfolio building, and creating reusable starter projects so students could keep exploring on their own.',
-      'IBM Z Student Ambassador, designing workshops on mainframe security, data pipelines, and batch processing — and connecting those principles to modern AI/ML workflows to show how legacy systems underpin scalable data handling.',
+      'Yes. She was a Backend Developer Intern at SkyIT Services for eleven months in 2024, building backend solutions in Python, Django REST Framework, Firebase and JavaScript.',
+      'In 2025 she worked as a Technology Consultant at Steve Fisher Consulting, building a secure litigation-document platform with role-based access control, audit logging, and structured search.',
     ],
   },
   {

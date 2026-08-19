@@ -2,21 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Kinjal Pandey — Developer · Entrepreneur · Model</title>
+  <title>Kinjal Pandey — Developer, Entrepreneur, Model</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kinjal Pandey — CS master's student, startup founder, and model. Three disciplines, one point of view.">
+
+  <!-- Per-route title, description, canonical and social tags are written by
+       src/app/core/seo.ts. These are the defaults, and what a crawler sees
+       before any JavaScript runs. -->
+  <meta name="description" content="Kinjal Pandey is a computer science master's student at UMass Amherst, a founder with three funded pitches, and a working model.">
+  <meta name="author" content="Kinjal Pandey">
   <meta name="theme-color" content="#08080a">
+  <link rel="canonical" href="https://kinjalpandey.com/">
+
+  <!-- Crawling. `max-image-preview:large` is what gets a photograph shown
+       beside the result instead of a thumbnail. -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Kinjal Pandey">
-  <meta property="og:description" content="Developer · Entrepreneur · Model">
+  <meta property="og:site_name" content="Kinjal Pandey">
+  <meta property="og:title" content="Kinjal Pandey — Developer, Entrepreneur, Model">
+  <meta property="og:description" content="Three disciplines, one point of view.">
+  <meta property="og:url" content="https://kinjalpandey.com/">
+  <meta property="og:image" content="https://kinjalpandey.com/img/model/carle/carle-01.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ===================================================================
+       Security
+
+       GitHub Pages serves static files and cannot set response headers, so
+       everything enforceable from the document itself is set here. The two
+       that genuinely cannot be done this way — Strict-Transport-Security and
+       X-Frame-Options — are covered by GitHub's "Enforce HTTPS" setting and
+       by frame-ancestors below, which supersedes X-Frame-Options anyway.
+       =================================================================== -->
+
+  <!-- No plugins, no inline scripts, no framing, and connections limited to
+       the three origins this site actually talks to. 'unsafe-inline' is
+       present for styles only: Angular injects component styles inline. -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://api.github.com https://kinjal-assistant.kinjalpandey.workers.dev;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'none';
+    object-src 'none';
+    upgrade-insecure-requests
+  ">
+
+  <!-- Don't leak the full URL to third parties -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+
+  <!-- ===================================================================
+       Structured data
+
+       This is what tells Google that the site, the LinkedIn profile, the
+       GitHub account and the arXiv paper are all the same person — which is
+       the thing that decides whether a name search returns one strong result
+       or several weak ones. `sameAs` does most of that work.
+       =================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://kinjalpandey.com/#kinjal",
+        "name": "Kinjal Pandey",
+        "givenName": "Kinjal",
+        "familyName": "Pandey",
+        "url": "https://kinjalpandey.com/",
+        "image": "https://kinjalpandey.com/img/model/carle/carle-01.jpg",
+        "email": "mailto:kinjalpandey18@gmail.com",
+        "jobTitle": "Computer Science graduate student, founder, and model",
+        "description": "Computer science master's student at UMass Amherst working on machine learning, privacy and cryptography; founder of six ventures; and a working editorial and runway model.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Amherst",
+          "addressRegion": "MA",
+          "addressCountry": "US"
+        },
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Massachusetts Amherst",
+            "sameAs": "https://www.umass.edu/"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Virginia Tech",
+            "sameAs": "https://www.vt.edu/"
+          }
+        ],
+        "knowsAbout": [
+          "Machine learning",
+          "Privacy-preserving artificial intelligence",
+          "Cryptography",
+          "Coding theory",
+          "Data science",
+          "Software engineering",
+          "Entrepreneurship"
+        ],
+        "worksFor": { "@id": "https://kinnovationgroup.com/#kinnovation" },
+        "sameAs": [
+          "https://www.linkedin.com/in/kinjalpandey",
+          "https://github.com/kinjalumass",
+          "https://medium.com/@kinjalpandey18",
+          "https://arxiv.org/abs/2601.05076",
+          "https://kinnovationgroup.com/"
+        ],
+        "award": [
+          "Karnah — second place, $750, UPitch Spring 2026, UMass Amherst Entrepreneurship Club",
+          "CalendAI — $500, Apex Center for Entrepreneurs, Virginia Tech, 2024",
+          "Trendify AI — Minute Pitch winner, $300, Berthiaume Center for Entrepreneurship, UMass Amherst, 2025",
+          "Dean's List with Distinction, Virginia Tech"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://kinnovationgroup.com/#kinnovation",
+        "name": "Kinnovation",
+        "url": "https://kinnovationgroup.com/",
+        "founder": { "@id": "https://kinjalpandey.com/#kinjal" },
+        "description": "The studio Kinjal Pandey builds ventures under \u2014 MeAsmi, Karna\u1e25, CalendAI, NutriNavigator, Witness and Trendify."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kinjalpandey.com/#website",
+        "url": "https://kinjalpandey.com/",
+        "name": "Kinjal Pandey",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://kinjalpandey.com/#kinjal" },
+        "about": { "@id": "https://kinjalpandey.com/#kinjal" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://kinjalpandey.com/#profile",
+        "url": "https://kinjalpandey.com/",
+        "mainEntity": { "@id": "https://kinjalpandey.com/#kinjal" },
+        "isPartOf": { "@id": "https://kinjalpandey.com/#website" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <app-root></app-root>

@@ -9,18 +9,10 @@
 
 /* --- overlays ------------------------------------------------------------- */
 
-.scan {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  pointer-events: none;
-  opacity: 0.5;
-  background: repeating-linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0 2px,
-    rgba(0, 0, 0, 0.32) 2px 3px
-  );
-}
+/* The CRT scanline overlay used to live here — a fixed, full-section
+   repeating gradient at 0.5 opacity. It sat on top of every photograph in the
+   developer section, which is exactly the "retro TV lines" effect. Removed.
+   The vignette below stays: it is a vignette, not scanlines. */
 
 .vign {
   position: fixed;
@@ -154,7 +146,6 @@
 }
 
 @media print {
-  .scan,
   .vign,
   .nav,
   .foot { display: none !important; }

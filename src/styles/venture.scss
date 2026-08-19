@@ -1,21 +1,27 @@
 /* ===========================================================
-   Light design system for /entrepreneur.
+   Dark design system for /entrepreneur.
 
-   Paper base, saturated accents, deliberately loose layout.
-   Every venture page sets --v1 / --v2 / --v3 (rgb triplets) on
-   its root; these classes read from those so the same pieces
-   recolour per venture.
+   Near-black violet base, saturated accents, deliberately loose
+   layout. Every venture page sets --v1 / --v2 / --v3 (rgb
+   triplets) on its root; these classes read from those so the
+   same pieces recolour per venture.
+
+   Surfaces are tinted with the venture's own accent rather than
+   being flat grey — on a dark ground that is what keeps the
+   section feeling vibrant instead of merely unlit.
    =========================================================== */
 
 .ent-page {
-  --paper: #faf7f2;
-  --paper-2: #ffffff;
-  --paper-3: #f2ede4;
-  --ink: #17121f;
-  --ink-2: rgba(23, 18, 31, 0.64);
-  --ink-3: rgba(23, 18, 31, 0.42);
-  --line: rgba(23, 18, 31, 0.12);
-  --line-soft: rgba(23, 18, 31, 0.07);
+  --paper: #0b0810;
+  --paper-2: #141020;
+  --paper-3: #1b1528;
+  --ink: #f7f3fb;
+  --ink-2: rgba(247, 243, 251, 0.68);
+  --ink-3: rgba(247, 243, 251, 0.46);
+  --line: rgba(247, 243, 251, 0.13);
+  --line-soft: rgba(247, 243, 251, 0.07);
+  /* Cast shadows into the base rather than into grey */
+  --cast: rgba(2, 0, 6, 0.8);
 
   position: relative;
   z-index: 2;
@@ -111,8 +117,8 @@
 .ent-mark {
   background: linear-gradient(
     100deg,
-    rgba(var(--v1, var(--ember)), 0.22),
-    rgba(var(--v2, var(--magenta)), 0.22)
+    rgba(var(--v1, var(--ember)), 0.32),
+    rgba(var(--v2, var(--magenta)), 0.32)
   );
   padding: 0.05em 0.22em;
   border-radius: 0.2em;
@@ -145,14 +151,17 @@
   padding: clamp(1.5rem, 3vw, 2.25rem);
   border: 1px solid var(--line);
   border-radius: 20px;
-  background: var(--paper-2);
+  /* a whisper of the venture's accent so cards aren't flat grey */
+  background: color-mix(in srgb, rgb(var(--v1, var(--ember))) 5%, var(--paper-2));
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out),
-    border-color 0.5s;
+    border-color 0.5s, background 0.5s;
 
   &:hover {
     transform: translateY(-5px);
-    border-color: rgba(var(--v1, var(--ember)), 0.5);
-    box-shadow: 0 24px 60px -34px rgba(23, 18, 31, 0.4);
+    border-color: rgba(var(--v1, var(--ember)), 0.55);
+    background: color-mix(in srgb, rgb(var(--v1, var(--ember))) 9%, var(--paper-2));
+    box-shadow: 0 26px 64px -32px rgba(var(--v2, var(--magenta)), 0.5),
+      0 18px 50px -30px var(--cast);
   }
 }
 
@@ -161,7 +170,7 @@
   position: relative;
   border: 1.5px solid var(--ink);
   border-radius: 18px;
-  background: var(--paper-2);
+  background: color-mix(in srgb, rgb(var(--v1, var(--ember))) 6%, var(--paper-2));
   box-shadow: 8px 8px 0 rgba(var(--v1, var(--ember)), 1);
   transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
 
@@ -216,7 +225,7 @@
   padding: 0.4rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(247, 243, 251, 0.06);
   backdrop-filter: blur(8px);
   font-size: 0.7rem;
   font-weight: 600;
@@ -232,7 +241,7 @@
   font-weight: 700;
   line-height: 0.75;
   letter-spacing: -0.06em;
-  color: rgba(var(--v1, var(--ember)), 0.1);
+  color: rgba(var(--v1, var(--ember)), 0.16);
   pointer-events: none;
   user-select: none;
 }
@@ -281,7 +290,8 @@
 
   &--light {
     background: #fff;
-    color: var(--ink);
+    /* --ink is light in dark mode, so this one is pinned */
+    color: #0b0810;
 
     &:hover { transform: translateY(-2px); }
   }
@@ -317,7 +327,8 @@
   bottom: 1rem;
   padding: 0.4rem 0.85rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(11, 8, 16, 0.66);
+  border: 1px solid rgba(247, 243, 251, 0.14);
   backdrop-filter: blur(10px);
   font-size: 0.64rem;
   font-weight: 600;
@@ -340,7 +351,7 @@
 .ent-metric {
   padding: 1.5rem 1.35rem;
   border-radius: 16px;
-  background: var(--paper-2);
+  background: color-mix(in srgb, rgb(var(--v1, var(--ember))) 6%, var(--paper-2));
   border: 1px solid var(--line);
   transition: transform 0.45s var(--ease-out), border-color 0.45s;
 
@@ -356,6 +367,7 @@
   font-size: clamp(1.5rem, 3vw, 2.15rem);
   font-weight: 700;
   letter-spacing: -0.035em;
+  color: rgb(var(--v1, var(--ember)));
 }
 
 .ent-metric__label {
@@ -377,7 +389,7 @@
   transition: padding-left 0.5s var(--ease-out), background 0.5s;
 
   &:hover {
-    background: rgba(var(--v1, var(--ember)), 0.07);
+    background: rgba(var(--v1, var(--ember)), 0.12);
     padding-left: calc(var(--gutter) + 1rem);
 
     .ent-next__arrow { transform: translateX(0.6rem); }
@@ -423,15 +435,30 @@
   object-fit: cover;
 }
 
+/**
+ * The closing band used to sit on a photograph, but the venture pages have
+ * one image each and it is spent in the hero. The overlay covered 90% of the
+ * picture anyway — this reaches the same weight from the venture's own hues.
+ */
+.ent-band--tint::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 12% 0%, rgba(var(--v1), 0.34), transparent 62%),
+    radial-gradient(110% 80% at 88% 100%, rgba(var(--v3), 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(var(--v2), 0.12), transparent 55%);
+}
+
 .ent-band::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(250, 247, 242, 0.9),
-    rgba(250, 247, 242, 0.62) 45%,
-    rgba(250, 247, 242, 0.94)
+    rgba(11, 8, 16, 0.9),
+    rgba(11, 8, 16, 0.6) 45%,
+    rgba(11, 8, 16, 0.94)
   );
 }
 

@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy kinjalpandey.com
 
 on:
   push:
@@ -28,14 +28,18 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build -- --base-href=/
+      # Every route is prerendered to its own directory, so there is no SPA
+      # fallback to set up — and 404.html must NOT be overwritten with
+      # index.html, because public/404.html is a real not-found page.
+      - run: npm run build
 
-      # SPA fallback: GitHub Pages serves 404.html for unknown paths,
-      # so pointing it at the app lets client-side routes deep-link.
-      - name: Add SPA fallback and disable Jekyll
+      - name: Check the build produced what we expect
         run: |
-          cp dist/portfolio/browser/index.html dist/portfolio/browser/404.html
-          touch dist/portfolio/browser/.nojekyll
+          test -f dist/portfolio/browser/index.html
+          test -f dist/portfolio/browser/CNAME
+          test -f dist/portfolio/browser/404.html
+          test -f dist/portfolio/browser/.nojekyll
+          echo "prerendered pages: $(find dist/portfolio/browser -name index.html | wc -l)"
 
       - uses: actions/upload-pages-artifact@v3
         with:

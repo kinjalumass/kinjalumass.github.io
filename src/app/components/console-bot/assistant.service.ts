@@ -7,6 +7,11 @@ export interface Reply {
   /** 'live' came from the model, 'local' from the built-in retrieval. */
   mode: 'live' | 'local';
   sources: string[];
+  /**
+   * Set when the model was configured but could not be reached. Surfaced in
+   * the UI — a silent downgrade to canned answers is worse than saying so.
+   */
+  degraded?: string;
 }
 
 /**
@@ -30,8 +35,11 @@ export class AssistantService {
     if (this.isLive) {
       try {
         return await this.askModel(question, context, onToken);
-      } catch {
-        // fall through to local
+      } catch (err) {
+        const reason = err instanceof Error ? err.message : 'unknown error';
+        console.warn('[assistant] live model unavailable, using local answers:', reason);
+        const local = await this.askLocal(question, onToken);
+        return { ...local, degraded: reason };
       }
     }
     return this.askLocal(question, onToken);
@@ -60,7 +68,18 @@ export class AssistantService {
         signal: controller.signal,
       });
 
-      if (!response.ok || !response.body) throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) {
+        // Surface what the Worker actually said — "HTTP 503" alone is useless.
+        let detail = '';
+        try {
+          const body = await response.json();
+          detail = body?.detail || body?.error || '';
+        } catch {
+          /* body wasn't JSON */
+        }
+        throw new Error(`HTTP ${response.status}${detail ? ` — ${detail}` : ''}`);
+      }
+      if (!response.body) throw new Error('Empty response body');
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();

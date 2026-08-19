@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 
 export const routes: Routes = [
-  { path: '', component: Home, title: 'Kinjal Pandey' },
+  { path: '', component: Home },
 
   // Each section is lazy-loaded, so the landing page only ships itself.
   {
@@ -19,7 +19,6 @@ export const routes: Routes = [
   {
     path: 'model',
     loadComponent: () => import('./pages/model/model').then((m) => m.Model),
-    title: 'Model — Kinjal Pandey',
   },
 
   { path: '**', redirectTo: '' },

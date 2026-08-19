@@ -1,4 +1,5 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { Asset } from '../../data/assets';
 
 interface ViewerState {
@@ -12,6 +13,9 @@ interface ViewerState {
  */
 @Injectable({ providedIn: 'root' })
 export class AssetService {
+  /** Injected rather than global, so this file is safe to prerender. */
+  private readonly doc = inject(DOCUMENT);
+
   private readonly state = signal<ViewerState | null>(null);
 
   readonly isOpen = computed(() => this.state() !== null);
@@ -25,12 +29,12 @@ export class AssetService {
   open(assets: Asset[], index = 0): void {
     if (!assets.length) return;
     this.state.set({ assets, index: Math.max(0, Math.min(index, assets.length - 1)) });
-    document.body.style.overflow = 'hidden';
+    this.doc.body.style.overflow = 'hidden';
   }
 
   close(): void {
     this.state.set(null);
-    document.body.style.overflow = '';
+    this.doc.body.style.overflow = '';
   }
 
   step(delta: number): void {

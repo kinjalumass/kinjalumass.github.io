@@ -89,7 +89,9 @@ export class MatrixRain implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    cancelAnimationFrame(this.raf);
+    // The animation only ever starts in a browser (afterNextRender), but
+    // ngOnDestroy also runs during prerendering, where rAF does not exist.
+    if (this.raf) cancelAnimationFrame(this.raf);
     this.observer?.disconnect();
     if (this.onResize) window.removeEventListener('resize', this.onResize);
     if (this.bound) window.removeEventListener('pointermove', this.onPointerMove);

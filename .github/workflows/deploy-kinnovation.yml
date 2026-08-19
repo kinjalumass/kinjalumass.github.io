@@ -1,0 +1,42 @@
+name: Deploy kinnovationgroup.com
+
+# Builds the standalone Kinnovation site from this same repository and pushes
+# the result to the second repo, whose GitHub Pages serves kinnovationgroup.com.
+#
+# Requires one secret: KINNOVATION_DEPLOY_KEY — see DEPLOY.md.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build:kinnovation
+
+      - name: Check the output before publishing
+        run: |
+          test "$(cat dist/kinnovation/browser/CNAME)" = "kinnovationgroup.com"
+          test -f dist/kinnovation/browser/index.html
+          test -f dist/kinnovation/browser/calendai/index.html
+          echo "pages: $(find dist/kinnovation/browser -name index.html | wc -l)"
+
+      - name: Publish to the Kinnovation repository
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.KINNOVATION_DEPLOY_KEY }}
+          external_repository: kinjalumass/kinnovationgroup
+          publish_branch: gh-pages
+          publish_dir: ./dist/kinnovation/browser
+          cname: kinnovationgroup.com

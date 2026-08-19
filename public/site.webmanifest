@@ -1,0 +1,16 @@
+{
+ "name": "Kinjal Pandey",
+ "short_name": "Kinjal Pandey",
+ "description": "Developer, entrepreneur, model.",
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#08080a",
+ "theme_color": "#08080a",
+ "icons": [
+  {
+   "src": "favicon.ico",
+   "sizes": "48x48",
+   "type": "image/x-icon"
+  }
+ ]
+}

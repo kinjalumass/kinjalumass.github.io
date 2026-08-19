@@ -13,7 +13,7 @@
     </div>
 
     <div class="ent-shot hero__shot">
-      <img [src]="v.images.hero" alt="" />
+      <img [src]="v.art" alt="" />
     </div>
 
     <div class="ent-wrap hero__foot">
@@ -79,12 +79,9 @@
         <h2 class="ent-h2 rules__title">Constraints, not features</h2>
         <p class="ent-body rules__body">
           Everything difficult about this problem comes from systems that collect more than
-          they need. These are the limits the platform is built inside — not settings that
-          can be relaxed later.
+          they need. These are the limits the platform is built inside. They are not
+          settings that get relaxed once there is a growth target.
         </p>
-        <div class="ent-shot rules__shot">
-          <img [src]="v.images.a" alt="" loading="lazy" />
-        </div>
       </div>
 
       <ul class="rulelist">
@@ -118,8 +115,7 @@
   </section>
 
   <!-- ===== Close ===== -->
-  <section class="ent-band">
-    <img class="ent-band__bg" [src]="v.images.b" alt="" loading="lazy" />
+  <section class="ent-band ent-band--tint">
     <div class="ent-wrap ent-wrap--tight ent-band__inner reveal" appReveal>
       <h2 class="ent-h2 close__title">{{ v.closing }}</h2>
       <dl class="ent-metrics">

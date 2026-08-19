@@ -8,7 +8,20 @@
  * this Worker wraps them in a grounding prompt and streams the reply back.
  */
 
-const MODEL = '@cf/meta/llama-3.1-8b-instruct';
+/**
+ * Tried in order until one answers. Cloudflare retires models regularly —
+ * pinning a single ID is how this broke the first time — so keep several
+ * live options here and the Worker survives the next deprecation on its own.
+ *
+ * Check the current catalogue at developers.cloudflare.com/workers-ai/models
+ * and drop anything marked Deprecated.
+ */
+const MODELS = [
+  '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+  '@cf/meta/llama-4-scout-17b-16e-instruct',
+  '@cf/meta/llama-3.1-8b-instruct-fast',
+  '@cf/mistralai/mistral-small-3.1-24b-instruct',
+];
 
 /** Origins allowed to call this Worker. */
 const ALLOWED = [
@@ -22,16 +35,31 @@ const MAX_QUESTION = 400;
 const MAX_CONTEXT_CHARS = 9000;
 const MAX_PASSAGES = 8;
 
-const SYSTEM = `You are the assistant on Kinjal Pandey's personal website. You answer questions about Kinjal for visitors — recruiters, collaborators, and people who found her work.
+const SYSTEM = `You are the assistant on Kinjal Pandey's personal website, answering visitors' questions about her — recruiters, collaborators, and people who found her work.
 
-Rules, in order of importance:
-1. Answer ONLY from the PROFILE passages provided in the user message. They are the complete truth available to you.
-2. If the passages do not contain the answer, say so plainly and suggest what you can cover instead. Never guess, never fill gaps with plausible detail. Never invent an employer, a date, a grade, a technology, or a credential.
-3. Do not speculate about anything personal that is not in the passages — age, relationships, salary, immigration status, health.
-4. Refer to her as Kinjal or "she". Never speak as Kinjal in the first person.
-5. Be concise: two or three short paragraphs at most, no headings, no bullet lists unless the question genuinely asks for a list.
-6. Write in plain, warm, professional prose. No emoji. Do not open with "Based on the provided passages" — just answer.
-7. If asked to compare her to someone, or to write something on her behalf, decline briefly and offer the facts instead.`;
+ANSWER THE EXACT QUESTION ASKED. This is the most important rule.
+- If asked about one company, answer about that company only. Do not list her other roles.
+- If asked about one project, answer about that project only.
+- Lead with the direct answer in the first sentence. No preamble, no scene-setting.
+- The passages you receive are retrieved by keyword and will often include material irrelevant to the question. Use only the parts that actually answer it and ignore the rest.
+
+LENGTH. Two to four sentences for a normal question. Only go longer if genuinely asked for detail. Never pad. Never restate the question back.
+
+GROUNDING.
+- Answer only from the PROFILE passages given below. They are the only facts you have.
+- If they do not answer the question, say exactly that in one sentence and name what you can cover instead. Never guess. Never invent an employer, date, title, grade, technology or credential.
+- Do not speculate about anything personal that is not in the passages — age, relationships, salary, immigration status, health.
+
+VOICE.
+- Refer to her as Kinjal or "she". Never write as Kinjal in the first person.
+- Plain, warm, professional prose. No emoji, no headings, no bullet lists unless the question explicitly asks for a list.
+- Never open with "Based on the provided passages", "According to", or "Great question".
+- If asked to compare her to a named person, or to write something on her behalf, decline in one sentence and offer the relevant facts instead.
+
+EXAMPLE
+Question: "What did she do at Microsoft?"
+Good: "She was a Microsoft Learn Student Ambassador through 2024, running peer workshops on Azure, AI fundamentals and portfolio building. She also built reusable starter projects so students could keep exploring Microsoft tooling on their own after the sessions ended."
+Bad: any answer that also describes her Google or IBM roles.`;
 
 function cors(origin) {
   const allow = ALLOWED.includes(origin) ? origin : ALLOWED[0];
@@ -58,8 +86,31 @@ export default {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors(origin) });
     }
+
+    // Health check — open the Worker URL in a browser to see which models
+    // actually work on this account right now.
+    if (request.method === 'GET') {
+      const results = [];
+      for (const model of MODELS) {
+        try {
+          const out = await env.AI.run(model, {
+            messages: [{ role: 'user', content: 'Reply with the single word: ok' }],
+            max_tokens: 5,
+          });
+          results.push({ model, ok: true, sample: out?.response ?? out });
+        } catch (err) {
+          results.push({ model, ok: false, error: String(err).slice(0, 200) });
+        }
+      }
+      return json(
+        { status: 'alive', usable: results.filter((r) => r.ok).map((r) => r.model), results },
+        200,
+        origin,
+      );
+    }
+
     if (request.method !== 'POST') {
-      return json({ error: 'POST only' }, 405, origin);
+      return json({ error: 'POST or GET only' }, 405, origin);
     }
     if (origin && !ALLOWED.includes(origin)) {
       return json({ error: 'Origin not allowed' }, 403, origin);
@@ -104,26 +155,37 @@ export default {
       },
     ];
 
-    try {
-      const stream = await env.AI.run(MODEL, {
-        messages,
-        stream: true,
-        max_tokens: 420,
-        temperature: 0.3,
-      });
+    // Walk the model list until one answers.
+    const failures = [];
+    for (const model of MODELS) {
+      try {
+        const stream = await env.AI.run(model, {
+          messages,
+          stream: true,
+          max_tokens: 300,
+          temperature: 0.15,
+        });
 
-      return new Response(stream, {
-        headers: {
-          'Content-Type': 'text/event-stream',
-          'Cache-Control': 'no-cache',
-          Connection: 'keep-alive',
-          ...cors(origin),
-        },
-      });
-    } catch (err) {
-      // Most likely the daily free allocation is spent. The site falls back
-      // to its own local answers when it sees this.
-      return json({ error: 'Model unavailable', detail: String(err) }, 503, origin);
+        return new Response(stream, {
+          headers: {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            Connection: 'keep-alive',
+            'X-Model': model,
+            ...cors(origin),
+          },
+        });
+      } catch (err) {
+        failures.push(`${model}: ${String(err).slice(0, 160)}`);
+      }
     }
+
+    // Every model refused — usually a spent daily allocation or a catalogue
+    // change. The site falls back to its own local answers when it sees this.
+    return json(
+      { error: 'No model available', detail: failures.join(' | ') },
+      503,
+      origin,
+    );
   },
 };

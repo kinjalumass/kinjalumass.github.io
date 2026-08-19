@@ -49,12 +49,11 @@
   to { opacity: 1; transform: rotate(-3deg) scale(1); }
 }
 
-/* --- collage: scattered, not gridded ------------------------------------- */
+/* --- one frame below the type -------------------------------------------- */
 
 .collage {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem;
+  place-items: center;
   max-width: 84rem;
   margin: clamp(3rem, 7vw, 5rem) auto 0;
   padding: 0 var(--gutter);
@@ -62,31 +61,15 @@
 
 .collage > * {
   border-radius: 20px;
-  box-shadow: 0 28px 70px -44px rgba(23, 18, 31, 0.5);
+  box-shadow: 0 28px 70px -44px rgba(2, 0, 6, 0.8);
   animation: rise-in 1.2s var(--ease-out) both;
 }
 
-.collage__a {
-  grid-column: 1 / 5;
-  aspect-ratio: 3 / 4;
-  align-self: end;
-  transform: rotate(-3deg);
-  animation-delay: 0.35s;
-}
-
-.collage__b {
-  grid-column: 5 / 10;
-  aspect-ratio: 4 / 3;
+.collage__solo {
+  width: min(100%, 54rem);
+  aspect-ratio: 16 / 10;
   transform: rotate(1deg);
-  animation-delay: 0.45s;
-}
-
-.collage__c {
-  grid-column: 10 / 13;
-  aspect-ratio: 1 / 1;
-  align-self: center;
-  transform: rotate(4deg);
-  animation-delay: 0.55s;
+  animation-delay: 0.35s;
 }
 
 @keyframes rise-in {
@@ -263,7 +246,7 @@
   &:hover {
     transform: translateY(-5px);
     border-color: rgb(var(--v1));
-    box-shadow: 0 24px 60px -38px rgba(23, 18, 31, 0.45);
+    box-shadow: 0 24px 60px -38px rgba(2, 0, 6, 0.75);
   }
 }
 
@@ -283,10 +266,7 @@
 .close__title { max-width: 30ch; }
 
 @media (max-width: 900px) {
-  .collage { grid-template-columns: repeat(6, 1fr); }
-  .collage__a { grid-column: 1 / 4; transform: none; }
-  .collage__b { grid-column: 4 / 7; aspect-ratio: 3 / 4; transform: none; }
-  .collage__c { display: none; }
+  .collage__solo { aspect-ratio: 4 / 3; transform: none; }
 
   .step { grid-template-columns: 2.5rem minmax(0, 1fr); }
   .step__rail { grid-column: 1; }

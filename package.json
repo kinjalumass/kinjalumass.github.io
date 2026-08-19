@@ -4,9 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node tools/cache-bust.mjs dist/portfolio/browser && node tools/csp-hashes.mjs dist/portfolio/browser && node tools/check-dist.mjs dist/portfolio/browser",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "seo": "python3 tools/seo.py",
+    "watermark": "python3 tools/watermark.py embed",
+    "build:kinnovation": "ng build --configuration kinnovation && node tools/kinnovation-dist.mjs && node tools/cache-bust.mjs dist/kinnovation/browser && node tools/csp-hashes.mjs dist/kinnovation/browser && node tools/check-dist.mjs dist/kinnovation/browser",
+    "build:all": "npm run build && npm run build:kinnovation"
   },
   "private": true,
   "packageManager": "npm@10.9.8",
@@ -16,7 +20,9 @@
     "@angular/core": "^22.1.0",
     "@angular/forms": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
+    "@angular/platform-server": "^22.1.0",
     "@angular/router": "^22.1.0",
+    "@angular/ssr": "^22.1.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

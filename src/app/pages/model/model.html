@@ -28,7 +28,11 @@
     </div>
 
     <figure class="portrait" (click)="open(id.hero[0])">
-      <img [src]="id.hero[0]" alt="" />
+      <img
+        [src]="id.hero[0]"
+        [style.object-position]="focusOf(id.hero[0])"
+        [alt]="id.first + ' ' + id.last"
+      />
       <figcaption class="portrait__cue">View</figcaption>
     </figure>
   </section>
@@ -51,7 +55,6 @@
             </div>
           }
         </dl>
-        <p class="spec__note">Unretouched digitals, shot in natural light.</p>
       </div>
 
       <div class="spec__digitals">
@@ -60,7 +63,12 @@
           @for (digital of digitals; track digital.slug; let i = $index) {
             <figure class="card" [style.--i]="i" (click)="open(digital.src)">
               <div class="card__img">
-                <img [src]="digital.src" [alt]="digital.label" loading="lazy" />
+                <img
+                  [src]="digital.src"
+                  [style.object-position]="focusOf(digital.src)"
+                  [alt]="digital.label"
+                  loading="lazy"
+                />
               </div>
               <figcaption>
                 <span class="card__label">{{ digital.label }}</span>
@@ -88,7 +96,9 @@
           <span class="story__index">{{ shoot.index }}</span>
           <h3 class="story__title">{{ shoot.title }}</h3>
           <p class="story__kind">{{ shoot.kind }}</p>
-          <p class="story__where">{{ shoot.place }} · {{ shoot.year }}</p>
+          <p class="story__where">
+            {{ shoot.place }}@if (shoot.year) { · {{ shoot.year }} }
+          </p>
           <p class="story__note">{{ shoot.note }}</p>
           <span class="story__tally">{{ shoot.images.length }} frames</span>
         </div>
@@ -96,7 +106,12 @@
         <div class="story__grid" [class.is-open]="isOpen(shoot.slug)">
           @for (src of shown(shoot.slug, shoot.images); track src; let i = $index) {
             <figure class="plate" [style.--i]="i" (click)="open(src)">
-              <img [src]="src" [alt]="shoot.title" loading="lazy" />
+              <img
+                [src]="src"
+                [style.object-position]="focusOf(src)"
+                [alt]="shoot.title + ' — frame ' + (i + 1)"
+                loading="lazy"
+              />
               <figcaption class="plate__n">{{ i + 1 < 10 ? '0' : '' }}{{ i + 1 }}</figcaption>
             </figure>
           }

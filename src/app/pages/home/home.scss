@@ -205,33 +205,29 @@
   .panel__spot { mix-blend-mode: screen; }
 }
 
-/* --- 02 Entrepreneur: light paper + vibrant wash --------------------------
-   Deliberately the one bright tile — it previews a light section, and the
-   contrast against its neighbours does the work. */
+/* --- 02 Entrepreneur: dark violet ground, saturated wash -------------------
+   Previews the dark-and-loud venture section — the ember/magenta gradient is
+   the same one that runs across the venture pages. */
 
 .panel[data-panel='entrepreneur'] {
   .panel__wash {
-    background: linear-gradient(
-      180deg,
-      rgba(252, 249, 245, 0.5),
-      rgba(252, 249, 245, 0.28) 42%,
-      rgba(244, 239, 230, 0.72)
-    );
+    background:
+      radial-gradient(110% 80% at 50% 105%, rgba(255, 45, 117, 0.34), transparent 62%),
+      radial-gradient(90% 70% at 12% 0%, rgba(var(--accent), 0.26), transparent 58%),
+      linear-gradient(180deg, rgba(11, 8, 16, 0.42), rgba(11, 8, 16, 0.86) 72%);
   }
 
-  /* Invert the type for the light surface */
-  .panel__title,
-  .panel__cta-text { color: #17121f; }
+  .panel__kicker { color: rgba(247, 243, 251, 0.72); }
 
-  .panel__kicker { color: rgba(23, 18, 31, 0.66); }
+  /* the venture pages are set in Grotesk, so the tile is too */
+  .panel__title {
+    font-family: var(--grotesk);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+  }
 
-  .panel__ordinal,
-  .panel__edge { color: rgba(23, 18, 31, 0.45); }
-
-  /* Orange wash pulled across the paper */
-  .panel__spot { mix-blend-mode: multiply; }
-
-  &:not(:first-child)::before { background: rgba(23, 18, 31, 0.16); }
+  /* Ember light thrown by the cursor, same as the developer tile */
+  .panel__spot { mix-blend-mode: screen; }
 }
 
 /* --- 03 Model: milk paper, the lightest of the three ---------------------- */
@@ -265,8 +261,8 @@
   &:not(:first-child)::before { background: rgba(26, 22, 24, 0.14); }
 }
 
-/* Cursor tint. Screen on the dark tile so it reads as light; multiply on the
-   pale tiles so it reads as a wash of colour across paper. */
+/* Cursor tint. Screen on the two dark tiles so it reads as light; multiply on
+   the model tile so it reads as a wash of colour across paper. */
 .panel__spot {
   position: absolute;
   inset: 0;

@@ -1,0 +1,143 @@
+<div class="dev-page">
+  <a class="back" routerLink="/developer/projects">
+    <span aria-hidden="true">←</span> All projects
+  </a>
+
+  <!-- ===== Masthead ===== -->
+  <header class="dev-head masthead">
+    <span class="dev-eyebrow">// flagship — {{ studies.length }} case studies</span>
+    <h1 class="dev-title masthead__title">{{ p.title }}</h1>
+
+    <p class="masthead__partner">
+      {{ p.partner }} <span class="masthead__sep" aria-hidden="true">·</span> {{ p.programme }}
+    </p>
+
+    <p class="dev-lede masthead__lede">{{ p.lede }}</p>
+
+    <div class="masthead__actions">
+      <a class="btn btn--primary" [href]="p.repo" target="_blank" rel="noopener">
+        {{ p.repoName }} <span aria-hidden="true">↗</span>
+      </a>
+      <a class="btn" [href]="p.fork" target="_blank" rel="noopener">
+        Personal fork <span aria-hidden="true">↗</span>
+      </a>
+      <a class="btn" href="#studies">Case studies <span aria-hidden="true">↓</span></a>
+    </div>
+
+    <dl class="headline">
+      @for (h of p.headline; track h.label) {
+        <div>
+          <dt>{{ h.value }}</dt>
+          <dd>{{ h.label }}</dd>
+        </div>
+      }
+    </dl>
+  </header>
+
+  <!-- ===== Why it exists ===== -->
+  <section class="dev-section context">
+    <span class="dev-label">// the question</span>
+    <div class="context__grid">
+      @for (para of p.context; track para) {
+        <p class="context__para">{{ para }}</p>
+      }
+    </div>
+  </section>
+
+  <!-- ===== The cohort ===== -->
+  <figure class="band">
+    <img [src]="cohort.src" [alt]="cohort.alt" loading="lazy" />
+    <figcaption>{{ cohort.caption }}</figcaption>
+  </figure>
+
+  <!-- ===== Attribution, stated up front rather than buried.
+             Paired with the team photograph, since that is what it is about. ===== -->
+  <section class="attrib attrib--withPhoto">
+    <div class="attrib__note">
+      <span class="attrib__mark" aria-hidden="true">◆</span>
+      <p class="attrib__text">{{ p.attribution }}</p>
+    </div>
+    <figure class="attrib__shot">
+      <img [src]="team.src" [alt]="team.alt" loading="lazy" />
+      <figcaption>{{ team.caption }}</figcaption>
+    </figure>
+  </section>
+
+  <!-- ===== Case studies ===== -->
+  <section class="dev-section" id="studies">
+    <span class="dev-label">// selected technical case studies</span>
+
+    <ol class="studies">
+      @for (study of studies; track study.slug; let i = $index) {
+        <li
+          class="study"
+          [style.--stagger]="i"
+          [id]="study.slug"
+          (pointermove)="onMove($event)"
+        >
+          <span class="study__glow" aria-hidden="true"></span>
+
+          <div class="study__index">
+            <span class="study__n">{{ study.index }}</span>
+            <span class="study__spine" aria-hidden="true"></span>
+          </div>
+
+          <div class="study__body">
+            <span class="study__kicker">{{ study.kicker }}</span>
+            <h2 class="study__title">{{ study.title }}</h2>
+            <p class="study__summary">{{ study.summary }}</p>
+
+            <ul class="study__points">
+              @for (point of study.points; track point) {
+                <li>{{ point }}</li>
+              }
+            </ul>
+
+            @if (study.metrics?.length) {
+              <dl class="study__metrics">
+                @for (m of study.metrics!; track m.label) {
+                  <div>
+                    <dt>{{ m.value }}</dt>
+                    <dd>{{ m.label }}</dd>
+                  </div>
+                }
+              </dl>
+            }
+
+            <ul class="study__tech">
+              @for (t of study.tech; track t) {
+                <li>{{ t }}</li>
+              }
+            </ul>
+
+            <div class="study__files">
+              <span class="study__files-label">Source</span>
+              @for (file of study.files; track file.href) {
+                <a
+                  [href]="file.href"
+                  target="_blank"
+                  rel="noopener"
+                  [class.is-pr]="file.pr"
+                >
+                  {{ file.label }}<span aria-hidden="true"> ↗</span>
+                </a>
+              }
+            </div>
+          </div>
+        </li>
+
+      }
+    </ol>
+  </section>
+
+  <!-- ===== Foot ===== -->
+  <section class="outro">
+    <p class="outro__text">
+      Every figure above comes from the validation notes in the merged pull requests,
+      each of which is linked from its case study.
+    </p>
+    <a class="btn btn--primary" [href]="p.repo" target="_blank" rel="noopener">
+      Open the repository <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+</div>

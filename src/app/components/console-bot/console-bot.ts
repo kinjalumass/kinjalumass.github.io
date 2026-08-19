@@ -11,6 +11,8 @@ interface Message {
   sources?: string[];
   /** Was this answered by the model or the offline fallback */
   mode?: 'live' | 'local';
+  /** Set when the model was configured but unreachable */
+  degraded?: string;
   streaming?: boolean;
 }
 
@@ -92,7 +94,15 @@ export class ConsoleBot implements OnDestroy {
       const reply = await this.assistant.ask(question, append);
       this.messages.update((list) =>
         list.map((m) =>
-          m.id === id ? { ...m, streaming: false, sources: reply.sources, mode: reply.mode } : m,
+          m.id === id
+            ? {
+                ...m,
+                streaming: false,
+                sources: reply.sources,
+                mode: reply.mode,
+                degraded: reply.degraded,
+              }
+            : m,
         ),
       );
     } catch {
@@ -119,10 +129,12 @@ export class ConsoleBot implements OnDestroy {
   }
 
   private scroll(): void {
-    const id = window.setTimeout(() => {
+    // Not `window.setTimeout` — this runs during prerendering too, where the
+    // global exists but `window` does not.
+    const id = setTimeout(() => {
       const el = this.logRef()?.nativeElement;
       if (el) el.scrollTop = el.scrollHeight;
     }, 30);
-    this.timers.push(id);
+    this.timers.push(id as unknown as number);
   }
 }

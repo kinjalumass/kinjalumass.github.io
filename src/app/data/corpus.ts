@@ -8,6 +8,7 @@
  * A handful of chunks at the bottom carry facts that live nowhere else
  * (the publication detail, press, availability).
  */
+import { BCU, CASE_STUDIES } from './bcu';
 import { INTRO, STACK } from './developer';
 import {
   AVAILABILITY,
@@ -19,6 +20,7 @@ import {
   ROLES,
   SELECTIONS,
 } from './profile';
+import { GITHUB_USER, HIDE, NOTES } from './repos';
 import { VENTURES } from './ventures';
 
 export interface Chunk {
@@ -43,6 +45,23 @@ chunks.push({
     `She graduated early from Virginia Tech with a B.S. in Computer Science and a minor in Mathematics. ` +
     `${INTRO.headline} ${INTRO.body} ` +
     `She is based in ${AVAILABILITY.location}. Her work spans machine learning, privacy and security, applied data science, and developer advocacy.`,
+});
+
+chunks.push({
+  id: 'strengths',
+  title: 'Why Kinjal — strengths and fit',
+  tags: [
+    'hire', 'hiring', 'why', 'strength', 'fit', 'good', 'best', 'stand', 'unique',
+    'different', 'value', 'bring', 'candidate', 'recruit', 'suit', 'suited', 'right',
+  ],
+  text:
+    `Why Kinjal: three things sit together in her record that rarely coincide. ` +
+    `Research depth — a published paper on privacy leakage in the reasoning traces of large models, plus cryptography and anomaly-detection research at the Commonwealth Cyber Initiative. ` +
+    `Shipping ability — backend engineering in Python and Django REST at SkyIT, a secure litigation-document platform built for a consulting client, and open-source contribution through a competitive UMass apprenticeship. ` +
+    `Communication — three simultaneous ambassadorships with Google, Microsoft and IBM spent teaching other people to build, and now grading a graduate course on trustworthy AI. ` +
+    `She also finishes ahead of schedule: an early Virginia Tech graduation with a mathematics minor attached. ` +
+    `The consistent thread is systems-level thinking — mainframe fundamentals connected to modern ML, coding theory connected to secure pipelines, urban data connected to policy. She looks for where the layers meet. ` +
+    `Strongest fits: AI/ML research, security and privacy engineering, applied data science, and backend software engineering.`,
 });
 
 /* --- education ------------------------------------------------------------ */
@@ -89,6 +108,42 @@ for (const p of PROJECTS) {
     text: `${p.name} (${p.kind}), ${p.context}, ${p.window}. ${p.summary} ${p.bullets.join(' ')} Technologies: ${p.stack.join(', ')}.`,
   });
 }
+
+/* --- the BCU work, in detail ---------------------------------------------- */
+
+chunks.push({
+  id: 'bcu',
+  title: 'Flagship project — Boston Cyclists Union, bicycle accessibility & equity',
+  tags: [
+    'bcu', 'boston', 'cyclist', 'cycling', 'bike', 'biking', 'accessibility', 'equity',
+    'graph', 'census', 'mobility', 'transportation', 'flagship', 'biggest', 'main',
+    'urban', 'lts', 'regression', 'hpc', 'slurm', 'project', 'best', 'impressive',
+    'proudest', 'largest', 'geospatial',
+  ],
+  text:
+    `${BCU.title} — her flagship project, with ${BCU.partner} through the ${BCU.programme}. ${BCU.lede} ` +
+    `${BCU.context.join(' ')} ` +
+    `Her contributions, as five case studies: ` +
+    CASE_STUDIES.map(
+      (c) => `${c.index}. ${c.title} (${c.kicker}) — ${c.summary} ${c.points.join(' ')} Built with ${c.tech.join(', ')}.`,
+    ).join(' ') +
+    ` Repository: ${BCU.repo}. Attribution: ${BCU.attribution}`,
+});
+
+/* --- what is actually on GitHub ------------------------------------------- */
+
+chunks.push({
+  id: 'github',
+  title: 'GitHub repositories',
+  tags: ['github', 'repo', 'repository', 'code', 'open', 'source', 'public', 'portfolio'],
+  text:
+    `Her public code is at github.com/${GITHUB_USER}. The projects page on this site lists every public repository and links straight to it. Notable ones: ` +
+    Object.entries(NOTES)
+      .filter(([name]) => !HIDE.has(name))
+      .map(([name, n]) => `${n.title ?? name} (${name})${n.blurb ? ` — ${n.blurb}` : ''}`)
+      .join(' ') +
+    ` Alongside these are systems and data-structures repositories from her Virginia Tech coursework in C, assembly and Java.`,
+});
 
 /* --- honors --------------------------------------------------------------- */
 
@@ -140,7 +195,7 @@ for (const v of VENTURES) {
   chunks.push({
     id: `venture-${v.id}`,
     title: `Venture — ${v.name}`,
-    // `v.id` is plain ASCII, which matters for names like Karnaḥ
+    // `v.id` is plain ASCII, which matters for names like Karnah
     tags: [
       'venture', 'startup', 'kinnovation', 'entrepreneur', 'founder', 'business',
       v.name.toLowerCase(),
@@ -247,7 +302,7 @@ const SYNONYMS: Record<string, string[]> = {
   data: ['dataset', 'analysis', 'analytics', 'science'],
 };
 
-/** Strips diacritics so "karnah" matches "Karnaḥ". */
+/** Strips diacritics so "karnah" matches "Karnah". */
 function flatten(input: string): string {
   return input
     .normalize('NFD')
@@ -281,31 +336,54 @@ const INDEX = CORPUS.map((chunk) => ({
 }));
 
 /**
- * Scores every chunk against the question and returns the strongest few.
- * Tag and title hits count for more than body hits.
+ * Scores every chunk against the question and returns only what is worth
+ * sending.
+ *
+ * Focus matters more than coverage here. A question like "what did she do at
+ * Microsoft?" has one right passage, and shipping five others alongside it is
+ * what makes an answer drift into listing everything. So when one chunk clearly
+ * dominates, we send it and little else.
  */
-export function selectContext(question: string, k = 6): Chunk[] {
+export function selectContext(question: string, k = 4): Chunk[] {
   const q = tokens(question);
   if (!q.length) return CORPUS.slice(0, k);
 
   const scored = INDEX.map((entry) => {
     let score = 0;
     for (const t of q) {
+      // an exact title word is the strongest possible signal of intent
+      if (entry.title.split(/\W+/).some((w) => w === t)) score += 8;
+      else if (entry.title.includes(t)) score += 4;
+
       if (entry.tags.some((tag) => tag === t)) score += 5;
-      else if (entry.tags.some((tag) => tag.includes(t))) score += 3;
-      if (entry.title.includes(t)) score += 3;
+      else if (entry.tags.some((tag) => tag.includes(t))) score += 2;
+
       const hits = entry.body.split(t).length - 1;
-      if (hits) score += Math.min(hits, 4);
+      if (hits) score += Math.min(hits, 3);
     }
     return { chunk: entry.chunk, score };
   })
     .filter((s) => s.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  // Always carry the overview so the model has a frame of reference.
-  const picked = scored.slice(0, k).map((s) => s.chunk);
-  const overview = CORPUS.find((c) => c.id === 'identity')!;
-  if (!picked.some((c) => c.id === 'identity')) picked.unshift(overview);
+  if (!scored.length) {
+    // Nothing matched — give the model the overview so it can answer
+    // "I don't have that" with some idea of what she does.
+    return [CORPUS.find((c) => c.id === 'identity')!];
+  }
 
-  return picked.slice(0, k);
+  const top = scored[0].score;
+
+  // Keep only passages within reach of the best one. A dominant match ends up
+  // alone, which is exactly what a specific question wants.
+  const kept = scored.filter((s) => s.score >= top * 0.45).slice(0, k);
+
+  // Broad questions ("who is she", "why hire her") benefit from the overview;
+  // narrow ones do not, so only add it when nothing dominates.
+  const dominant = kept.length === 1 || scored[0].score > (scored[1]?.score ?? 0) * 1.8;
+  if (!dominant && !kept.some((s) => s.chunk.id === 'identity')) {
+    kept.push({ chunk: CORPUS.find((c) => c.id === 'identity')!, score: 0 });
+  }
+
+  return kept.slice(0, k).map((s) => s.chunk);
 }

@@ -14,15 +14,19 @@
         </h1>
 
         <p class="hero__lede">
-          Five ventures, one conviction:
-          <span class="ent-mark">the hardest problems are the ones worth building for.</span>
+          Six ventures, and the reason I keep picking hard ones:
+          <span class="ent-mark">nobody else is going to.</span>
         </p>
 
         <div class="hero__actions">
           <a class="ent-btn ent-btn--solid" href="#ventures">
             See the ventures <span aria-hidden="true">↓</span>
           </a>
-          <a class="ent-btn ent-btn--ghost" routerLink="/developer">The engineering side</a>
+          @if (external.developer; as devUrl) {
+            <a class="ent-btn ent-btn--ghost" [href]="devUrl">The engineering side</a>
+          } @else {
+            <a class="ent-btn ent-btn--ghost" routerLink="/developer">The engineering side</a>
+          }
         </div>
       </div>
 
@@ -45,7 +49,7 @@
         <div class="ent-shot ent-shot--tilt thesis__shot">
           <img [src]="studio.images.portrait" alt="" loading="lazy" />
         </div>
-        <figcaption class="thesis__cap">Kinnovation — a venture studio</figcaption>
+        <figcaption class="thesis__cap">Kinnovation, a venture studio</figcaption>
       </figure>
 
       <div class="thesis__copy reveal" appReveal [revealDelay]="100">
@@ -93,7 +97,7 @@
 
           <a class="slot__card ent-offset" [routerLink]="['/entrepreneur', venture.id]">
             <div class="slot__media">
-              <img [src]="venture.images.a" alt="" loading="lazy" />
+              <img [src]="venture.art" alt="" loading="lazy" />
             </div>
 
             <div class="slot__body">
@@ -115,16 +119,73 @@
        Close — loud colour block
        ======================================================== -->
 
+  <!-- ========================================================
+       Proof — the two cheques, and the rooms they were won in
+       ======================================================== -->
+
+  <section class="ent-section proof" id="proof">
+    <div class="ent-wrap">
+      <header class="proof__head reveal" appReveal>
+        <span class="ent-eyebrow">In the room</span>
+        <h2 class="ent-h2 proof__title">
+          Three of these have already
+          <span class="ent-serif proof__ital">won money.</span>
+        </h2>
+      </header>
+
+      <div class="proof__awards">
+        @for (award of awards; track award.ventureId; let i = $index) {
+          <article class="award reveal" appReveal [revealDelay]="i * 90">
+            <div class="award__shot">
+              <img [src]="award.photo" [alt]="award.alt" loading="lazy" />
+            </div>
+            <div class="award__body">
+              <span class="award__amount">{{ award.amount }}</span>
+              <h3 class="ent-h3 award__venture">{{ award.venture }}</h3>
+              @if (award.competition) {
+                <p class="award__comp">
+                  {{ award.competition }}, {{ award.placing ?? 'winner' }}
+                </p>
+              }
+              @if (award.withWhom?.length) {
+                <p class="award__with">
+                  with
+                  @for (person of award.withWhom!; track person.name; let last = $last) {
+                    @if (person.url) {
+                      <a [href]="person.url" target="_blank" rel="noopener noreferrer">{{ person.name }}</a>
+                    } @else { {{ person.name }} }{{ last ? '' : ', ' }}
+                  }
+                </p>
+              }
+              <p class="award__where">
+                {{ award.centre }}<br />
+                {{ award.school }}, {{ award.institution }}
+              </p>
+              <time class="award__date" [attr.datetime]="award.date">{{ award.dateLabel }}</time>
+            </div>
+          </article>
+        }
+      </div>
+
+      <figure class="frame frame--wide reveal" appReveal>
+        <div class="ent-shot frame__shot">
+          <img [src]="pitchFrame.src" [alt]="pitchFrame.alt" loading="lazy" />
+        </div>
+        <figcaption class="frame__cap">{{ pitchFrame.caption }}</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="ent-block close">
     <div class="ent-wrap ent-wrap--tight close__inner reveal" appReveal>
       <span class="ent-sticker close__sticker">Say hello</span>
       <h2 class="ent-h2 close__title">
-        Building the future,<br />one venture at a time.
+        I would rather build<br />than talk about building.
       </h2>
       <p class="ent-body close__body">
-        If any of this overlaps with what you are working on — as a collaborator, an
-        operator, or someone who has lived one of these problems — that is the most
-        useful conversation there is.
+        If any of this overlaps with what you are working on, whether as a collaborator, an
+        operator, or someone who has actually lived one of these problems, that is the
+        conversation I want most.
       </p>
       <div class="close__actions">
         <a class="ent-btn ent-btn--light" href="mailto:kinjalpandey18&#64;gmail.com">

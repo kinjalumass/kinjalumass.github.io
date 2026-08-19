@@ -59,7 +59,7 @@
   aspect-ratio: 4 / 5;
   border-radius: 24px;
   transform: rotate(1.5deg);
-  box-shadow: 0 34px 80px -46px rgba(23, 18, 31, 0.55);
+  box-shadow: 0 34px 80px -46px rgba(2, 0, 6, 0.85);
 }
 
 .hero__stage {
@@ -165,21 +165,7 @@
 
 .how__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
-  gap: clamp(2rem, 6vw, 4.5rem);
-  align-items: start;
-}
-
-.how__media {
-  position: sticky;
-  top: 7rem;
-}
-
-.how__shot {
-  aspect-ratio: 3 / 4;
-  border-radius: 22px;
-  transform: rotate(-2deg);
-  box-shadow: 0 28px 70px -44px rgba(23, 18, 31, 0.5);
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .how__list { position: relative; }
@@ -230,11 +216,7 @@
 .impact__title { max-width: 32ch; }
 
 @media (max-width: 900px) {
-  .hero__grid,
-  .how__grid { grid-template-columns: minmax(0, 1fr); }
-
-  .how__media { position: static; }
-  .how__shot { aspect-ratio: 16 / 10; transform: none; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__shot { transform: none; }
   .split__col--next { transform: none; }
 }

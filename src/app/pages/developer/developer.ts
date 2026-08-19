@@ -4,26 +4,26 @@ import {
   afterNextRender,
   signal,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ConsoleBot } from '../../components/console-bot/console-bot';
 import { MatrixRain } from '../../components/matrix-rain/matrix-rain';
 import { NodeField } from '../../components/node-field/node-field';
-import { HERO, INTRO, LINKS, STACK, STATS, TIMELINE, TRACKS } from '../../data/developer';
+import { BCU } from '../../data/bcu';
+import { HERO, INTRO, LINKS, SECTIONS } from '../../data/developer';
 
 const GLYPHS = '!<>-_\\/[]{}—=+*^?#________';
 
 @Component({
   selector: 'app-developer',
-  imports: [NodeField, MatrixRain, ConsoleBot],
+  imports: [NodeField, MatrixRain, ConsoleBot, RouterLink],
   templateUrl: './developer.html',
   styleUrl: './developer.scss',
 })
 export class Developer implements OnDestroy {
   protected readonly hero = HERO;
   protected readonly intro = INTRO;
-  protected readonly stats = STATS;
-  protected readonly tracks = TRACKS;
-  protected readonly timeline = TIMELINE;
-  protected readonly stack = STACK;
+  protected readonly sections = SECTIONS;
+  protected readonly bcu = BCU;
   protected readonly links = LINKS;
 
   /** Text currently rendered under the name — mid-scramble it is garbage. */
@@ -97,23 +97,22 @@ export class Developer implements OnDestroy {
      Pointer-reactive surfaces
      --------------------------------------------------------------- */
 
-  /** Tilts a card toward the cursor and moves its specular highlight. */
+  /** Follows the cursor with the card's specular highlight. */
   protected onCardMove(event: PointerEvent): void {
     const el = event.currentTarget as HTMLElement | null;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    el.style.setProperty('--mx', `${(x * 100).toFixed(1)}%`);
-    el.style.setProperty('--my', `${(y * 100).toFixed(1)}%`);
-    el.style.setProperty('--ry', `${((x - 0.5) * 7).toFixed(2)}deg`);
-    el.style.setProperty('--rx', `${((0.5 - y) * 7).toFixed(2)}deg`);
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--mx', `${x.toFixed(1)}%`);
+    el.style.setProperty('--my', `${y.toFixed(1)}%`);
   }
 
+  /** Parks the highlight back in the centre so the fade-out looks even. */
   protected onCardLeave(event: PointerEvent): void {
     const el = event.currentTarget as HTMLElement | null;
     if (!el) return;
-    el.style.setProperty('--ry', '0deg');
-    el.style.setProperty('--rx', '0deg');
+    el.style.setProperty('--mx', '50%');
+    el.style.setProperty('--my', '50%');
   }
 }

@@ -1,7 +1,14 @@
 # Resume PDFs
 
-The three files here are **placeholders**. Replace each with your real resume,
-keeping the exact same filename, and the site picks it up with no code changes.
+All three files here are currently **the same PDF** (the CI/COMP resume,
+Aug 2026). They are real and correct to hand out, but they are not yet tailored
+per track. Replace any of them with a tailored version, keeping the exact same
+filename, and the site picks it up with no code changes.
+
+Note that `src/app/data/resume.ts` describes them as research-weighted,
+build-weighted and analysis-weighted. That is what they will be, not what they
+are today. Either swap in the tailored files or soften those three `note`
+strings.
 
 | File | Tab on the site |
 |---|---|

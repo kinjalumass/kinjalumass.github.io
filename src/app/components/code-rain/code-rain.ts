@@ -61,7 +61,9 @@ export class CodeRain implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    cancelAnimationFrame(this.raf);
+    // The animation only ever starts in a browser (afterNextRender), but
+    // ngOnDestroy also runs during prerendering, where rAF does not exist.
+    if (this.raf) cancelAnimationFrame(this.raf);
     this.observer?.disconnect();
     if (this.resize) window.removeEventListener('resize', this.resize);
   }

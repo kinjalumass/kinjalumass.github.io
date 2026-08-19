@@ -1,17 +1,18 @@
 :host {
   --milk: #fdfbf8;
-  --ash: #17131a;
-  --ash-2: rgba(23, 19, 26, 0.62);
-  --ash-3: rgba(23, 19, 26, 0.4);
-  --hair: rgba(23, 19, 26, 0.14);
+  --ash: #120e16;
+  /* secondary/tertiary text was too pale to read as deliberate */
+  --ash-2: rgba(18, 14, 22, 0.72);
+  --ash-3: rgba(18, 14, 22, 0.52);
+  --hair: rgba(18, 14, 22, 0.16);
 
   /* the palette — warm, saturated, deliberately not neutral */
-  --rose: 226, 106, 128;
-  --clay: 214, 122, 96;
-  --iris: 138, 122, 196;
-  --jade: 96, 158, 148;
-  --amber: 226, 162, 84;
-  --ink-block: #1b1620;
+  --rose: 232, 74, 110;
+  --clay: 224, 106, 66;
+  --iris: 124, 96, 214;
+  --jade: 58, 156, 140;
+  --amber: 240, 160, 52;
+  --ink-block: #150f1c;
 
   --fashion: 'Bodoni Moda', 'Instrument Serif', Didot, serif;
 
@@ -38,8 +39,8 @@
   span {
     position: absolute;
     border-radius: 50%;
-    filter: blur(110px);
-    opacity: 0.42;
+    filter: blur(100px);
+    opacity: 0.62;
   }
 }
 
@@ -72,7 +73,23 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(253, 251, 248, 0.74), rgba(253, 251, 248, 0.88));
+  background: linear-gradient(
+    180deg,
+    rgba(253, 251, 248, 0.58),
+    rgba(253, 251, 248, 0.76) 40%,
+    rgba(253, 251, 248, 0.88)
+  );
+}
+
+/* film grain — stops the large flat areas looking like empty CSS */
+.wash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.4'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -95,10 +112,10 @@
   font-size: 0.6rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--ash-3);
+  color: var(--ash-2);
 
   a { transition: color 0.3s; }
-  a:hover { color: rgb(var(--rose)); }
+  a:hover { color: color-mix(in srgb, rgb(var(--rose)) 72%, #120e16); }
 }
 
 /* ===========================================================
@@ -177,7 +194,8 @@
   overflow: hidden;
   cursor: pointer;
   border-radius: 999px 999px 16px 16px;
-  box-shadow: 0 32px 80px -46px rgba(23, 19, 26, 0.55);
+  box-shadow: 0 34px 70px -40px rgba(var(--rose), 0.55),
+    0 24px 70px -46px rgba(18, 14, 22, 0.5);
   transform: rotate(-1.5deg);
   animation: rise 1.5s var(--ease-out) 0.3s both;
   transition: transform 0.7s var(--ease-out);
@@ -251,8 +269,12 @@
   z-index: 2;
   margin: 0 var(--gutter);
   border-radius: clamp(1.25rem, 3vw, 2.5rem);
-  background: var(--ink-block);
+  background:
+    radial-gradient(70% 90% at 0% 0%, rgba(var(--rose), 0.3), transparent 60%),
+    radial-gradient(60% 80% at 100% 100%, rgba(var(--iris), 0.28), transparent 62%),
+    var(--ink-block);
   color: #f6f1ec;
+  box-shadow: 0 40px 90px -50px rgba(var(--iris), 0.6);
   overflow: hidden;
 }
 
@@ -312,14 +334,6 @@
   }
 }
 
-.spec__note {
-  margin-top: 1.5rem;
-  font-family: var(--fashion);
-  font-style: italic;
-  font-size: 0.95rem;
-  color: rgba(246, 241, 236, 0.55);
-}
-
 /* --- digitals row --------------------------------------------------------- */
 
 /* Three across, two rows — big enough to actually read as photographs. */
@@ -347,7 +361,7 @@
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: 8px;
-  background: #241e29;
+  background: color-mix(in srgb, rgb(var(--rose)) 12%, #241e29);
   transition: box-shadow 0.5s;
 
   img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
@@ -413,7 +427,7 @@
   font-style: italic;
   font-weight: 600;
   color: transparent;
-  -webkit-text-stroke: 2px var(--ash);
+  -webkit-text-stroke: 2px rgb(var(--rose));
 }
 
 .book__count {
@@ -427,16 +441,47 @@
 /* --- one shoot ------------------------------------------------------------ */
 
 .story {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   max-width: 96rem;
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter);
-  border-top: 1px solid var(--hair);
+  /* each shoot sits on a faint field of its own accent, so scrolling the
+     book reads as six distinct stories rather than one long grey list */
+  background:
+    radial-gradient(80% 60% at 12% 0%, rgba(var(--accent, 232, 74, 110), 0.09), transparent 64%),
+    radial-gradient(60% 50% at 96% 30%, rgba(var(--accent, 232, 74, 110), 0.06), transparent 60%);
+
+  /* the divider is the accent, fading out — not a hairline */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--gutter);
+    right: var(--gutter);
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      rgb(var(--accent, 232, 74, 110)),
+      rgba(var(--accent, 232, 74, 110), 0.25) 32%,
+      transparent 72%
+    );
+  }
 
   &--flip {
     grid-template-columns: minmax(0, 1.38fr) minmax(0, 0.62fr);
+
+    &::before {
+      background: linear-gradient(
+        270deg,
+        rgb(var(--accent, 232, 74, 110)),
+        rgba(var(--accent, 232, 74, 110), 0.25) 32%,
+        transparent 72%
+      );
+    }
 
     .story__meta { grid-column: 2; grid-row: 1; text-align: right; }
     .story__grid { grid-column: 1; grid-row: 1; }
@@ -444,17 +489,24 @@
   }
 }
 
+/* accent, darkened just enough to be readable as type on paper */
+.story {
+  --accent-ink: color-mix(in srgb, rgb(var(--accent, 232, 74, 110)) 70%, #120e16);
+}
+
 .story__meta { position: sticky; top: 2.5rem; align-self: start; }
 
 .story__index {
   display: inline-block;
-  padding: 0.28rem 0.6rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  background: rgba(var(--accent), 0.16);
+  border: 1px solid rgba(var(--accent, 232, 74, 110), 0.4);
+  background: rgba(var(--accent, 232, 74, 110), 0.14);
+  font-weight: 600;
   font-family: var(--mono);
   font-size: 0.58rem;
   letter-spacing: 0.24em;
-  color: rgb(var(--accent));
+  color: var(--accent-ink);
 }
 
 .story__title {
@@ -473,7 +525,8 @@
   font-family: var(--fashion);
   font-style: italic;
   font-size: 1.05rem;
-  color: rgb(var(--accent));
+  font-weight: 500;
+  color: var(--accent-ink);
 }
 
 .story__where {
@@ -482,7 +535,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ash-3);
+  color: var(--ash-2);
 }
 
 .story__note {
@@ -500,7 +553,7 @@
   font-size: 0.56rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ash-3);
+  color: var(--ash-2);
 }
 
 /* --- the frames: a deliberately uneven mosaic ---------------------------- */
@@ -517,9 +570,10 @@
   margin: 0;
   overflow: hidden;
   cursor: pointer;
-  border-radius: 8px;
-  background: #efe9e4;
-  box-shadow: 0 18px 44px -34px rgba(23, 19, 26, 0.55);
+  border-radius: 10px;
+  /* tinted rather than grey, so a missing or slow image still looks placed */
+  background: color-mix(in srgb, rgb(var(--accent, 232, 74, 110)) 14%, #efe9e4);
+  box-shadow: 0 18px 40px -30px rgba(18, 14, 22, 0.5);
   transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
   animation: bloom 0.7s var(--ease-out) both;
   animation-delay: calc(var(--i) * 0.045s);
@@ -527,19 +581,23 @@
   img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease-out); }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 28px 60px -34px rgba(23, 19, 26, 0.6);
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -28px rgba(var(--accent, 232, 74, 110), 0.5),
+      0 20px 44px -30px rgba(18, 14, 22, 0.45);
     img { transform: scale(1.05); }
     .plate__n { opacity: 1; }
   }
 
-  /* rhythm: big, small, small, wide, tall, small … repeating */
-  &:nth-child(6n + 1) { grid-column: span 4; aspect-ratio: 4 / 3; }
-  &:nth-child(6n + 2) { grid-column: span 2; aspect-ratio: 3 / 4; }
-  &:nth-child(6n + 3) { grid-column: span 2; aspect-ratio: 1 / 1; }
-  &:nth-child(6n + 4) { grid-column: span 4; aspect-ratio: 16 / 10; }
-  &:nth-child(6n + 5) { grid-column: span 3; aspect-ratio: 4 / 5; }
-  &:nth-child(6n + 6) { grid-column: span 3; aspect-ratio: 4 / 5; }
+  /* Rhythm comes from scale, not orientation. Every tile is portrait,
+     because the source frames are — a landscape tile over a full-length
+     photograph has to throw away the head or the feet, and cover-cropping
+     picks the middle. Variety is two half-width tiles, then three
+     third-width ones. */
+  &:nth-child(5n + 1) { grid-column: span 3; aspect-ratio: 2 / 3; }
+  &:nth-child(5n + 2) { grid-column: span 3; aspect-ratio: 4 / 5; }
+  &:nth-child(5n + 3) { grid-column: span 2; aspect-ratio: 3 / 4; }
+  &:nth-child(5n + 4) { grid-column: span 2; aspect-ratio: 3 / 4; }
+  &:nth-child(5n + 5) { grid-column: span 2; aspect-ratio: 3 / 4; }
 }
 
 @keyframes bloom {
@@ -568,12 +626,22 @@
   align-items: center;
   gap: 1rem;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   cursor: pointer;
 
   &:hover {
-    .more__text { color: rgb(var(--accent)); letter-spacing: 0.3em; }
-    .more__rule { background: rgb(var(--accent)); }
+    .more__text {
+      color: #fff;
+      border-color: var(--accent-ink);
+      background: var(--accent-ink);
+      box-shadow: 0 14px 30px -14px rgba(var(--accent, 232, 74, 110), 0.8);
+    }
+    .more__rule { background: rgba(var(--accent, 232, 74, 110), 0.55); }
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--accent, 232, 74, 110));
+    outline-offset: 4px;
   }
 }
 
@@ -586,12 +654,16 @@
 
 .more__text {
   flex: none;
+  padding: 0.55rem 1.15rem;
+  border: 1px solid rgba(var(--accent, 232, 74, 110), 0.45);
+  border-radius: 999px;
+  background: rgba(var(--accent, 232, 74, 110), 0.08);
   font-family: var(--mono);
   font-size: 0.58rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--ash-3);
-  transition: color 0.35s, letter-spacing 0.45s var(--ease-out);
+  color: var(--accent-ink);
+  transition: color 0.35s, background 0.35s, border-color 0.35s, box-shadow 0.4s;
 }
 
 /* ===========================================================
@@ -721,8 +793,8 @@
   align-items: center;
   justify-content: center;
   padding: clamp(2.5rem, 6vw, 5rem);
-  background: rgba(253, 251, 248, 0.96);
-  backdrop-filter: blur(10px);
+  background: rgba(16, 12, 20, 0.94);
+  backdrop-filter: blur(14px);
   animation: veil 0.3s ease-out both;
 }
 
@@ -733,7 +805,7 @@
   max-height: 100%;
   object-fit: contain;
   border-radius: 6px;
-  box-shadow: 0 40px 100px -50px rgba(23, 19, 26, 0.6);
+  box-shadow: 0 40px 110px -40px rgba(0, 0, 0, 0.85);
   animation: zoom 0.45s var(--ease-out) both;
 }
 
@@ -748,15 +820,21 @@
   z-index: 2;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid var(--hair);
+  border: 1px solid rgba(253, 251, 248, 0.28);
   border-radius: 50%;
-  background: #fff;
+  background: rgba(253, 251, 248, 0.1);
+  backdrop-filter: blur(8px);
   font-family: var(--mono);
   font-size: 0.8rem;
-  color: var(--ash);
+  color: #fdfbf8;
   transition: border-color 0.3s, transform 0.3s var(--ease-out), color 0.3s;
 
-  &:hover { border-color: rgb(var(--rose)); color: rgb(var(--rose)); transform: scale(1.06); }
+  &:hover {
+    border-color: rgb(var(--rose));
+    background: rgb(var(--rose));
+    color: #fff;
+    transform: scale(1.06);
+  }
 }
 
 .view__close { top: 1.5rem; right: 1.5rem; }
@@ -774,7 +852,7 @@
   font-size: 0.56rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ash-3);
+  color: rgba(253, 251, 248, 0.72);
 }
 
 /* ===========================================================
@@ -818,14 +896,40 @@
   .name__b { margin-left: 0; }
   .story__grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
 
+  /* two up, all portrait */
   .plate {
-    &:nth-child(6n + 1) { grid-column: span 2; aspect-ratio: 4 / 3; }
-    &:nth-child(6n + 2) { grid-column: span 1; aspect-ratio: 3 / 4; }
-    &:nth-child(6n + 3) { grid-column: span 1; aspect-ratio: 3 / 4; }
-    &:nth-child(6n + 4) { grid-column: span 2; aspect-ratio: 16 / 10; }
-    &:nth-child(6n + 5) { grid-column: span 1; aspect-ratio: 4 / 5; }
-    &:nth-child(6n + 6) { grid-column: span 1; aspect-ratio: 4 / 5; }
+    &:nth-child(5n + 1),
+    &:nth-child(5n + 2),
+    &:nth-child(5n + 3),
+    &:nth-child(5n + 4),
+    &:nth-child(5n + 5) { grid-column: span 1; aspect-ratio: 3 / 4; }
   }
 
   .view__nav { display: none; }
+}
+
+/* ===========================================================
+   Three-frame shoots
+
+   The mosaic rhythm assumes at least four frames: two half-width
+   tiles then three third-width ones. With exactly three it leaves
+   a lone narrow tile stranded on its own row. A shoot of three
+   reads better as one even band.
+   =========================================================== */
+
+.story__grid:has(> .plate:nth-child(3):last-child) > .plate {
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3) {
+    grid-column: span 2;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (max-width: 700px) {
+  .story__grid:has(> .plate:nth-child(3):last-child) > .plate {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) { grid-column: span 1; }
+  }
 }

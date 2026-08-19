@@ -51,16 +51,23 @@
   to { opacity: 1; transform: rotate(-3deg) scale(1); }
 }
 
-/* two frames, deliberately misaligned */
+/* one frame, held off the type at a slight angle */
 .hero__stack {
   position: relative;
   min-height: clamp(20rem, 40vw, 30rem);
 }
 
+.hero__stack--solo .hero__img--a {
+  top: 50%;
+  right: 0;
+  width: 100%;
+  transform: translateY(-50%) rotate(2deg);
+}
+
 .hero__img {
   position: absolute;
   border-radius: 22px;
-  box-shadow: 0 30px 76px -46px rgba(23, 18, 31, 0.55);
+  box-shadow: 0 30px 76px -46px rgba(2, 0, 6, 0.85);
 
   &--a {
     top: 0;
@@ -71,14 +78,6 @@
     animation: settle 1.4s var(--ease-out) 0.35s both;
   }
 
-  &--b {
-    bottom: 0;
-    left: 0;
-    width: 52%;
-    aspect-ratio: 3 / 4;
-    transform: rotate(-4deg);
-    animation: settle 1.4s var(--ease-out) 0.5s both;
-  }
 }
 
 @keyframes settle {

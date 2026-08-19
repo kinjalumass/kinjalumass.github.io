@@ -22,6 +22,13 @@
           }
         </p>
 
+        @if (message.degraded && !message.streaming) {
+          <p class="msg__degraded">
+            ⚠ the assistant service didn't respond ({{ message.degraded }}) — answered from the
+            built-in profile instead
+          </p>
+        }
+
         @if (message.sources?.length && !message.streaming) {
           <p class="msg__sources">
             <span class="msg__sources-label">

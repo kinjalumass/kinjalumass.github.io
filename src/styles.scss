@@ -37,7 +37,7 @@
   --ink-v2: #130d1a;
   --ember: 255, 106, 61;
   --magenta: 255, 45, 117;
-  --violet: 124, 58, 237;
+  --violet: 167, 139, 250;
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -131,4 +131,21 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+
+/* ===========================================================
+   Photograph handling
+
+   Paired with the invisible watermark in tools/watermark.py. These rules
+   only make casual saving inconvenient — see src/app/core/image-guard.ts
+   for why nothing stronger is possible in a browser.
+   =========================================================== */
+
+img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* stops the long-press "save image" sheet on iOS */
+  -webkit-touch-callout: none;
 }

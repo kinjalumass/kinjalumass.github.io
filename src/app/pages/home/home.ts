@@ -46,9 +46,13 @@ export class Home implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    cancelAnimationFrame(this.raf);
+    // The animation only ever starts in a browser (afterNextRender), but
+    // ngOnDestroy also runs during prerendering, where rAF does not exist.
+    if (this.raf) cancelAnimationFrame(this.raf);
     if (this.trackingBound) {
-      window.removeEventListener('pointermove', this.onWindowMove);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('pointermove', this.onWindowMove);
+      }
     }
   }
 

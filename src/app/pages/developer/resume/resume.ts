@@ -66,7 +66,9 @@ export class Resume implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.resize) window.removeEventListener('resize', this.resize);
+    if (this.resize && typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.resize);
+    }
   }
 
   protected select(id: string): void {

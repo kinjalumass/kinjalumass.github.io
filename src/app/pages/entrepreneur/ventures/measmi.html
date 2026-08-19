@@ -22,7 +22,7 @@
 
       <div class="hero__media">
         <div class="ent-shot hero__shot">
-          <img [src]="v.images.hero" alt="" />
+          <img [src]="v.art" alt="" />
         </div>
         <span class="ent-pill hero__stage">{{ v.stage }}</span>
       </div>
@@ -68,13 +68,6 @@
   <!-- ===== Features as numbered rows with a sticky image ===== -->
   <section class="ent-section how">
     <div class="ent-wrap how__grid">
-      <aside class="how__media reveal" appReveal>
-        <div class="ent-shot how__shot">
-          <img [src]="v.images.a" alt="" loading="lazy" />
-          <span class="ent-shot__tag">Collective intelligence</span>
-        </div>
-      </aside>
-
       <div class="how__list">
         <span class="ent-ghost how__ghost" aria-hidden="true">{{ v.index }}</span>
         <header class="reveal" appReveal>
@@ -98,8 +91,7 @@
   </section>
 
   <!-- ===== Impact band over imagery ===== -->
-  <section class="ent-band">
-    <img class="ent-band__bg" [src]="v.images.b" alt="" loading="lazy" />
+  <section class="ent-band ent-band--tint">
     <div class="ent-wrap ent-band__inner reveal" appReveal>
       <h2 class="ent-h2 impact__title">{{ v.closing }}</h2>
       <dl class="ent-metrics">

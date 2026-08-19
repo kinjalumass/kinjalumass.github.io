@@ -3,61 +3,198 @@
     <span class="dev-eyebrow">// 03 — projects</span>
     <h1 class="dev-title">Projects</h1>
     <p class="dev-lede">
-      Research, prototypes, and applied work — from privacy leakage in model reasoning
-      to bike-safety data for the city of Boston.
+      Everything here is a public repository. Each one opens on GitHub — research pipelines,
+      applied AI work, and the systems coursework underneath it.
     </p>
+
+    <a class="ghlink" [href]="'https://github.com/' + user" target="_blank" rel="noopener">
+      <span class="ghlink__mark" aria-hidden="true">◆</span>
+      github.com/{{ user }}
+      <span aria-hidden="true">↗</span>
+    </a>
   </header>
 
-  <div class="list">
-    @for (project of projects; track project.index; let i = $index) {
-      <article
-        class="proj"
-        [class.proj--media]="!!project.image"
-        [style.--stagger]="i"
-        (pointermove)="onMove($event)"
-      >
-        <span class="proj__glow" aria-hidden="true"></span>
-        <span class="proj__rule" aria-hidden="true"></span>
+    <!-- ========================================================
+       The paper. Not a repository, so it sits outside the GitHub
+       list — but it is research output, which belongs under
+       projects rather than buried in honors.
+       ======================================================== -->
+  <section class="dev-section">
+    <span class="dev-label">// publication</span>
 
-        <div class="proj__index">
-          <span>{{ project.index }}</span>
+    <a
+      class="paper"
+      [href]="paper.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      (pointermove)="onMove($event)"
+    >
+      <span class="paper__glow" aria-hidden="true"></span>
+      <span class="paper__rule" aria-hidden="true"></span>
+
+      <div class="paper__body">
+        <span class="paper__badge">{{ paper.venue }} · arXiv:{{ paper.arxivId }}</span>
+
+        <h2 class="paper__title">{{ paper.title }}</h2>
+        <p class="paper__subtitle">{{ paper.subtitle }}</p>
+
+        <p class="paper__authors">
+          @for (author of paper.authors; track author; let last = $last) {
+            <span [class.is-self]="author === paper.self">{{ author }}</span>{{ last ? '' : ', ' }}
+          }
+        </p>
+
+        <p class="paper__abstract">{{ paper.abstract }}</p>
+
+        <ul class="paper__points">
+          @for (point of paper.contributions; track point) {
+            <li>{{ point }}</li>
+          }
+        </ul>
+
+        <div class="paper__foot">
+          <ul class="chips">
+            @for (t of paper.topics; track t) {
+              <li>{{ t }}</li>
+            }
+          </ul>
+          <span class="paper__go">Read on arXiv <span aria-hidden="true">↗</span></span>
         </div>
+      </div>
+    </a>
+  </section>
 
-        <div class="proj__main">
-          <div class="proj__head">
-            <span class="dev-chip">{{ project.kind }}</span>
-            <span class="dev-meta">{{ project.window }}</span>
+  @if (loading()) {
+    <div class="loading">
+      <span class="loading__bar" aria-hidden="true"></span>
+      <span class="loading__text">reading repositories…</span>
+    </div>
+  } @else {
+    @if (!live()) {
+      <p class="notice">
+        GitHub didn't respond, so this is the last known list. The links are still good.
+      </p>
+    }
+
+    <!-- The lead project -->
+    @if (lead(); as repo) {
+      <section class="dev-section">
+        <span class="dev-label">// flagship</span>
+
+        <a
+          class="lead"
+          routerLink="/developer/projects/bcu"
+          (pointermove)="onMove($event)"
+        >
+          <span class="lead__glow" aria-hidden="true"></span>
+          <span class="lead__rule" aria-hidden="true"></span>
+
+          <div class="lead__body">
+            <span class="lead__badge">Flagship · 5 case studies</span>
+            <h2 class="lead__title">{{ repo.title }}</h2>
+            <p class="lead__repo">{{ user }}/{{ repo.name }}</p>
+            <p class="lead__blurb">{{ repo.blurb }}</p>
+
+            <div class="lead__foot">
+              <ul class="chips">
+                @for (t of repo.topics; track t) {
+                  <li>{{ t }}</li>
+                }
+              </ul>
+              <span class="lead__go">
+                Read the case studies <span aria-hidden="true">→</span>
+              </span>
+            </div>
           </div>
+        </a>
+      </section>
+    }
 
-          <h2 class="proj__name">{{ project.name }}</h2>
-          <p class="proj__context dev-wire">{{ project.context }}</p>
-          <p class="proj__summary">{{ project.summary }}</p>
+    <!-- Featured -->
+    @if (featured().length) {
+    <section class="dev-section">
+      <span class="dev-label">// selected</span>
+      <div class="feat">
+        @for (repo of featured(); track repo.name; let i = $index) {
+          <a
+            class="card card--big"
+            [href]="repo.url"
+            target="_blank"
+            rel="noopener"
+            [style.--stagger]="i"
+            (pointermove)="onMove($event)"
+          >
+            <span class="card__glow" aria-hidden="true"></span>
+            <span class="card__rule" aria-hidden="true"></span>
 
-          <ul class="dev-bullets">
-            @for (bullet of project.bullets; track bullet) {
-              <li>{{ bullet }}</li>
-            }
-          </ul>
+            <div class="card__head">
+              <h2 class="card__title">{{ repo.title }}</h2>
+              <span class="card__go" aria-hidden="true">↗</span>
+            </div>
 
-          <ul class="dev-tags proj__stack">
-            @for (item of project.stack; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
+            <p class="card__repo">{{ user }}/{{ repo.name }}</p>
+            <p class="card__blurb">{{ repo.blurb }}</p>
 
-          @if (project.assets?.length) {
-            <app-asset-strip [assets]="project.assets!" label="certificates & photos" />
+            <div class="card__foot">
+              @if (repo.topics.length) {
+                <ul class="chips">
+                  @for (t of repo.topics; track t) {
+                    <li>{{ t }}</li>
+                  }
+                </ul>
+              }
+              @if (repo.updated) {
+                <span class="card__when">{{ when(repo.updated) }}</span>
+              }
+            </div>
+          </a>
+        }
+      </div>
+    </section>
+    }
+
+    <!-- Everything else -->
+    @if (rest().length) {
+      <section class="dev-section">
+        <span class="dev-label">// more repositories</span>
+        <div class="grid">
+          @for (repo of rest(); track repo.name; let i = $index) {
+            <a
+              class="card"
+              [href]="repo.url"
+              target="_blank"
+              rel="noopener"
+              [style.--stagger]="i"
+              (pointermove)="onMove($event)"
+            >
+              <span class="card__glow" aria-hidden="true"></span>
+              <span class="card__rule" aria-hidden="true"></span>
+
+              <div class="card__head">
+                <h3 class="card__title card__title--sm">{{ repo.title }}</h3>
+                <span class="card__go" aria-hidden="true">↗</span>
+              </div>
+
+              <p class="card__repo">{{ repo.name }}</p>
+
+              @if (repo.blurb) {
+                <p class="card__blurb card__blurb--sm">{{ repo.blurb }}</p>
+              }
+
+              <div class="card__foot">
+                <span class="card__lang">
+                  @if (repo.language) {
+                    <span class="card__dot" aria-hidden="true"></span>{{ repo.language }}
+                  }
+                </span>
+                @if (repo.updated) {
+                  <span class="card__when">{{ when(repo.updated) }}</span>
+                }
+              </div>
+            </a>
           }
         </div>
-
-        @if (project.image) {
-          <div class="proj__media">
-            <img [src]="project.image" alt="" loading="lazy" />
-            <span class="proj__media-grid" aria-hidden="true"></span>
-            <span class="proj__media-tick" aria-hidden="true"></span>
-          </div>
-        }
-      </article>
+      </section>
     }
-  </div>
+  }
 </div>

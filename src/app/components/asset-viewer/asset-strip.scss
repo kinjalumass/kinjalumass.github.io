@@ -61,12 +61,6 @@
   }
 }
 
-.tile__scan {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0 1px, transparent 1px 3px);
-}
-
 /* --- pdf tile ------------------------------------------------------------- */
 
 .tile__doc {

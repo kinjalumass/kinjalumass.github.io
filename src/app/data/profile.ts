@@ -113,13 +113,6 @@ export const DEGREES: Degree[] = [
         ],
       },
     ],
-    transcript: {
-      kind: 'pdf',
-      src: 'docs/transcripts/umass-transcript.pdf',
-      title: 'UMass Amherst — Transcript',
-      caption: 'Viewable here only. Redacted copy.',
-      shareable: false,
-    },
   },
   {
     school: 'Virginia Tech',
@@ -171,19 +164,6 @@ export const DEGREES: Degree[] = [
         ],
       },
     ],
-    transcript: {
-      kind: 'pdf',
-      src: 'docs/transcripts/vt-transcript.pdf',
-      title: 'Virginia Tech — Transcript',
-      caption: 'Viewable here only. Redacted copy.',
-      shareable: false,
-    },
-    certificates: [
-      cert('vt-diploma', 'B.S. Diploma', 'Bachelor of Science in Computer Science, Virginia Tech.'),
-      cert('vt-deans-list', "Dean's List with Distinction"),
-      cert('research-excellence', 'Undergraduate Research Excellence'),
-      cert('vt-career-bridge', 'Career Bridge Experience'),
-    ],
   },
 ];
 
@@ -201,9 +181,96 @@ export const FOCUS_AREAS: string[] = [
 export interface Certification {
   name: string;
   issuer: string;
+  issued?: string;
+  /**
+   * Basename of the certificate in `public/docs/certificates/`, without the
+   * extension. Absent means the document could not be retrieved — see the
+   * note beside the Microsoft Learn and IBM entries below.
+   */
+  slug?: string;
+  /** Defaults to pdf */
+  ext?: 'pdf' | 'png' | 'jpg';
 }
 
 export const CERTIFICATIONS: Certification[] = [
+  /* ---- AWS Skill Builder, all completed 13 August 2026 ----
+     Every title below is read off the certificate itself. */
+  {
+    name: 'AWS Artificial Intelligence Practitioner Learning Plan',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-ai-practitioner-learning-plan',
+  },
+  {
+    name: 'Fundamentals of Machine Learning and Artificial Intelligence',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-fundamentals-ml-and-ai',
+  },
+  {
+    name: 'Exploring Artificial Intelligence Use Cases and Applications',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-exploring-ai-use-cases',
+  },
+  {
+    name: 'Responsible Artificial Intelligence Practices',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-responsible-ai-practices',
+  },
+  {
+    name: 'Developing Machine Learning Solutions',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-developing-ml-solutions',
+  },
+  {
+    name: 'Developing Generative Artificial Intelligence Solutions',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-developing-generative-ai-solutions',
+  },
+  {
+    name: 'Optimizing Foundation Models',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-optimizing-foundation-models',
+  },
+  {
+    name: 'Security, Compliance, and Governance for AI Solutions',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-security-compliance-governance-ai',
+  },
+  {
+    name: 'Essentials of Prompt Engineering',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-essentials-of-prompt-engineering',
+  },
+  {
+    name: 'Exam Prep Plan: AWS Certified AI Practitioner (AIF-C01)',
+    issuer: 'AWS Training & Certification',
+    issued: 'Aug 2026',
+    slug: 'aws-exam-prep-ai-practitioner-aif-c01',
+  },
+
+  /* ---- UMass, via Skillsoft ---- */
+  {
+    name: 'Security Awareness for End Users',
+    issuer: 'University of Massachusetts',
+    issued: 'Jul 2026',
+    slug: 'umass-security-awareness-end-users',
+    ext: 'png',
+  },
+
+  /*
+   * ---- No document available ----
+   * These were issued through platforms whose accounts have since been
+   * deleted by the provider, so the certificates cannot be retrieved. They
+   * are listed because they were earned; they simply have nothing to show.
+   */
   { name: 'Train and evaluate regression models', issuer: 'Microsoft Learn' },
   { name: 'Fundamental AI Concepts', issuer: 'Microsoft Learn' },
   { name: 'Introduction to natural language processing concepts', issuer: 'Microsoft Learn' },
@@ -211,12 +278,27 @@ export const CERTIFICATIONS: Certification[] = [
   { name: 'Concepts — IBM Z Xplore', issuer: 'IBM' },
 ];
 
+/** Full document, for the ones that have one. */
+export function certDoc(c: Certification): string | null {
+  return c.slug ? `docs/certificates/${c.slug}.${c.ext ?? 'pdf'}` : null;
+}
+
+/** Preview image rendered from the first page. */
+export function certThumb(c: Certification): string | null {
+  return c.slug ? `img/certs/${c.slug}.jpg` : null;
+}
+
 /* ===========================================================
    Experience
    =========================================================== */
 
 export interface Role {
   org: string;
+  /**
+   * The organisation's own website. Verified individually — a dead link on a
+   * CV is worse than no link. See ORG_SITES below for the notes.
+   */
+  url?: string;
   title: string;
   window: string;
   place: string;
@@ -230,31 +312,86 @@ export interface Role {
 export const ROLES: Role[] = [
   {
     org: 'Manning College of Information and Computer Sciences, UMass Amherst',
+    url: 'https://www.cics.umass.edu',
+    title: 'Course Grader — COMPSCI 684, Trustworthy & Responsible AI',
+    window: 'Aug 2026 — present',
+    place: 'Amherst, MA',
+    kind: 'Applied',
+    bullets: [
+      'Course grader for COMPSCI 684: Trustworthy & Responsible AI, an advanced graduate course on the privacy, security, societal and environmental risks of modern AI systems.',
+      'Evaluates coursework on adversarial attacks, AI security and privacy, responsible model development, generative AI risks, and current trustworthy-AI research.',
+      'Works with material examining attack vectors, the guarantees and limits of current AI safety methods, and approaches to building more reliable systems.',
+    ],
+  },
+  {
+    org: 'Manning College of Information and Computer Sciences, UMass Amherst',
+    url: 'https://www.cics.umass.edu',
     title: 'Open-Source Apprentice',
-    window: 'Jun 2026 — present',
+    window: 'Jun 2026 — Aug 2026',
     place: 'Amherst, MA',
     kind: 'Applied',
     bullets: [
       'Selected for the competitive Summer 2026 cohort of the CICS Open-Source Apprenticeship Program, which pairs students with experienced open-source contributors and industry mentors.',
-      'Contributing to established open-source projects in a structured, mentor-guided apprenticeship.',
+      'Contributed to established open-source projects in a structured, mentor-guided apprenticeship.',
       'Emphasis on source control, contribution workflows, technical communication, and engagement with maintainer communities.',
     ],
   },
   {
     org: 'UMass Amherst Center for Data Science and Artificial Intelligence',
+    url: 'https://ds.cs.umass.edu',
     title: 'Data Scientist',
-    window: 'May 2026 — present',
+    window: 'May 2026 — Aug 2026',
     place: 'Amherst, MA',
     kind: 'Applied',
     bullets: [
       'Selected for the 2026 Data Science for the Common Good program, training data scientists on real public-interest problems.',
-      'Working with the Boston Cyclists Union on safer, more accessible, and more equitable biking infrastructure.',
-      'Contributing analysis across urban mobility, transportation safety, and community advocacy.',
-      'Translating complex datasets into insights that support policy conversations and evidence-based decisions.',
+      'Worked with the Boston Cyclists Union on safer, more accessible, and more equitable biking infrastructure.',
+      'Contributed analysis across urban mobility, transportation safety, and community advocacy.',
+      'Translated complex datasets into insights that support policy conversations and evidence-based decisions.',
+    ],
+  },
+  {
+    org: 'Steve Fisher Consulting',
+    url: 'https://stevefisherconsulting.com',
+    title: 'Technology Consultant',
+    window: 'May 2025 — Sep 2025',
+    place: 'San Diego, CA',
+    kind: 'Industry',
+    bullets: [
+      'Designed and built technology to modernise document-heavy legal workflows, including a secure litigation-document platform with structured storage, metadata organisation, and search.',
+      'Implemented role-based access controls, audit logging, and secure document processing to handle sensitive legal information.',
+      'Worked directly with the stakeholder to map existing workflows and refine features iteratively through testing and feedback.',
+    ],
+  },
+  {
+    org: 'SkyIT Services, a subsidiary of GBCS Group',
+    url: 'https://skyit.services',
+    title: 'Backend Developer Intern',
+    window: 'Feb 2024 — Dec 2024',
+    place: 'Remote',
+    kind: 'Industry',
+    bullets: [
+      'Built and supported backend solutions in Python, Django REST Framework, Firebase and JavaScript across multiple software projects.',
+      'Translated application requirements into reliable backend functionality, working in a collaborative environment on clean, maintainable, documented code.',
+      'Gained production-oriented experience with backend architecture, API-driven development, and database-backed applications, in an environment applying ML and AI to fleet operations.',
+    ],
+  },
+  {
+    org: 'Simple Coaching Inc.',
+    url: 'https://www.simplecoachinginc.com',
+    title: 'Digital Solutions Consultant',
+    window: 'Mar 2025 — May 2025',
+    place: 'Remote',
+    kind: 'Industry',
+    bullets: [
+      'Designed and built the company website, giving its coaching services, programmes and events a more professional and organised presence.',
+      'Worked directly with the business owner to improve the customer experience and use technology to support day-to-day operations.',
+      'Refined the site and its digital workflows iteratively on stakeholder feedback, combining web development, UX and business problem-solving.',
     ],
   },
   {
     org: 'Franklin County Community Development Corporation',
+    url: 'https://www.fccdc.org',
     title: 'Entrepreneurs Accelerator Program Participant',
     window: 'Mar 2026 — May 2026',
     place: 'Greenfield, MA',
@@ -267,6 +404,7 @@ export const ROLES: Role[] = [
   },
   {
     org: 'Microsoft',
+    url: 'https://mvp.microsoft.com/studentambassadors',
     title: 'Microsoft Learn Student Ambassador',
     window: 'Jan 2024 — Dec 2024',
     place: 'Blacksburg, VA',
@@ -276,13 +414,10 @@ export const ROLES: Role[] = [
       'Created reusable starter projects and hands-on resources so students could keep exploring Microsoft technologies independently.',
       'Built a community of aspiring developers on campus by mentoring peers and amplifying their work.',
     ],
-    assets: [
-      cert('microsoft-learn-ambassador', 'Ambassador Certificate'),
-      photo('workshop', 'Azure workshop', 'Running a peer session on Azure and AI fundamentals.'),
-    ],
   },
   {
     org: 'Virginia Tech',
+    url: 'https://www.vt.edu',
     title: 'Student Leader',
     window: 'Aug 2024 — Dec 2024',
     place: 'Blacksburg, VA',
@@ -295,6 +430,7 @@ export const ROLES: Role[] = [
   },
   {
     org: 'CodSoft',
+    url: 'https://www.codsoft.in',
     title: 'AI Intern',
     window: 'Jan 2024 — Feb 2024',
     place: 'Remote',
@@ -304,10 +440,10 @@ export const ROLES: Role[] = [
       'Moved from theory to practice on each project, strengthening applied implementation skills.',
       'Collaborated in a remote team while documenting progress publicly on GitHub.',
     ],
-    assets: [cert('codsoft-internship', 'Internship Certificate')],
   },
   {
     org: 'IBM',
+    url: 'https://www.ibm.com/z',
     title: 'Z Student Ambassador',
     window: 'Nov 2023 — Jun 2024',
     place: 'Blacksburg, VA',
@@ -317,10 +453,10 @@ export const ROLES: Role[] = [
       'Connected mainframe principles to modern AI/ML workflows, showing how legacy systems underpin scalable data handling.',
       'Engaged students, faculty, and IBM professionals to build a knowledge-sharing community.',
     ],
-    assets: [cert('ibm-z-ambassador', 'Z Ambassador Certificate')],
   },
   {
     org: 'Google Developer Student Club, Virginia Tech',
+    url: 'https://gdg.community.dev',
     title: 'Team Leader',
     window: 'Oct 2023 — Jun 2024',
     place: 'Blacksburg, VA',
@@ -330,13 +466,10 @@ export const ROLES: Role[] = [
       'Mentored peers through real-world software and machine learning projects.',
       'Built partnerships with faculty and industry professionals to keep programming aligned with real-world needs.',
     ],
-    assets: [
-      cert('google-dsc-lead', 'Team Leader Certificate'),
-      photo('hackathon', 'Hackathon', 'Directing a student hackathon on Google Cloud and APIs.'),
-    ],
   },
   {
     org: 'Virginia Tech',
+    url: 'https://www.vt.edu',
     title: 'Peer Mentor',
     window: 'Jul 2023 — Aug 2024',
     place: 'Blacksburg, VA',
@@ -349,6 +482,7 @@ export const ROLES: Role[] = [
   },
   {
     org: 'Commonwealth Cyber Initiative, Southwest Virginia',
+    url: 'https://cyberinitiative-swva.org',
     title: 'Coding & Cryptography Researcher',
     window: 'Oct 2023 — Jan 2024',
     place: 'Blacksburg, VA',
@@ -358,13 +492,10 @@ export const ROLES: Role[] = [
       'Investigated coding theory and cryptographic concepts to design fault-tolerant data encoding approaches.',
       'Collaborated with faculty and peers to publish reports and present findings at academic forums.',
     ],
-    assets: [
-      cert('cci-research', 'Research Certificate'),
-      photo('research', 'Research work', 'Cryptography and anomaly-detection research at CCI.'),
-    ],
   },
   {
     org: 'VT Center for the Enhancement of Engineering Diversity',
+    url: 'https://eng.vt.edu/ceed.html',
     title: 'Upper Class Leader, Design Challenge Team',
     window: 'Aug 2023 — Oct 2023',
     place: 'Blacksburg, VA',
@@ -377,6 +508,7 @@ export const ROLES: Role[] = [
   },
   {
     org: 'VT Center for the Enhancement of Engineering Diversity',
+    url: 'https://eng.vt.edu/ceed.html',
     title: 'Member',
     window: 'Aug 2022 — Jul 2023',
     place: 'Blacksburg, VA',
@@ -440,7 +572,6 @@ export const PROJECTS: Project[] = [
       'Turning complex data into evidence that holds up in policy conversations.',
     ],
     stack: ['Python', 'Geospatial data', 'Statistics', 'Civic tech'],
-    image: 'img/work-01.jpg',
   },
   {
     index: '03',
@@ -456,10 +587,6 @@ export const PROJECTS: Project[] = [
       'Published reports and presented findings at academic forums.',
     ],
     stack: ['Cryptography', 'Coding theory', 'Anomaly detection', 'Python'],
-    assets: [
-      cert('cci-research', 'Research Certificate'),
-      photo('research', 'Research work'),
-    ],
   },
   {
     index: '04',
@@ -475,8 +602,6 @@ export const PROJECTS: Project[] = [
       'Showed how AI could address an everyday productivity problem rather than an abstract one.',
     ],
     stack: ['Machine learning', 'Recommendation', 'Python'],
-    image: 'img/work-02.jpg',
-    assets: [photo('presenting', 'Demo day', 'Presenting the smart calendar prototype.')],
   },
   {
     index: '05',
@@ -522,13 +647,6 @@ export const PROJECTS: Project[] = [
       'Hackathon and bootcamp curricula covering Google Cloud and APIs.',
     ],
     stack: ['Azure', 'Google Cloud', 'IBM Z', 'Curriculum'],
-    assets: [
-      photo('workshop', 'Workshop session'),
-      photo('hackathon', 'Hackathon'),
-      cert('microsoft-learn-ambassador', 'Microsoft Certificate'),
-      cert('ibm-z-ambassador', 'IBM Z Certificate'),
-      cert('google-dsc-lead', 'Google DSC Certificate'),
-    ],
   },
 ];
 
@@ -546,11 +664,29 @@ export interface Honor {
 }
 
 export const HONORS: Honor[] = [
+  /* The two pitch wins. Every detail here is read off the presentation
+     cheque in the photograph — centre, amount and date. The CalendAI cheque
+     names no competition, so none is claimed. */
   {
-    title: 'Chain-of-Sanitized-Thoughts',
-    issuer: 'Publication',
-    window: '—',
-    note: 'Plugging PII leakage in CoT of large reasoning models.',
+    title: 'Karnah — second place, $750',
+    issuer: 'UPitch Spring 2026 · UMass Amherst Entrepreneurship Club',
+    window: 'Apr 2026',
+    note:
+      'Second of nineteen student founders, with Rishav Chakravarty. Sponsored by the Berthiaume Center for Entrepreneurship.',
+    weight: 'major',
+  },
+  {
+    title: 'CalendAI — $500 award',
+    issuer: 'Apex Center for Entrepreneurs · Pamplin College of Business, Virginia Tech',
+    window: 'Nov 2024',
+    note: 'Awarded to CalendAI, the machine-learning smart calendar built for students.',
+    weight: 'major',
+  },
+  {
+    title: 'Trendify AI — Minute Pitch winner, $300',
+    issuer: 'Berthiaume Center for Entrepreneurship · Isenberg School of Management, UMass Amherst',
+    window: 'Oct 2025',
+    note: 'First place in the Minute Pitch competition.',
     weight: 'major',
   },
   {
@@ -559,35 +695,30 @@ export const HONORS: Honor[] = [
     window: '—',
     note: 'Academic distinction across qualifying terms.',
     weight: 'major',
-    assets: [cert('vt-deans-list', "Dean's List Certificate")],
   },
   {
     title: 'Undergraduate Research Excellence Program',
     issuer: 'Virginia Tech',
     window: '—',
     note: 'Member, recognising sustained undergraduate research contribution.',
-    assets: [cert('research-excellence', 'Program Certificate')],
   },
   {
     title: "Buzz's Bunch Scholarship Award",
     issuer: 'Scholarship',
     window: '2024 — 25',
     note: 'Award winner.',
-    assets: [cert('buzz-bunch-scholarship', 'Scholarship Letter')],
   },
   {
     title: 'Student Affairs Scholarship',
     issuer: 'Virginia Tech',
     window: '2024',
     note: 'Scholarship winner.',
-    assets: [cert('student-affairs-scholarship', 'Scholarship Letter')],
   },
   {
     title: 'Virginia Pell Initiative Grant',
     issuer: 'Commonwealth of Virginia',
     window: '—',
     note: 'Grant recipient.',
-    assets: [cert('pell-initiative-grant', 'Grant Letter')],
   },
 ];
 
@@ -596,6 +727,8 @@ export interface Selection {
   issuer: string;
   window: string;
   note: string;
+  /** The programme's own page. Each one verified individually. */
+  url?: string;
 }
 
 export const SELECTIONS: Selection[] = [
@@ -604,18 +737,24 @@ export const SELECTIONS: Selection[] = [
     issuer: 'UMass CICS',
     window: 'Summer 2026',
     note: 'Competitive mentor-guided cohort pairing students with experienced open-source contributors.',
+    // The OSAP page CICS itself links to from cics.umass.edu/careers/cics-careers-notion
+    url: 'https://cicscareers.notion.site/Open-Source-Apprenticeship-Program-OSAP-1e65ada1554b805a86edf5c541a3362b',
   },
   {
     title: 'Data Science for the Common Good',
     issuer: 'UMass Center for Data Science and AI',
     window: '2026',
     note: 'Selected cohort applying data science to public-interest problems.',
+    url: 'https://ds.cs.umass.edu/programs/ds4cg',
   },
   {
     title: 'Entrepreneurs Accelerator Program',
     issuer: 'Franklin County CDC',
     window: 'Spring 2026',
     note: 'Selected for the accelerator supporting early-stage ventures.',
+    // The accelerator sits inside the FCCDC's UPstart programme, not the
+    // generic business-development page.
+    url: 'https://www.fccdc.org/upstart-program/',
   },
 ];
 
@@ -667,3 +806,31 @@ export const AVAILABILITY = {
   status: 'Open to research collaborations, internships, and full-time roles',
   timezone: 'ET (UTC−5 / −4)',
 };
+
+/* ===========================================================
+   Photography for the honors page
+
+   ⚠️  The badge in the second frame reads "VT · Student Affairs"
+   and her name; the line beneath it is too soft to read, so the
+   specific event is not named here. Add it, and photographer
+   credit, if you have them.
+   =========================================================== */
+
+export interface HonorPlate {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+export const HONOR_PLATES: HonorPlate[] = [
+  {
+    src: 'img/honors/scholarship-backdrop.jpg',
+    alt: 'Kinjal Pandey at a Virginia Tech scholarship recognition event, photographed against the Inn at Virginia Tech backdrop',
+    caption: 'Scholarship recognition — The Inn at Virginia Tech and Skelton Conference Center.',
+  },
+  {
+    src: 'img/honors/scholarship-dinner.jpg',
+    alt: 'Kinjal Pandey seated with donors and guests at a Virginia Tech Student Affairs scholarship dinner',
+    caption: 'At the donor table. Virginia Tech Student Affairs.',
+  },
+];

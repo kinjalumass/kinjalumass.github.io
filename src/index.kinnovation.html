@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kinnovation: a venture studio by Kinjal Pandey</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Per-route title, description, canonical and social tags are written by
+       src/app/core/seo.ts. These are the defaults, and what a crawler sees
+       before any JavaScript runs. -->
+  <meta name="description" content="Kinnovation is a venture studio by Kinjal Pandey. Six ventures, three of them funded, built where the evidence to fix a broken system already exists but sits scattered.">
+  <meta name="author" content="Kinjal Pandey">
+  <meta name="theme-color" content="#0b0810">
+  <link rel="canonical" href="https://kinnovationgroup.com/">
+
+  <!-- Crawling. `max-image-preview:large` is what gets a photograph shown
+       beside the result instead of a thumbnail. -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kinnovation">
+  <meta property="og:title" content="Kinnovation: a venture studio by Kinjal Pandey">
+  <meta property="og:description" content="Six ventures. Three of them funded.">
+  <meta property="og:url" content="https://kinnovationgroup.com/">
+  <meta property="og:image" content="https://kinnovationgroup.com/img/pitches/pitch-umass-stage.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ===================================================================
+       Security
+
+       GitHub Pages serves static files and cannot set response headers, so
+       everything enforceable from the document itself is set here. The two
+       that genuinely cannot be done this way — Strict-Transport-Security and
+       X-Frame-Options — are covered by GitHub's "Enforce HTTPS" setting and
+       by frame-ancestors below, which supersedes X-Frame-Options anyway.
+       =================================================================== -->
+
+  <!-- No plugins, no inline scripts, no framing, and connections limited to
+       the three origins this site actually talks to. 'unsafe-inline' is
+       present for styles only: Angular injects component styles inline. -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self' https://api.github.com https://kinjal-assistant.kinjalpandey.workers.dev;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'none';
+    object-src 'none';
+    upgrade-insecure-requests
+  ">
+
+  <!-- Don't leak the full URL to third parties -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+
+  <!-- ===================================================================
+       Structured data
+
+       This is what tells Google that the site, the LinkedIn profile, the
+       GitHub account and the arXiv paper are all the same person — which is
+       the thing that decides whether a name search returns one strong result
+       or several weak ones. `sameAs` does most of that work.
+       =================================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://kinnovationgroup.com/#kinnovation",
+        "name": "Kinnovation",
+        "url": "https://kinnovationgroup.com/",
+        "description": "A venture studio building where the evidence needed to fix a broken system already exists but sits in a thousand disconnected places.",
+        "founder": { "@id": "https://kinjalpandey.com/#kinjal" },
+        "email": "mailto:kinjalpandey18@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Amherst",
+          "addressRegion": "MA",
+          "addressCountry": "US"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://kinjalpandey.com/#kinjal",
+        "name": "Kinjal Pandey",
+        "url": "https://kinjalpandey.com/",
+        "sameAs": [
+          "https://kinjalpandey.com/",
+          "https://www.linkedin.com/in/kinjalpandey",
+          "https://github.com/kinjalumass"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kinnovationgroup.com/#website",
+        "url": "https://kinnovationgroup.com/",
+        "name": "Kinnovation",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://kinnovationgroup.com/#kinnovation" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

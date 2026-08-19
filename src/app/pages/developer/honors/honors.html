@@ -34,6 +34,20 @@
     </div>
   </section>
 
+  <!-- The scholarship recognition evening. Three of the honors above are
+       scholarships, so this is the evidence for them. -->
+  <section class="dev-section plates">
+    <span class="dev-label">// on the night</span>
+    <div class="plates__grid">
+      @for (plate of plates; track plate.src; let i = $index) {
+        <figure class="plate" [style.--stagger]="i">
+          <img [src]="plate.src" [alt]="plate.alt" loading="lazy" />
+          <figcaption>{{ plate.caption }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
+
   <section class="dev-section">
     <span class="dev-label">// competitive selections</span>
 
@@ -42,7 +56,19 @@
         <li class="pick">
           <span class="pick__mark" aria-hidden="true">◆</span>
           <div class="pick__body">
-            <h3 class="pick__title">{{ pick.title }}</h3>
+            <h3 class="pick__title">
+              @if (pick.url) {
+                <a
+                  class="pick__link"
+                  [href]="pick.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  [attr.aria-label]="pick.title + ' — opens the programme page in a new tab'"
+                >{{ pick.title }}<span class="pick__arrow" aria-hidden="true">↗</span></a>
+              } @else {
+                {{ pick.title }}
+              }
+            </h3>
             <p class="pick__meta dev-meta">{{ pick.issuer }} · {{ pick.window }}</p>
             <p class="pick__note">{{ pick.note }}</p>
           </div>
@@ -53,10 +79,48 @@
 
   <section class="dev-section">
     <span class="dev-label">// certifications</span>
-    <ul class="dev-tags">
-      @for (cert of certifications; track cert.name) {
-        <li>{{ cert.name }}</li>
+
+    <div class="certs">
+      @for (cert of documented; track cert.name; let i = $index) {
+        <a
+          class="cert"
+          [href]="doc(cert)"
+          target="_blank"
+          rel="noopener noreferrer"
+          [style.--stagger]="i"
+          [attr.aria-label]="cert.name + ', ' + cert.issuer + ' — opens the certificate in a new tab'"
+        >
+          <span class="cert__shot">
+            <img
+              [src]="thumb(cert)"
+              [alt]="'Certificate: ' + cert.name"
+              loading="lazy"
+            />
+          </span>
+
+          <span class="cert__body">
+            <span class="cert__name">{{ cert.name }}</span>
+            <span class="cert__meta">
+              {{ cert.issuer }}@if (cert.issued) { · {{ cert.issued }} }
+            </span>
+            <span class="cert__go">View certificate <i aria-hidden="true">↗</i></span>
+          </span>
+        </a>
       }
-    </ul>
+    </div>
+
+    @if (undocumented.length) {
+      <div class="certs__rest">
+        <p class="certs__note">
+          Also completed. The issuing platforms have since closed these accounts,
+          so the certificates themselves are no longer retrievable.
+        </p>
+        <ul class="dev-tags">
+          @for (cert of undocumented; track cert.name) {
+            <li>{{ cert.name }} <small>— {{ cert.issuer }}</small></li>
+          }
+        </ul>
+      </div>
+    }
   </section>
 </div>

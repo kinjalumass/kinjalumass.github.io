@@ -1,0 +1,40 @@
+# Line endings and binary handling.
+#
+# Without this file Git guesses, and the guess depends on each machine's
+# core.autocrlf setting. That is why `git add` prints a wall of "LF will be
+# replaced by CRLF" warnings on Windows. The code is edited on Windows but
+# built on Linux in GitHub Actions, so the repository stores LF and each
+# checkout gets whatever suits it.
+
+# Detect text automatically, and always commit it with LF.
+* text=auto eol=lf
+
+# Files where a stray CR would actually break something. GitHub Pages reads
+# CNAME as a single hostname, and a trailing \r makes it a different hostname.
+CNAME           text eol=lf
+.nojekyll       text eol=lf
+*.sh            text eol=lf
+
+# Windows-only files keep CRLF so they open correctly in Notepad.
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.ps1           text eol=crlf
+
+# Binary. Never convert, never try to diff. Git usually infers these
+# correctly, but 20 MB of photographs is not something to leave to a heuristic.
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.webp          binary
+*.gif           binary
+*.ico           binary
+*.pdf           binary
+*.woff          binary
+*.woff2         binary
+*.ttf           binary
+*.otf           binary
+*.mp4           binary
+*.zip           binary
+
+# Generated. Collapse it in pull requests rather than reviewing 20k lines.
+package-lock.json  -diff linguist-generated

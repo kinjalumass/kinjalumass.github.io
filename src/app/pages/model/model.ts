@@ -1,5 +1,7 @@
-import { Component, OnDestroy, computed, signal } from '@angular/core';
+import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { focusOf } from '../../data/focus';
 import { BOOKING, DIGITALS, IDENTITY, SHOOTS, STATS } from '../../data/model';
 
 interface Frame {
@@ -20,8 +22,14 @@ const VISIBLE = 4;
   },
 })
 export class Model implements OnDestroy {
+  /** Injected so it also works while the page is prerendered in Node. */
+  private readonly doc = inject(DOCUMENT);
+
   protected readonly id = IDENTITY;
   protected readonly stats = STATS;
+
+  /** Keeps a cover-cropped tile centred on the face rather than the torso. */
+  protected readonly focusOf = focusOf;
   protected readonly digitals = DIGITALS;
   protected readonly shoots = SHOOTS;
   protected readonly booking = BOOKING;
@@ -73,12 +81,12 @@ export class Model implements OnDestroy {
     const i = this.frames.findIndex((f) => f.src === src);
     if (i === -1) return;
     this.at.set(i);
-    document.body.style.overflow = 'hidden';
+    this.doc.body.style.overflow = 'hidden';
   }
 
   protected close(): void {
     this.at.set(null);
-    document.body.style.overflow = '';
+    this.doc.body.style.overflow = '';
   }
 
   protected step(delta: number): void {
@@ -114,7 +122,7 @@ export class Model implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    document.body.style.overflow = '';
+    this.doc.body.style.overflow = '';
     clearTimeout(this.timer);
   }
 }

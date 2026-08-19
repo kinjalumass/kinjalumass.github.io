@@ -6,18 +6,18 @@
 </div>
 
 <header class="nav">
-  <a class="nav__mark" routerLink="/entrepreneur">
+  <a class="nav__mark" [routerLink]="studioLink()">
     <span class="nav__dot" aria-hidden="true"></span>
     Kinnovation
   </a>
 
   <nav class="nav__links" aria-label="Ventures">
-    <a routerLink="/entrepreneur" routerLinkActive="is-on" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="studioLink()" routerLinkActive="is-on" [routerLinkActiveOptions]="{ exact: true }">
       Studio
     </a>
     @for (venture of ventures; track venture.id) {
       <a
-        [routerLink]="['/entrepreneur', venture.id]"
+        [routerLink]="ventureLink(venture.id)"
         routerLinkActive="is-on"
         [style.--hue]="venture.palette.a"
       >
@@ -26,9 +26,15 @@
     }
   </nav>
 
-  <a class="nav__back" routerLink="/">
-    <span aria-hidden="true">←</span> Index
-  </a>
+  @if (external.home; as homeUrl) {
+    <a class="nav__back" [href]="homeUrl">
+      <span aria-hidden="true">←</span> Kinjal Pandey
+    </a>
+  } @else {
+    <a class="nav__back" routerLink="/">
+      <span aria-hidden="true">←</span> Index
+    </a>
+  }
 </header>
 
 <router-outlet />
@@ -43,14 +49,22 @@
     <nav class="foot__nav" aria-label="Footer">
       <span class="foot__label">Ventures</span>
       @for (venture of ventures; track venture.id) {
-        <a [routerLink]="['/entrepreneur', venture.id]">{{ venture.name }}</a>
+        <a [routerLink]="ventureLink(venture.id)">{{ venture.name }}</a>
       }
     </nav>
 
     <nav class="foot__nav" aria-label="Elsewhere">
       <span class="foot__label">Kinjal</span>
-      <a routerLink="/">Index</a>
-      <a routerLink="/developer">Developer</a>
+      @if (external.home; as homeUrl) {
+        <a [href]="homeUrl">Kinjal Pandey</a>
+      } @else {
+        <a routerLink="/">Index</a>
+      }
+      @if (external.developer; as devUrl) {
+        <a [href]="devUrl">Developer</a>
+      } @else {
+        <a routerLink="/developer">Developer</a>
+      }
       <a href="mailto:kinjalpandey18&#64;gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/kinjalpandey" target="_blank" rel="noopener">LinkedIn</a>
     </nav>

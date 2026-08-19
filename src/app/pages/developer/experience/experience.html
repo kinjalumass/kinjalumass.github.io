@@ -35,7 +35,19 @@
         </div>
 
         <h2 class="role__title">{{ role.title }}</h2>
-        <p class="role__org dev-wire">{{ role.org }}</p>
+        <p class="role__org dev-wire">
+          @if (role.url) {
+            <a
+              class="role__org-link"
+              [href]="role.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="role.org + ' — opens the organisation website in a new tab'"
+            >{{ role.org }}<span class="role__org-arrow" aria-hidden="true">↗</span></a>
+          } @else {
+            {{ role.org }}
+          }
+        </p>
         <p class="dev-meta">{{ role.place }}</p>
 
         <ul class="dev-bullets">

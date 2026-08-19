@@ -4,7 +4,7 @@
   [style.--v2]="v.palette.b"
   [style.--v3]="v.palette.c"
 >
-  <!-- ===== Hero: centred type, offset image collage below ===== -->
+  <!-- ===== Hero: centred type, one image below ===== -->
   <section class="hero">
     <div class="ent-wrap hero__inner">
       <span class="ent-sticker hero__sticker">{{ v.index }} · {{ v.sector }}</span>
@@ -22,9 +22,7 @@
     </div>
 
     <div class="collage">
-      <div class="ent-shot collage__a"><img [src]="v.images.a" alt="" /></div>
-      <div class="ent-shot collage__b"><img [src]="v.images.hero" alt="" /></div>
-      <div class="ent-shot collage__c"><img [src]="v.images.b" alt="" /></div>
+      <div class="ent-shot collage__solo"><img [src]="v.art" alt="" /></div>
     </div>
   </section>
 
@@ -102,8 +100,7 @@
   </section>
 
   <!-- ===== Close ===== -->
-  <section class="ent-band">
-    <img class="ent-band__bg" [src]="v.images.b" alt="" loading="lazy" />
+  <section class="ent-band ent-band--tint">
     <div class="ent-wrap ent-band__inner reveal" appReveal>
       <h2 class="ent-h2 close__title">{{ v.closing }}</h2>
       <dl class="ent-metrics">
