@@ -7,7 +7,7 @@
    same pieces recolour per venture.
 
    Surfaces are tinted with the venture's own accent rather than
-   being flat grey — on a dark ground that is what keeps the
+   being flat gray — on a dark ground that is what keeps the
    section feeling vibrant instead of merely unlit.
    =========================================================== */
 
@@ -20,7 +20,7 @@
   --ink-3: rgba(247, 243, 251, 0.46);
   --line: rgba(247, 243, 251, 0.13);
   --line-soft: rgba(247, 243, 251, 0.07);
-  /* Cast shadows into the base rather than into grey */
+  /* Cast shadows into the base rather than into gray */
   --cast: rgba(2, 0, 6, 0.8);
 
   position: relative;
@@ -151,7 +151,7 @@
   padding: clamp(1.5rem, 3vw, 2.25rem);
   border: 1px solid var(--line);
   border-radius: 20px;
-  /* a whisper of the venture's accent so cards aren't flat grey */
+  /* a whisper of the venture's accent so cards aren't flat gray */
   background: color-mix(in srgb, rgb(var(--v1, var(--ember))) 5%, var(--paper-2));
   transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out),
     border-color 0.5s, background 0.5s;

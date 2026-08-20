@@ -1,5 +1,5 @@
 /**
- * Content for the modelling portfolio at /model.
+ * Content for the modeling portfolio at /model.
  *
  * The shoot list below mirrors the folders in the "website portfolio pics"
  * Drive — one shoot per folder, in the order they appear on the page. The
@@ -47,7 +47,7 @@ export const IDENTITY = {
   status: 'Available for editorial, runway, and campaign',
   /**
    * The opening frame. Published on its own path rather than as part of a
-   * shoot, so it can change without shifting every index in that shoot — and
+   * shoot, so it can change without shifting every index in that shoot, and
    * it is deliberately not repeated in the Beauty set below.
    */
   hero: ['img/model/hero.jpg'],
@@ -111,7 +111,7 @@ export const SHOOTS: Shoot[] = [
     place: 'Eric Carle Museum of Picture Book Art',
     year: '2026',
     note:
-      'A show staged inside the galleries — the walks lead, then the portraits made in among the frames.',
+      'A show staged inside the galleries, the walks lead, then the portraits made in among the frames.',
     accent: '224, 146, 84',
     images: frames('carle', 11),
   },
@@ -123,7 +123,7 @@ export const SHOOTS: Shoot[] = [
     place: 'Leverett, MA',
     year: '2026',
     note:
-      'White drapery against snow and gilt, shot at the stupa. Several frames are a two-person set — credit your partner here.',
+      'White drapery against snow and gilt, shot at the stupa. Several frames are a two-person set, credit your partner here.',
     accent: '96, 168, 156',
     images: frames('pagoda', 6),
   },
@@ -135,7 +135,7 @@ export const SHOOTS: Shoot[] = [
     place: 'Add location',
     year: '',
     note:
-      'Full makeup, styled hair, shallow depth of field — the close work, where the face carries the frame on its own. The opening portrait at the top of this page is from the same sitting.',
+      'Full makeup, styled hair, shallow depth of field, the close work, where the face carries the frame on its own. The opening portrait at the top of this page is from the same sitting.',
     accent: '206, 96, 128',
     images: frames('beauty', 5),
   },
@@ -147,7 +147,7 @@ export const SHOOTS: Shoot[] = [
     place: 'White cyclorama',
     year: '2026',
     note:
-      'High key on white, everything carried by line and motion — including one frame shot from directly overhead.',
+      'High key on white, everything carried by line and motion, including one frame shot from directly overhead.',
     accent: '120, 150, 200',
     images: frames('snow', 4),
   },
@@ -171,7 +171,7 @@ export const SHOOTS: Shoot[] = [
     place: 'Virginia Tech · Blacksburg, VA',
     year: '',
     note:
-      'Collegiate cheer in maroon and orange — field, court, and one obligatory frame with the HokieBird. Add the seasons you competed.',
+      'Collegiate cheer in maroon and orange, field, court, and one obligatory frame with the HokieBird. Add the seasons you competed.',
     accent: '206, 112, 76',
     images: frames('cheer', 5),
   },

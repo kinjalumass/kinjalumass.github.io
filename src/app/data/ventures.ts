@@ -67,7 +67,7 @@ export interface Venture {
 
 export const VENTURES: Venture[] = [
   /* =========================================================
-     01 — MeAsmi
+     01, MeAsmi
      ========================================================= */
   {
     id: 'measmi',
@@ -88,7 +88,7 @@ export const VENTURES: Venture[] = [
       points: [
         'The highest quality information is parent to parent. It is anecdotal, it is specific, and it is trapped in the room where it was spoken.',
         'Families cycle through therapy after therapy with almost nothing to tell them whether this one is likely to fit their child.',
-        'The resources that do exist are organised by diagnosis, written in general terms, or published by whoever is selling the service.',
+        'The resources that do exist are organized by diagnosis, written in general terms, or published by whoever is selling the service.',
         'Clinics keep structured records, but nothing learns across clinics, and what happens at home between sessions is never captured at all.',
       ],
     },
@@ -126,7 +126,7 @@ export const VENTURES: Venture[] = [
   },
 
   /* =========================================================
-     02 — Karnah
+     02, Karnah
      ========================================================= */
   {
     id: 'karnah',
@@ -143,7 +143,7 @@ export const VENTURES: Venture[] = [
     problem: {
       title: 'You gave it away and nobody can tell you what happened next',
       lead:
-        'Clothes, bedding and furniture get dropped at a centre and vanish. The receipt comes back blank or vague, and you never find out whether the item was used, sold, thrown out or shipped somewhere else entirely. The whole chain runs on good intentions and almost no information.',
+        'Clothes, bedding and furniture get dropped at a center and vanish. The receipt comes back blank or vague, and you never find out whether the item was used, sold, thrown out or shipped somewhere else entirely. The whole chain runs on good intentions and almost no information.',
       points: [
         'Donors put a number on their own goods, which lets fraud through one side and leaves honest people underclaiming on the other.',
         'Shelters receive winter coats in July and extra small sizes for adult men, then burn storage space and volunteer hours dealing with it.',
@@ -156,23 +156,23 @@ export const VENTURES: Venture[] = [
     features: [
       {
         title: 'Valuation from a photograph',
-        body: 'Photograph the item, describe it briefly, and a model trained on condition, brand, retail price and resale data returns a fair market value with an itemised receipt the IRS will accept.',
+        body: 'Photograph the item, describe it briefly, and a model trained on condition, brand, retail price and resale data returns a fair market value with an itemized receipt the IRS will accept.',
       },
       {
         title: 'Matched against real need',
-        body: 'Charities fill in a short needs survey covering categories, sizes, seasonal demand and who they serve. Donations only get routed to organisations that asked for them.',
+        body: 'Charities fill in a short needs survey covering categories, sizes, seasonal demand and who they serve. Donations only get routed to organizations that asked for them.',
       },
       {
         title: 'Proof it landed',
-        body: 'Anonymised acknowledgements, short stories or photographs showing where the item went, and a running count of what you have given and how much textile waste that kept out of landfill.',
+        body: 'Anonymized acknowledgements, short stories or photographs showing where the item went, and a running count of what you have given and how much textile waste that kept out of landfill.',
       },
       {
         title: 'An audit trail that holds',
-        body: 'Receipts formatted to IRS guidance including Form 8283. Every donation timestamped, itemised and cross checked, ready for filing season or for an audit three years later.',
+        body: 'Receipts formatted to IRS guidance including Form 8283. Every donation timestamped, itemized and cross checked, ready for filing season or for an audit three years later.',
       },
       {
         title: 'Logistics that do not fall on you',
-        body: 'Pickup and delivery through gig couriers, nonprofit driver programmes and eco-logistics partners, because friction is what kills most donations before they ever complete.',
+        body: 'Pickup and delivery through gig couriers, nonprofit driver programs and eco-logistics partners, because friction is what kills most donations before they ever complete.',
       },
     ],
     steps: [
@@ -180,7 +180,7 @@ export const VENTURES: Venture[] = [
       { n: '02', title: 'Match', body: 'It is offered only to charities whose stated need it satisfies.' },
       { n: '03', title: 'Collect', body: 'A local partner books the pickup. Nothing gets transported on spec.' },
       { n: '04', title: 'Deliver', body: 'Custody is logged at handover, which is where the current chain goes dark.' },
-      { n: '05', title: 'Prove', body: 'An itemised receipt ready for Form 8283, and a record of the impact.' },
+      { n: '05', title: 'Prove', body: 'An itemized receipt ready for Form 8283, and a record of the impact.' },
     ],
     audiences: [
       {
@@ -221,7 +221,7 @@ export const VENTURES: Venture[] = [
   },
 
   /* =========================================================
-     03 — CalendAI
+     03, CalendAI
      ========================================================= */
   {
     id: 'calendai',
@@ -272,9 +272,9 @@ export const VENTURES: Venture[] = [
     ],
     steps: [
       { n: '01', title: 'Connect', body: 'Canvas and Google Calendar become one view of the actual week.' },
-      { n: '02', title: 'Prioritise', body: 'Tasks ranked by deadline, effort estimate and what they are worth to your grade.' },
+      { n: '02', title: 'Prioritize', body: 'Tasks ranked by deadline, effort estimate and what they are worth to your grade.' },
       { n: '03', title: 'Block', body: 'Work placed around fixed events, commutes and the hours you need to sleep.' },
-      { n: '04', title: 'Repair', body: 'Every completion or overrun re-optimises whatever is left.' },
+      { n: '04', title: 'Repair', body: 'Every completion or overrun re-optimizes whatever is left.' },
       { n: '05', title: 'Learn', body: 'Duration estimates and your best hours sharpen with every cycle.' },
     ],
     metrics: [
@@ -287,7 +287,7 @@ export const VENTURES: Venture[] = [
   },
 
   /* =========================================================
-     04 — NutriNavigator
+     04, NutriNavigator
      ========================================================= */
   {
     id: 'nutri-navigator',
@@ -329,7 +329,7 @@ export const VENTURES: Venture[] = [
       },
       {
         title: 'One answer, not a menu',
-        body: 'What to eat, when to leave, and where to get it, weighed against whatever you are optimising for that day, whether that is staying sharp through an exam, recovering from training, or making the week last.',
+        body: 'What to eat, when to leave, and where to get it, weighed against whatever you are optimizing for that day, whether that is staying sharp through an exam, recovering from training, or making the week last.',
       },
       {
         title: 'It learns your physiology',
@@ -366,7 +366,7 @@ export const VENTURES: Venture[] = [
   },
 
   /* =========================================================
-     05 — Witness
+     05, Witness
      ========================================================= */
   {
     id: 'witness-platform',
@@ -432,7 +432,7 @@ export const VENTURES: Venture[] = [
   },
 
   /* =========================================================
-     06 — Trendify AI
+     06, Trendify AI
      ========================================================= */
   {
     id: 'trendify',

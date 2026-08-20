@@ -20,19 +20,21 @@ import {
   ROLES,
   SELECTIONS,
 } from './profile';
+import type { Chunk } from './corpus.types';
+import { KB_CHUNKS } from './kb';
 import { GITHUB_USER, HIDE, NOTES } from './repos';
 import { VENTURES } from './ventures';
 
-export interface Chunk {
-  id: string;
-  /** Shown as a source chip under the answer */
-  title: string;
-  /** Extra terms that should pull this chunk in */
-  tags: string[];
-  text: string;
-}
+export type { Chunk } from './corpus.types';
 
 const chunks: Chunk[] = [];
+
+/**
+ * The approved knowledge base goes in first, so that when retrieval scores a
+ * tie the canonical wording and the venture-stage guardrails win over the
+ * looser prose the pages use.
+ */
+chunks.push(...KB_CHUNKS);
 
 /* --- who she is ----------------------------------------------------------- */
 
@@ -121,7 +123,7 @@ chunks.push({
     'proudest', 'largest', 'geospatial',
   ],
   text:
-    `${BCU.title} — her flagship project, with ${BCU.partner} through the ${BCU.programme}. ${BCU.lede} ` +
+    `${BCU.title} — her flagship project, with ${BCU.partner} through the ${BCU.program}. ${BCU.lede} ` +
     `${BCU.context.join(' ')} ` +
     `Her contributions, as five case studies: ` +
     CASE_STUDIES.map(
@@ -158,7 +160,7 @@ chunks.push({
   id: 'selections',
   title: 'Competitive selections',
   tags: ['selected', 'selection', 'cohort', 'program', 'accelerator', 'apprenticeship', 'competitive'],
-  text: `Competitive programme selections: ${SELECTIONS.map((s) => `${s.title} (${s.issuer}, ${s.window}) — ${s.note}`).join(' ')}`,
+  text: `Competitive program selections: ${SELECTIONS.map((s) => `${s.title} (${s.issuer}, ${s.window}) — ${s.note}`).join(' ')}`,
 });
 
 /* --- skills --------------------------------------------------------------- */
@@ -220,12 +222,12 @@ chunks.push({
     `She was also selected for Franklin County CDC's Spring 2026 Entrepreneurs Accelerator Program.`,
 });
 
-/* --- modelling ------------------------------------------------------------ */
+/* --- modeling ------------------------------------------------------------ */
 
 chunks.push({
-  id: 'modelling',
-  title: 'Modelling',
-  tags: ['model', 'modelling', 'modeling', 'editorial', 'runway', 'campaign', 'fashion', 'shoot', 'digitals'],
+  id: 'modeling',
+  title: 'Modeling',
+  tags: ['model', 'modeling', 'modeling', 'editorial', 'runway', 'campaign', 'fashion', 'shoot', 'digitals'],
   text:
     `Alongside her technical work, Kinjal models — editorial, runway, and commercial. ` +
     `Her work includes a shoot at the Eric Carle Museum where fashion met illustration, which received press coverage. ` +
@@ -298,7 +300,7 @@ const SYNONYMS: Record<string, string[]> = {
   uni: ['university', 'college', 'education'],
   umass: ['massachusetts', 'amherst', 'cics'],
   vt: ['virginia', 'tech', 'blacksburg'],
-  photo: ['model', 'modelling', 'shoot', 'editorial'],
+  photo: ['model', 'modeling', 'shoot', 'editorial'],
   data: ['dataset', 'analysis', 'analytics', 'science'],
 };
 

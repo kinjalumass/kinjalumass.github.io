@@ -94,44 +94,44 @@ export interface PageMeta {
 export const PAGES: PageMeta[] = [
   {
     path: '',
-    title: 'Kinjal Pandey — Developer, Entrepreneur, Model',
+    title: 'Kinjal Pandey | Portfolio: Computer Science, AI, Ventures, Modeling',
     description:
-      'Kinjal Pandey is a computer science master’s student at UMass Amherst, a founder with two funded pitches, and a working model. Three disciplines, one page.',
+      'Official portfolio and personal website of Kinjal Pandey, a computer science master’s student at UMass Amherst and a Virginia Tech graduate. AI and machine learning research, six ventures, and a modeling portfolio.',
     image: 'img/model/carle/carle-01.jpg',
     priority: 1.0,
   },
   {
     path: 'developer',
-    title: 'Kinjal Pandey — AI Researcher and Software Engineer',
+    title: 'Kinjal Pandey | AI Researcher, Data Scientist, Software Engineer',
     description:
-      'Machine learning, privacy and cryptography work by Kinjal Pandey — published research on sanitising chain-of-thought, and civic data science with the Boston Cyclists Union.',
+      'The computer science work of Kinjal Pandey at UMass Amherst: machine learning, privacy, security and responsible AI, published research on sanitizing chain-of-thought, and civic data science for the Boston Cyclists Union.',
     image: 'img/bcu/cohort-stairs.jpg',
     priority: 0.9,
   },
   {
     path: 'developer/education',
-    title: 'Education — Kinjal Pandey',
+    title: 'Kinjal Pandey | Education: UMass Amherst MSCS, Virginia Tech BS',
     description:
-      'M.S. Computer Science at UMass Amherst and a B.S. from Virginia Tech finished a year early, with the full coursework behind each degree.',
+      'Kinjal Pandey studies MS Computer Science at the Manning College of Information and Computer Sciences, UMass Amherst, after a B.S. in Computer Science with a Mathematics minor from Virginia Tech, finished a year early.',
     priority: 0.6,
   },
   {
     path: 'developer/experience',
-    title: 'Experience — Kinjal Pandey',
+    title: 'Kinjal Pandey | Experience: Research, Data Science, Consulting',
     description:
-      'Research, consulting and ambassadorships — UMass Center for Data Science, the Commonwealth Cyber Initiative, Microsoft, IBM and Google.',
+      'Sixteen roles across research, applied data science, consulting and technology leadership: the UMass Center for Data Science and AI, the Commonwealth Cyber Initiative, and student ambassadorships with Google, Microsoft and IBM.',
     priority: 0.7,
   },
   {
     path: 'developer/projects',
-    title: 'Projects — Kinjal Pandey',
+    title: 'Kinjal Pandey | Projects: AI, Data Science, Security, Open Source',
     description:
-      'Research and open-source work by Kinjal Pandey, including the Chain-of-Sanitized-Thoughts paper (arXiv:2601.05076) and projects pulled live from GitHub.',
+      'Technical projects by Kinjal Pandey across AI, data science, software engineering and security, including the Chain-of-Sanitized-Thoughts paper (arXiv:2601.05076) and repositories pulled live from GitHub.',
     priority: 0.7,
   },
   {
     path: 'developer/projects/bcu',
-    title: 'Bicycle Accessibility & Equity in Greater Boston — Kinjal Pandey',
+    title: 'Kinjal Pandey | Bicycle Accessibility and Equity in Greater Boston',
     description:
       'Graph analysis across 96,232 nodes and 929,540 residents for the Boston Cyclists Union. Five case studies, each linked to its merged pull request.',
     image: 'img/bcu/cohort-stairs.jpg',
@@ -139,23 +139,24 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: 'developer/honors',
-    title: 'Honors & Awards — Kinjal Pandey',
+    title: 'Kinjal Pandey | Honors, Awards, Scholarships and Recognition',
     description:
-      'Scholarships, competitive selections and three funded startup pitch wins at UMass Amherst and Virginia Tech.',
+      'Research publications, academic honors, scholarships and selective programs recognizing Kinjal Pandey at UMass Amherst and Virginia Tech, including three funded startup pitch wins.',
     image: 'img/honors/scholarship-backdrop.jpg',
     priority: 0.6,
   },
   {
     path: 'developer/resume',
-    title: 'Résumé — Kinjal Pandey',
+    title: 'Kinjal Pandey | Résumé: AI/ML, Software Engineering, Data Science',
     description:
-      'Three résumés from Kinjal Pandey — AI and machine learning, software engineering, and data science. Preview or download.',
+      'Download the résumé of Kinjal Pandey, computer science master’s student at UMass Amherst, in role-focused versions for AI and machine learning, software engineering, and data science.',
     priority: 0.6,
   },
   {
     path: 'developer/contact',
-    title: 'Contact — Kinjal Pandey',
-    description: 'How to reach Kinjal Pandey, and what she is currently open to.',
+    title: 'Kinjal Pandey | Contact',
+    description:
+      'Contact Kinjal Pandey in Amherst, Massachusetts about technology and AI roles anywhere in the United States, research collaborations, ventures, and modeling work.',
     priority: 0.5,
   },
   {
@@ -169,9 +170,9 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: 'model',
-    title: 'Kinjal Pandey — Modelling Portfolio',
+    title: 'Kinjal Pandey | Modeling Portfolio: Editorial, Runway, Beauty',
     description:
-      'Editorial, runway and concept work by Kinjal Pandey. Eight shoots, based in Amherst, Massachusetts and available across New England and New York.',
+      'The modeling portfolio of Kinjal Pandey, a fashion and editorial model based in Amherst, Massachusetts and available across New England, Boston and New York. Shoots at the Eric Carle Museum and the New England Peace Pagoda, plus digitals and beauty work.',
     image: 'img/model/carle/carle-01.jpg',
     priority: 0.9,
   },

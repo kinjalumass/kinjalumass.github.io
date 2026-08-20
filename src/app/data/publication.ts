@@ -38,10 +38,10 @@ export const PUBLICATION: Publication = {
   ],
   self: 'Kinjal Pandey',
   abstract:
-    'A reasoning model can answer carefully and still give the private data away in its working. The chain-of-thought is treated as scratch space, so it leaks the personal information the final answer was written to protect. This work sanitises the reasoning trace itself — without breaking the reasoning that depends on it.',
+    'A reasoning model can answer carefully and still give the private data away in its working. The chain-of-thought is treated as scratch space, so it leaks the personal information the final answer was written to protect. This work sanitizes the reasoning trace itself, without breaking the reasoning that depends on it.',
   contributions: [
     'Contributed to PII-CoT-Bench, the benchmark used to measure how much personal information a reasoning trace exposes.',
-    'The same question approached from the defence side that MediaTagger approaches from the attack side: what a model reveals about data it was never meant to repeat.',
+    'The same question approached from the defense side that MediaTagger approaches from the attack side: what a model reveals about data it was never meant to repeat.',
   ],
   topics: ['Privacy', 'LLM reasoning', 'PII', 'Benchmarking'],
 };

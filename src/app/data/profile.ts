@@ -16,7 +16,7 @@ import { Asset, cert, photo } from './assets';
 
    Virginia Tech publishes per-subject catalog pages, so a CS course links
    to the CS listing, a MATH course to the MATH listing, and so on.
-   UMass has no stable public per-course page — SPIRE needs a login — so
+   UMass has no stable public per-course page (SPIRE needs a login) so
    graduate courses link to the CICS course listing, which carries the
    current descriptions.
    --------------------------------------------------------------- */
@@ -78,11 +78,11 @@ export const DEGREES: Degree[] = [
     school: 'University of Massachusetts Amherst',
     credential: 'M.S. Computer Science',
     detail: 'Manning College of Information and Computer Sciences',
-    window: 'Aug 2025 — present',
+    window: 'Aug 2025 to present',
     place: 'Amherst, MA',
     logo: 'img/logos/umass.png',
     notes: [
-      'Concentration in field experience — coursework paired with applied placements.',
+      'Concentration in field experience, coursework paired with applied placements.',
       'Focus on secure, transparent, and socially responsible computing systems.',
       'Selected for the CICS Open-Source Apprenticeship and the Center for Data Science and AI.',
     ],
@@ -118,7 +118,7 @@ export const DEGREES: Degree[] = [
     school: 'Virginia Tech',
     credential: 'B.S. Computer Science',
     detail: 'Minor in Mathematics',
-    window: 'Graduated Jun 2022 — early',
+    window: 'Graduated Jun 2022, a year early',
     place: 'Blacksburg, VA',
     logo: 'img/logos/virginia-tech.png',
     notes: [
@@ -184,7 +184,7 @@ export interface Certification {
   issued?: string;
   /**
    * Basename of the certificate in `public/docs/certificates/`, without the
-   * extension. Absent means the document could not be retrieved — see the
+   * extension. Absent means the document could not be retrieved, see the
    * note beside the Microsoft Learn and IBM entries below.
    */
   slug?: string;
@@ -275,7 +275,7 @@ export const CERTIFICATIONS: Certification[] = [
   { name: 'Fundamental AI Concepts', issuer: 'Microsoft Learn' },
   { name: 'Introduction to natural language processing concepts', issuer: 'Microsoft Learn' },
   { name: 'Explore and analyze data with Python', issuer: 'Microsoft Learn' },
-  { name: 'Concepts — IBM Z Xplore', issuer: 'IBM' },
+  { name: 'Concepts: IBM Z Xplore', issuer: 'IBM' },
 ];
 
 /** Full document, for the ones that have one. */
@@ -295,7 +295,7 @@ export function certThumb(c: Certification): string | null {
 export interface Role {
   org: string;
   /**
-   * The organisation's own website. Verified individually — a dead link on a
+   * The organization's own website. Verified individually — a dead link on a
    * CV is worse than no link. See ORG_SITES below for the notes.
    */
   url?: string;
@@ -313,8 +313,8 @@ export const ROLES: Role[] = [
   {
     org: 'Manning College of Information and Computer Sciences, UMass Amherst',
     url: 'https://www.cics.umass.edu',
-    title: 'Course Grader — COMPSCI 684, Trustworthy & Responsible AI',
-    window: 'Aug 2026 — present',
+    title: 'Course Grader: COMPSCI 684, Trustworthy & Responsible AI',
+    window: 'Aug 2026 to present',
     place: 'Amherst, MA',
     kind: 'Applied',
     bullets: [
@@ -327,7 +327,7 @@ export const ROLES: Role[] = [
     org: 'Manning College of Information and Computer Sciences, UMass Amherst',
     url: 'https://www.cics.umass.edu',
     title: 'Open-Source Apprentice',
-    window: 'Jun 2026 — Aug 2026',
+    window: 'Jun 2026 to Aug 2026',
     place: 'Amherst, MA',
     kind: 'Applied',
     bullets: [
@@ -340,7 +340,7 @@ export const ROLES: Role[] = [
     org: 'UMass Amherst Center for Data Science and Artificial Intelligence',
     url: 'https://ds.cs.umass.edu',
     title: 'Data Scientist',
-    window: 'May 2026 — Aug 2026',
+    window: 'May 2026 to Aug 2026',
     place: 'Amherst, MA',
     kind: 'Applied',
     bullets: [
@@ -354,11 +354,11 @@ export const ROLES: Role[] = [
     org: 'Steve Fisher Consulting',
     url: 'https://stevefisherconsulting.com',
     title: 'Technology Consultant',
-    window: 'May 2025 — Sep 2025',
+    window: 'May 2025 to Sep 2025',
     place: 'San Diego, CA',
     kind: 'Industry',
     bullets: [
-      'Designed and built technology to modernise document-heavy legal workflows, including a secure litigation-document platform with structured storage, metadata organisation, and search.',
+      'Designed and built technology to modernise document-heavy legal workflows, including a secure litigation-document platform with structured storage, metadata organization, and search.',
       'Implemented role-based access controls, audit logging, and secure document processing to handle sensitive legal information.',
       'Worked directly with the stakeholder to map existing workflows and refine features iteratively through testing and feedback.',
     ],
@@ -367,7 +367,7 @@ export const ROLES: Role[] = [
     org: 'SkyIT Services, a subsidiary of GBCS Group',
     url: 'https://skyit.services',
     title: 'Backend Developer Intern',
-    window: 'Feb 2024 — Dec 2024',
+    window: 'Feb 2024 to Dec 2024',
     place: 'Remote',
     kind: 'Industry',
     bullets: [
@@ -380,11 +380,11 @@ export const ROLES: Role[] = [
     org: 'Simple Coaching Inc.',
     url: 'https://www.simplecoachinginc.com',
     title: 'Digital Solutions Consultant',
-    window: 'Mar 2025 — May 2025',
+    window: 'Mar 2025 to May 2025',
     place: 'Remote',
     kind: 'Industry',
     bullets: [
-      'Designed and built the company website, giving its coaching services, programmes and events a more professional and organised presence.',
+      'Designed and built the company website, giving its coaching services, programs and events a more professional and organized presence.',
       'Worked directly with the business owner to improve the customer experience and use technology to support day-to-day operations.',
       'Refined the site and its digital workflows iteratively on stakeholder feedback, combining web development, UX and business problem-solving.',
     ],
@@ -393,7 +393,7 @@ export const ROLES: Role[] = [
     org: 'Franklin County Community Development Corporation',
     url: 'https://www.fccdc.org',
     title: 'Entrepreneurs Accelerator Program Participant',
-    window: 'Mar 2026 — May 2026',
+    window: 'Mar 2026 to May 2026',
     place: 'Greenfield, MA',
     kind: 'Leadership',
     bullets: [
@@ -406,7 +406,7 @@ export const ROLES: Role[] = [
     org: 'Microsoft',
     url: 'https://mvp.microsoft.com/studentambassadors',
     title: 'Microsoft Learn Student Ambassador',
-    window: 'Jan 2024 — Dec 2024',
+    window: 'Jan 2024 to Dec 2024',
     place: 'Blacksburg, VA',
     kind: 'Advocacy',
     bullets: [
@@ -419,7 +419,7 @@ export const ROLES: Role[] = [
     org: 'Virginia Tech',
     url: 'https://www.vt.edu',
     title: 'Student Leader',
-    window: 'Aug 2024 — Dec 2024',
+    window: 'Aug 2024 to Dec 2024',
     place: 'Blacksburg, VA',
     kind: 'Leadership',
     bullets: [
@@ -432,11 +432,11 @@ export const ROLES: Role[] = [
     org: 'CodSoft',
     url: 'https://www.codsoft.in',
     title: 'AI Intern',
-    window: 'Jan 2024 — Feb 2024',
+    window: 'Jan 2024 to Feb 2024',
     place: 'Remote',
     kind: 'Industry',
     bullets: [
-      'Explored core AI domains — NLP, computer vision, and neural networks — by building small projects applying algorithms to real use cases.',
+      'Explored core AI domains (NLP, computer vision, and neural networks) by building small projects applying algorithms to real use cases.',
       'Moved from theory to practice on each project, strengthening applied implementation skills.',
       'Collaborated in a remote team while documenting progress publicly on GitHub.',
     ],
@@ -445,7 +445,7 @@ export const ROLES: Role[] = [
     org: 'IBM',
     url: 'https://www.ibm.com/z',
     title: 'Z Student Ambassador',
-    window: 'Nov 2023 — Jun 2024',
+    window: 'Nov 2023 to Jun 2024',
     place: 'Blacksburg, VA',
     kind: 'Advocacy',
     bullets: [
@@ -458,7 +458,7 @@ export const ROLES: Role[] = [
     org: 'Google Developer Student Club, Virginia Tech',
     url: 'https://gdg.community.dev',
     title: 'Team Leader',
-    window: 'Oct 2023 — Jun 2024',
+    window: 'Oct 2023 to Jun 2024',
     place: 'Blacksburg, VA',
     kind: 'Advocacy',
     bullets: [
@@ -471,7 +471,7 @@ export const ROLES: Role[] = [
     org: 'Virginia Tech',
     url: 'https://www.vt.edu',
     title: 'Peer Mentor',
-    window: 'Jul 2023 — Aug 2024',
+    window: 'Jul 2023 to Aug 2024',
     place: 'Blacksburg, VA',
     kind: 'Leadership',
     bullets: [
@@ -484,7 +484,7 @@ export const ROLES: Role[] = [
     org: 'Commonwealth Cyber Initiative, Southwest Virginia',
     url: 'https://cyberinitiative-swva.org',
     title: 'Coding & Cryptography Researcher',
-    window: 'Oct 2023 — Jan 2024',
+    window: 'Oct 2023 to Jan 2024',
     place: 'Blacksburg, VA',
     kind: 'Research',
     bullets: [
@@ -497,7 +497,7 @@ export const ROLES: Role[] = [
     org: 'VT Center for the Enhancement of Engineering Diversity',
     url: 'https://eng.vt.edu/ceed.html',
     title: 'Upper Class Leader, Design Challenge Team',
-    window: 'Aug 2023 — Oct 2023',
+    window: 'Aug 2023 to Oct 2023',
     place: 'Blacksburg, VA',
     kind: 'Leadership',
     bullets: [
@@ -510,7 +510,7 @@ export const ROLES: Role[] = [
     org: 'VT Center for the Enhancement of Engineering Diversity',
     url: 'https://eng.vt.edu/ceed.html',
     title: 'Member',
-    window: 'Aug 2022 — Jul 2023',
+    window: 'Aug 2022 to Jul 2023',
     place: 'Blacksburg, VA',
     kind: 'Leadership',
     bullets: [
@@ -562,7 +562,7 @@ export const PROJECTS: Project[] = [
     index: '02',
     name: 'Boston Cyclists Union analysis',
     kind: 'Applied data science',
-    context: 'UMass Center for Data Science and AI — Data Science for the Common Good',
+    context: 'UMass Center for Data Science and AI: Data Science for the Common Good',
     window: '2026',
     summary:
       'Data work supporting safer, more accessible, and more equitable biking infrastructure across Boston.',
@@ -578,7 +578,7 @@ export const PROJECTS: Project[] = [
     name: 'Anomaly detection & secure pipelines',
     kind: 'Research',
     context: 'Commonwealth Cyber Initiative, Southwest Virginia',
-    window: '2023 — 2024',
+    window: '2023 to 2024',
     summary:
       'Applied research at the seam between cryptography and machine learning, on data that cannot afford to leak.',
     bullets: [
@@ -595,7 +595,7 @@ export const PROJECTS: Project[] = [
     context: 'VT Center for the Enhancement of Engineering Diversity',
     window: '2023',
     summary:
-      'A machine-learning prototype that recommended tasks and schedules to students — covered in the press as an AI productivity tool built by a student, for students.',
+      'A machine-learning prototype that recommended tasks and schedules to students, covered in the press as an AI productivity tool built by a student, for students.',
     bullets: [
       'Co-led the prototype from concept through working demonstration.',
       'Applied recommendation approaches to the specific shape of student schedules.',
@@ -623,7 +623,7 @@ export const PROJECTS: Project[] = [
     name: 'Open-source contributions',
     kind: 'Engineering',
     context: 'UMass CICS Open-Source Apprenticeship',
-    window: '2026 — present',
+    window: '2026 to present',
     summary:
       'Mentor-guided contribution to established open-source projects, with the engineering practice around it treated as part of the work.',
     bullets: [
@@ -638,7 +638,7 @@ export const PROJECTS: Project[] = [
     name: 'Workshop & starter-kit library',
     kind: 'Teaching',
     context: 'Microsoft Learn · IBM Z · Google DSC',
-    window: '2023 — 2024',
+    window: '2023 to 2024',
     summary:
       'Reusable teaching material built so the workshops would outlive the sessions that introduced them.',
     bullets: [
@@ -665,10 +665,10 @@ export interface Honor {
 
 export const HONORS: Honor[] = [
   /* The two pitch wins. Every detail here is read off the presentation
-     cheque in the photograph — centre, amount and date. The CalendAI cheque
+     cheque in the photograph, center, amount and date. The CalendAI cheque
      names no competition, so none is claimed. */
   {
-    title: 'Karnah — second place, $750',
+    title: 'Karnah: second place, $750',
     issuer: 'UPitch Spring 2026 · UMass Amherst Entrepreneurship Club',
     window: 'Apr 2026',
     note:
@@ -676,14 +676,14 @@ export const HONORS: Honor[] = [
     weight: 'major',
   },
   {
-    title: 'CalendAI — $500 award',
+    title: 'CalendAI: $500 award',
     issuer: 'Apex Center for Entrepreneurs · Pamplin College of Business, Virginia Tech',
     window: 'Nov 2024',
     note: 'Awarded to CalendAI, the machine-learning smart calendar built for students.',
     weight: 'major',
   },
   {
-    title: 'Trendify AI — Minute Pitch winner, $300',
+    title: 'Trendify AI: Minute Pitch winner, $300',
     issuer: 'Berthiaume Center for Entrepreneurship · Isenberg School of Management, UMass Amherst',
     window: 'Oct 2025',
     note: 'First place in the Minute Pitch competition.',
@@ -692,33 +692,33 @@ export const HONORS: Honor[] = [
   {
     title: "Dean's List with Distinction",
     issuer: 'Virginia Tech',
-    window: '—',
-    note: 'Academic distinction across qualifying terms.',
+    window: 'Multiple terms',
+    note: 'Awarded for academic distinction across qualifying terms at Virginia Tech.',
     weight: 'major',
   },
   {
     title: 'Undergraduate Research Excellence Program',
     issuer: 'Virginia Tech',
-    window: '—',
-    note: 'Member, recognising sustained undergraduate research contribution.',
+    window: 'Member',
+    note: 'Member of the program recognizing sustained undergraduate research contribution.',
   },
   {
     title: "Buzz's Bunch Scholarship Award",
-    issuer: 'Scholarship',
-    window: '2024 — 25',
-    note: 'Award winner.',
+    issuer: 'Virginia Tech',
+    window: '2024 to 2025',
+    note: 'Scholarship award winner for the 2024 to 2025 academic year.',
   },
   {
     title: 'Student Affairs Scholarship',
     issuer: 'Virginia Tech',
     window: '2024',
-    note: 'Scholarship winner.',
+    note: 'Scholarship winner, 2024.',
   },
   {
     title: 'Virginia Pell Initiative Grant',
     issuer: 'Commonwealth of Virginia',
-    window: '—',
-    note: 'Grant recipient.',
+    window: 'Grant',
+    note: 'Grant recipient, supporting undergraduate study in Virginia.',
   },
 ];
 
@@ -727,7 +727,7 @@ export interface Selection {
   issuer: string;
   window: string;
   note: string;
-  /** The programme's own page. Each one verified individually. */
+  /** The program's own page. Each one verified individually. */
   url?: string;
 }
 
@@ -752,9 +752,16 @@ export const SELECTIONS: Selection[] = [
     issuer: 'Franklin County CDC',
     window: 'Spring 2026',
     note: 'Selected for the accelerator supporting early-stage ventures.',
-    // The accelerator sits inside the FCCDC's UPstart programme, not the
+    // The accelerator sits inside the FCCDC's UPstart program, not the
     // generic business-development page.
     url: 'https://www.fccdc.org/upstart-program/',
+  },
+  {
+    title: 'Grace Hopper Celebration',
+    issuer: 'AnitaB.org',
+    window: '2026',
+    note: 'Selected to attend the largest gathering of women and non-binary technologists in the world.',
+    url: 'https://ghc.anitab.org/',
   },
 ];
 
@@ -776,7 +783,7 @@ export const CHANNELS: Channel[] = [
     label: 'Email',
     value: 'kinjalpandey18@gmail.com',
     href: 'mailto:kinjalpandey18@gmail.com',
-    note: 'Best for anything substantive — roles, research, collaboration.',
+    note: 'Best for anything substantive, roles, research, collaboration.',
   },
   {
     key: 'linkedin',
@@ -826,7 +833,7 @@ export const HONOR_PLATES: HonorPlate[] = [
   {
     src: 'img/honors/scholarship-backdrop.jpg',
     alt: 'Kinjal Pandey at a Virginia Tech scholarship recognition event, photographed against the Inn at Virginia Tech backdrop',
-    caption: 'Scholarship recognition — The Inn at Virginia Tech and Skelton Conference Center.',
+    caption: 'Scholarship recognition, The Inn at Virginia Tech and Skelton Conference Center.',
   },
   {
     src: 'img/honors/scholarship-dinner.jpg',

@@ -1,12 +1,117 @@
 <div class="dev-page">
   <header class="dev-head">
-    <span class="dev-eyebrow">// 06 — contact</span>
+    <span class="dev-eyebrow">// 06: contact</span>
     <h1 class="dev-title">Contact</h1>
     <p class="dev-lede">
-      No form, no middleman. Every channel below goes straight to her — pick whichever
-      suits what you want to say.
+      Send a message below, or use whichever channel suits what you want to say. Every
+      one of them goes straight to her.
     </p>
   </header>
+
+
+  <!-- Always rendered: it degrades to a composed mailto, never to nothing. -->
+    <section class="dev-section">
+      <span class="dev-label">// send a message</span>
+
+      <form class="form" (submit)="send($event)" novalidate>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Name</span>
+            <input
+              class="field__input"
+              type="text"
+              name="name"
+              autocomplete="name"
+              [value]="name()"
+              (input)="set('name', $event)"
+              [attr.aria-invalid]="touched() && errors().name ? 'true' : null"
+            />
+            @if (touched() && errors().name) {
+              <span class="field__error">{{ errors().name }}</span>
+            }
+          </label>
+
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input
+              class="field__input"
+              type="email"
+              name="email"
+              autocomplete="email"
+              [value]="email()"
+              (input)="set('email', $event)"
+              [attr.aria-invalid]="touched() && errors().email ? 'true' : null"
+            />
+            @if (touched() && errors().email) {
+              <span class="field__error">{{ errors().email }}</span>
+            }
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="field__label">Subject <span class="field__hint">optional</span></span>
+          <input
+            class="field__input"
+            type="text"
+            name="subject"
+            [value]="subject()"
+            (input)="set('subject', $event)"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field__label">Message</span>
+          <textarea
+            class="field__input field__input--area"
+            name="message"
+            rows="6"
+            [value]="message()"
+            (input)="set('message', $event)"
+            [attr.aria-invalid]="touched() && errors().message ? 'true' : null"
+          ></textarea>
+          @if (touched() && errors().message) {
+            <span class="field__error">{{ errors().message }}</span>
+          }
+        </label>
+
+        <!-- Honeypot: hidden from people, filled in by bots. -->
+        <label class="field field--trap" aria-hidden="true">
+          <span>Company</span>
+          <input type="text" name="company" tabindex="-1" autocomplete="off"
+                 [value]="company()" (input)="set('company', $event)" />
+        </label>
+
+        <div class="form__foot">
+          <button class="form__send" type="submit" [disabled]="state() === 'sending'">
+            @switch (state()) {
+              @case ('sending') { sending… }
+              @case ('sent') { sent ✓ }
+              @case ('handoff') { opened in your email app }
+              @default { send message }
+            }
+          </button>
+
+          @if (state() === 'sent') {
+            <p class="form__msg form__msg--ok" role="status">
+              Thank you. That is on its way, and she usually replies within a couple of days.
+            </p>
+          }
+          @if (state() === 'handoff') {
+            <p class="form__msg form__msg--ok" role="status">
+              Your email app should have opened with this message ready to send. If it did not,
+              write to kinjalpandey18&#64;gmail.com.
+            </p>
+          }
+          @if (state() === 'error') {
+            <p class="form__msg form__msg--bad" role="alert">
+              That did not send.
+              <a [href]="mailtoFallback()">Open it in your email app instead</a>, or write to
+              kinjalpandey18&#64;gmail.com.
+            </p>
+          }
+        </div>
+      </form>
+    </section>
 
   <section class="dev-section">
     <span class="dev-label">// channels</span>

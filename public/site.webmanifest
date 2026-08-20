@@ -1,16 +1,38 @@
 {
  "name": "Kinjal Pandey",
  "short_name": "Kinjal Pandey",
- "description": "Developer, entrepreneur, model.",
+ "description": "Kinjal Pandey: AI and computer science portfolio, ventures, and modeling work.",
  "start_url": "/",
  "display": "standalone",
  "background_color": "#08080a",
  "theme_color": "#08080a",
  "icons": [
   {
+   "src": "favicon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  },
+  {
    "src": "favicon.ico",
    "sizes": "48x48",
    "type": "image/x-icon"
+  },
+  {
+   "src": "apple-touch-icon.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
   }
  ]
 }

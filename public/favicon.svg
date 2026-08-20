@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="K">
+  <!-- Kinjal Pandey monogram. Geometry matches the raster icons exactly:
+       stem plus two arms that start inside the stem so the junction fuses
+       rather than notching at small sizes. -->
+  <rect width="512" height="512" rx="116" fill="#06080A"/>
+  <g stroke="#F2EFE9" stroke-width="64" fill="none">
+    <line x1="172" y1="268" x2="368" y2="122"/>
+    <line x1="172" y1="244" x2="368" y2="390"/>
+  </g>
+  <rect x="128" y="116" width="66" height="280" rx="6" fill="#F2EFE9"/>
+</svg>

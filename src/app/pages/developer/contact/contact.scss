@@ -154,3 +154,121 @@
   .channel__note { grid-column: 1; }
   .channel__arrow { grid-column: 2; grid-row: 1; }
 }
+
+/* ===========================================================
+   Contact form
+   =========================================================== */
+
+.form {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 46rem;
+  margin-top: 1.5rem;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field__label {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-faint);
+}
+
+.field__hint {
+  margin-left: 0.4rem;
+  opacity: 0.55;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.field__input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(var(--signal), 0.18);
+  border-radius: 2px;
+  color: var(--bone);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  transition: border-color 0.25s, background 0.25s;
+
+  &::placeholder { color: rgba(255, 255, 255, 0.25); }
+
+  &:focus-visible {
+    outline: none;
+    border-color: rgba(var(--signal), 0.6);
+    background: rgba(var(--signal), 0.04);
+  }
+
+  &[aria-invalid='true'] { border-color: rgba(255, 122, 122, 0.55); }
+}
+
+.field__input--area {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.field__error {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: rgb(255, 138, 138);
+}
+
+/* Off-screen rather than display:none, because some bots skip hidden inputs. */
+.field--trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form__send {
+  padding: 0.65rem 1.5rem;
+  border: 1px solid rgba(var(--signal), 0.5);
+  background: rgba(var(--signal), 0.08);
+  color: rgb(var(--signal));
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+
+  &:hover:not(:disabled) {
+    background: rgba(var(--signal), 0.16);
+    border-color: rgba(var(--signal), 0.8);
+  }
+
+  &:disabled { opacity: 0.55; cursor: default; }
+}
+
+.form__msg {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+
+  a { color: rgb(var(--signal)); }
+}
+
+.form__msg--ok  { color: var(--bone); }
+.form__msg--bad { color: rgb(255, 150, 150); }

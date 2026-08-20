@@ -14,7 +14,7 @@
 }
 
 /* ===========================================================
-   Atmosphere — soft colour washes on paper
+   Atmosphere — soft color washes on paper
    =========================================================== */
 
 .sky {
@@ -29,7 +29,7 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
-  /* screen keeps the colour luminous against the near-black base */
+  /* screen keeps the color luminous against the near-black base */
   mix-blend-mode: screen;
   opacity: 0.5;
   will-change: transform;
@@ -191,7 +191,7 @@
 }
 
 /* ===========================================================
-   Footer — a solid colour block, deliberately loud
+   Footer — a solid color block, deliberately loud
    =========================================================== */
 
 .foot {

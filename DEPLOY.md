@@ -349,6 +349,29 @@ Google treats the set as one verified person.
 
 ---
 
+## Turning on the contact form
+
+The form on the contact page works today: it composes the message and hands it
+to the visitor's email app. To make it send in place without leaving the site,
+connect EmailJS. Free for 200 emails a month, about ten minutes.
+
+1. Sign up at <https://www.emailjs.com> and add an Email Service. Gmail works;
+   connect `kinjalpandey18@gmail.com`. Copy the **Service ID**.
+2. Create an Email Template. Use exactly these variables, because they are what
+   the form sends: `{{from_name}}`, `{{from_email}}`, `{{subject}}`,
+   `{{message}}`. Set the template's **Reply To** to `{{from_email}}` so
+   replying reaches the sender. Copy the **Template ID**.
+3. Account then General: copy the **Public Key**.
+4. Account then Security: turn **off** "Allow EmailJS API for non-browser
+   applications", and add `kinjalpandey.com` to the allowed origins. That is
+   what stops anyone reusing these IDs from another site.
+5. Paste all three into `src/app/data/emailjs.config.ts`, then commit and push.
+
+The public key is meant to be public, so committing it is fine. The domain
+restriction in step 4 is what actually protects it, and `api.emailjs.com` is
+already allowlisted in the site's CSP.
+
+
 ## Making changes from here
 
 ```powershell

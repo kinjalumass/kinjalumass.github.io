@@ -10,7 +10,7 @@
   </header>
 
   <!-- ========================================================
-       Overture — the name, one frame, nothing else
+       Overture: the name, one frame, nothing else
        ======================================================== -->
   <section class="overture">
     <div class="overture__type">
@@ -38,7 +38,7 @@
   </section>
 
   <!-- ========================================================
-       Spec — stats and digitals side by side on a colour block
+       Spec: stats and digitals side by side on a color block
        ======================================================== -->
   <section class="spec">
     <div class="spec__inner">
@@ -82,7 +82,7 @@
   </section>
 
   <!-- ========================================================
-       The book — six shoots, expandable
+       The book: six shoots, expandable
        ======================================================== -->
   <section class="book">
     <header class="book__head">
@@ -109,7 +109,7 @@
               <img
                 [src]="src"
                 [style.object-position]="focusOf(src)"
-                [alt]="shoot.title + ' — frame ' + (i + 1)"
+                [alt]="shoot.title + ': frame ' + (i + 1)"
                 loading="lazy"
               />
               <figcaption class="plate__n">{{ i + 1 < 10 ? '0' : '' }}{{ i + 1 }}</figcaption>
@@ -133,7 +133,7 @@
   </section>
 
   <!-- ========================================================
-       Booking — the loud one
+       Booking: the loud one
        ======================================================== -->
   <footer class="holler">
     <span class="holler__eyebrow">{{ booking.line }}</span>

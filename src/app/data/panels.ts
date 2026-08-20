@@ -40,7 +40,7 @@ export const PANELS: Panel[] = [
     title: 'Developer',
     kicker: "Master's in Computer Science",
     blurb:
-      'I build software that has to hold up under real use — not just demos. ' +
+      'I build software that has to hold up under real use, not just demos. ' +
       'Currently deep in a CS master’s, splitting time between coursework, research, and shipping things people actually touch.',
     focus: [
       'Master of Science, Computer Science',
@@ -85,7 +85,7 @@ export const PANELS: Panel[] = [
     kicker: 'Editorial · Runway · Campaign',
     blurb:
       'Work in front of the camera, treated with the same rigour as everything else. ' +
-      'Editorial, runway, and commercial — collaborative, direction-friendly, and comfortable on a long shoot day.',
+      'Editorial, runway, and commercial, collaborative, direction-friendly, and comfortable on a long shoot day.',
     focus: [
       'Editorial and lookbook shoots',
       'Runway and live presentation',

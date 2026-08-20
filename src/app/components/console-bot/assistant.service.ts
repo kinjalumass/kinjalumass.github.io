@@ -16,7 +16,7 @@ export interface Reply {
 
 /**
  * Talks to the assistant Worker, and falls back to the offline knowledge base
- * whenever that isn't possible — no endpoint configured, network down, daily
+ * whenever that isn't possible, no endpoint configured, network down, daily
  * allocation spent, or a slow response.
  */
 @Injectable({ providedIn: 'root' })
@@ -69,7 +69,7 @@ export class AssistantService {
       });
 
       if (!response.ok) {
-        // Surface what the Worker actually said — "HTTP 503" alone is useless.
+        // Surface what the Worker actually said, "HTTP 503" alone is useless.
         let detail = '';
         try {
           const body = await response.json();
@@ -77,7 +77,7 @@ export class AssistantService {
         } catch {
           /* body wasn't JSON */
         }
-        throw new Error(`HTTP ${response.status}${detail ? ` — ${detail}` : ''}`);
+        throw new Error(`HTTP ${response.status}${detail ? `, ${detail}` : ''}`);
       }
       if (!response.body) throw new Error('Empty response body');
 
@@ -134,7 +134,7 @@ export class AssistantService {
       ? match.entry.answer
       : [
           "That one isn't in my notes.",
-          'Try asking about her research, education, current work, projects, technical stack, awards, or how to get in touch — or type `help` for the full list.',
+          'Try asking about her research, education, current work, projects, technical stack, awards, or how to get in touch, or type `help` for the full list.',
         ];
 
     // Typed out so the offline path feels like the live one.

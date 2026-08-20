@@ -11,7 +11,7 @@ import { NodeField } from '../../components/node-field/node-field';
 import { BCU } from '../../data/bcu';
 import { HERO, INTRO, LINKS, SECTIONS } from '../../data/developer';
 
-const GLYPHS = '!<>-_\\/[]{}—=+*^?#________';
+const GLYPHS = '!<>-_\\/[]{}, =+*^?#________';
 
 @Component({
   selector: 'app-developer',
@@ -108,7 +108,7 @@ export class Developer implements OnDestroy {
     el.style.setProperty('--my', `${y.toFixed(1)}%`);
   }
 
-  /** Parks the highlight back in the centre so the fade-out looks even. */
+  /** Parks the highlight back in the center so the fade-out looks even. */
   protected onCardLeave(event: PointerEvent): void {
     const el = event.currentTarget as HTMLElement | null;
     if (!el) return;

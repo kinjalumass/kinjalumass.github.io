@@ -2,10 +2,10 @@
  * Pitch photography and competition wins.
  *
  * Every fact below is read directly off the presentation cheques in the
- * photographs — the issuing centre, the amount, the date, and in Trendify's
+ * photographs — the issuing center, the amount, the date, and in Trendify's
  * case the competition name. Nothing here is inferred.
  *
- * The CalendAI cheque does not name a competition, only the awarding centre,
+ * The CalendAI cheque does not name a competition, only the awarding center,
  * so this does not claim one.
  */
 
@@ -20,13 +20,13 @@ export interface Award {
   ventureId: string;
   venture: string;
   amount: string;
-  /** e.g. "Second place" — omitted when the award was outright */
+  /** e.g. "Second place", omitted when the award was outright */
   placing?: string;
   /** Competition name, where the cheque states one */
   competition?: string;
   /** Co-founders credited on the award */
   withWhom?: { name: string; url?: string }[];
-  centre: string;
+  center: string;
   school: string;
   institution: string;
   /** ISO, for structured data */
@@ -43,7 +43,7 @@ export const AWARDS: Award[] = [
     amount: '$750',
     placing: 'Second place',
     competition: 'UPitch Spring 2026',
-    centre: 'UMass Amherst Entrepreneurship Club',
+    center: 'UMass Amherst Entrepreneurship Club',
     school: 'Sponsored by the Berthiaume Center for Entrepreneurship',
     institution: 'UMass Amherst',
     date: '2026-04-24',
@@ -58,7 +58,7 @@ export const AWARDS: Award[] = [
      * $1,000 cheque awarded to Pitchify, a different team. Karnah took second
      * at $750.
      *
-     * Horizontally, to the left half: Kinjal is second from left, so a centred
+     * Horizontally, to the left half: Kinjal is second from left, so a centered
      * crop made another team's founder the subject of her own award card.
      *
      * The crop lives in tools/rebuild-photos.py under CROPPED.
@@ -73,7 +73,7 @@ export const AWARDS: Award[] = [
     withWhom: [
       { name: 'Rishav Chakravarty', url: 'https://www.linkedin.com/in/rishav-dsc/' },
     ],
-    centre: 'Apex Center for Entrepreneurs',
+    center: 'Apex Center for Entrepreneurs',
     school: 'Pamplin College of Business',
     institution: 'Virginia Tech',
     date: '2024-11-06',
@@ -89,7 +89,7 @@ export const AWARDS: Award[] = [
       { name: 'Rishav Chakravarty', url: 'https://www.linkedin.com/in/rishav-dsc/' },
     ],
     competition: 'Minute Pitch',
-    centre: 'Berthiaume Center for Entrepreneurship',
+    center: 'Berthiaume Center for Entrepreneurship',
     school: 'Isenberg School of Management',
     institution: 'UMass Amherst',
     date: '2025-10-16',

@@ -46,6 +46,63 @@ export const SYNONYMS: Record<string, string[]> = {
 };
 
 export const ENTRIES: Entry[] = [
+  /* --- from the canonical knowledge base ---------------------------------- */
+  {
+    id: 'kb-graduation',
+    keywords: ['graduate', 'graduation', 'finish', 'when', 'done', 'degree', 'spring', '2027'],
+    question: 'When does she graduate?',
+    answer: ['Her expected M.S. graduation is Spring 2027.'],
+  },
+  {
+    id: 'kb-cat',
+    keywords: ['cat', 'pet', 'vasuki', 'animal'],
+    question: 'Does she have a pet?',
+    answer: ['Her cat is named Vasuki.'],
+  },
+  {
+    id: 'kb-hobbies',
+    keywords: ['hobby', 'hobbies', 'interest', 'outside', 'fun', 'free', 'time', 'personal', 'dance', 'dancing', 'volunteer'],
+    question: 'What does she do outside computer science?',
+    suggest: true,
+    answer: [
+      'She is passionate about modeling and entrepreneurship, and enjoys dancing, volunteering, spending time with her cat, and meeting people through technology clubs and communities.',
+    ],
+  },
+  {
+    id: 'kb-venture-stage',
+    keywords: ['launched', 'launch', 'live', 'available', 'download', 'app', 'use', 'stage', 'progress', 'traction', 'customer'],
+    question: 'Are the startups launched?',
+    suggest: true,
+    answer: [
+      'All of them are still in development, and their maturity varies. Karnah is at early ideation and design. CalendAI is at ideation to architecture. Trendify AI is at conceptual architecture. NutriNavigator is furthest along, between ideation and early prototyping, with wireframes, paper prototypes, a demo interface, and a survey of more than 70 potential users.',
+      'That survey number is potential users who responded, not active users. None of the ventures is a launched commercial product.',
+    ],
+  },
+  {
+    id: 'kb-investors',
+    keywords: ['investor', 'investment', 'funding', 'fundraising', 'raise', 'money', 'cofounder', 'co-founder'],
+    question: 'Is she raising money?',
+    answer: [
+      'She is open to investor conversations about the ventures she is developing, but she is not actively fundraising. She is not currently looking for cofounders.',
+    ],
+  },
+  {
+    id: 'kb-modeling-start',
+    keywords: ['modeling', 'model', 'start', 'began', 'why', 'agency', 'signed', 'represented'],
+    question: 'How did she get into modeling?',
+    answer: [
+      'She started modeling while she was a student at Virginia Tech. She was drawn to the creative process and liked having a visual, collaborative form of expression alongside her technical work.',
+      'She is open to a broad range of modeling work rather than one narrow category. There is no public information here about agency representation.',
+    ],
+  },
+  {
+    id: 'kb-private',
+    keywords: ['address', 'phone', 'age', 'birthday', 'salary', 'visa', 'immigration', 'health', 'relationship', 'private', 'personal'],
+    question: 'Can you share personal details?',
+    answer: [
+      'That is not something this portfolio covers. I can tell you about her education, research, work experience, ventures, and creative work, and you can reach her at kinjalpandey18@gmail.com.',
+    ],
+  },
   {
     id: 'who',
     question: 'Who is Kinjal?',
@@ -68,7 +125,7 @@ export const ENTRIES: Entry[] = [
     ],
     answer: [
       'M.S. in Computer Science at the University of Massachusetts Amherst, started August 2025, with a concentration in field experience.',
-      'B.S. in Computer Science with a minor in Mathematics from Virginia Tech, completed June 2022 — she graduated early.',
+      'B.S. in Computer Science with a minor in Mathematics from Virginia Tech, completed June 2022, she graduated early.',
       'Her coursework spans machine learning, cryptography, and data science, alongside AI policy and ethics.',
     ],
   },
@@ -80,7 +137,7 @@ export const ENTRIES: Entry[] = [
       'bachelor', 'hokie', 'early',
     ],
     answer: [
-      'Virginia Tech is where her B.S. in Computer Science with a Mathematics minor came from, finished June 2022 — early.',
+      'Virginia Tech is where her B.S. in Computer Science with a Mathematics minor came from, finished June 2022 to early.',
       'While there she led the Google Developer Student Club chapter, served as a Microsoft Learn and IBM Z ambassador, researched cryptography with the Commonwealth Cyber Initiative, and co-led a machine-learning smart calendar prototype.',
       'She also worked as a Student Leader supporting 2,000+ residents and spent over a year as a Peer Mentor, and completed the Undergraduate Career Bridge Experience.',
     ],
@@ -97,7 +154,7 @@ export const ENTRIES: Entry[] = [
     answer: [
       'Her publication is "Chain-of-Sanitized-Thoughts: Plugging PII Leakage in CoT of Large Reasoning Models."',
       'The problem it addresses: a reasoning model can produce a careful final answer while its chain-of-thought quietly exposes the personal data it reasoned over. The reasoning trace becomes the leak.',
-      'The work looks at sanitizing that intermediate reasoning without degrading the reasoning quality itself — privacy and capability at the same time, rather than one traded for the other.',
+      'The work looks at sanitizing that intermediate reasoning without degrading the reasoning quality itself, privacy and capability at the same time, rather than one traded for the other.',
     ],
   },
   {
@@ -123,9 +180,9 @@ export const ENTRIES: Entry[] = [
       'working', 'doing', 'busy', 'next', 'summer', '2026',
     ],
     answer: [
-      'Two things in parallel. She was selected for the UMass CICS Open-Source Apprenticeship Program, Summer 2026 cohort — a competitive, mentor-guided program pairing students with experienced open-source contributors to work on established projects.',
+      'Two things in parallel. She was selected for the UMass CICS Open-Source Apprenticeship Program, Summer 2026 cohort, a competitive, mentor-guided program pairing students with experienced open-source contributors to work on established projects.',
       "She's also a Data Scientist with the UMass Center for Data Science and Artificial Intelligence, in the 2026 Data Science for the Common Good program, partnered with the Boston Cyclists Union.",
-      'That project supports safer and more equitable biking infrastructure in Boston — turning urban mobility and transportation-safety data into insights that hold up in policy conversations.',
+      'That project supports safer and more equitable biking infrastructure in Boston, turning urban mobility and transportation-safety data into insights that hold up in policy conversations.',
     ],
   },
   {
@@ -137,7 +194,7 @@ export const ENTRIES: Entry[] = [
     ],
     answer: [
       'Through the Data Science for the Common Good program at UMass, she works with the Boston Cyclists Union on safer, more accessible, and more equitable biking infrastructure.',
-      'The work is data-driven analysis of urban mobility and transportation safety, framed for community advocacy — translating complex datasets into something stakeholders and policymakers can actually act on.',
+      'The work is data-driven analysis of urban mobility and transportation safety, framed for community advocacy, translating complex datasets into something stakeholders and policymakers can actually act on.',
       "It's the clearest example of the pattern in her work: technical rigor pointed at a public-interest problem.",
     ],
   },
@@ -156,7 +213,7 @@ export const ENTRIES: Entry[] = [
     keywords: ['ibm', 'mainframe', 'zxplore', 'batch'],
     answer: [
       'She was an IBM Z Student Ambassador from late 2023 to mid 2024, designing and delivering workshops on mainframe security, data pipelines, and batch processing.',
-      'Her angle was connecting mainframe principles to modern AI/ML workflows — showing how legacy systems underpin scalable data handling.',
+      'Her angle was connecting mainframe principles to modern AI/ML workflows, showing how legacy systems underpin scalable data handling.',
     ],
   },
   {
@@ -212,7 +269,7 @@ export const ENTRIES: Entry[] = [
     ],
     answer: [
       'She was an AI Intern at CodSoft in early 2024, working remotely.',
-      'She built small projects across core AI domains — natural language processing, computer vision, and neural networks — applying algorithms to real use cases and documenting the work publicly on GitHub.',
+      'She built small projects across core AI domains (natural language processing, computer vision, and neural networks), applying algorithms to real use cases and documenting the work publicly on GitHub.',
     ],
   },
   {
@@ -292,7 +349,7 @@ export const ENTRIES: Entry[] = [
       'unique', 'different', 'value', 'bring', 'candidate', 'fit',
     ],
     answer: [
-      'Three things sit together in her record that usually do not. Research depth — a publication on privacy leakage in reasoning models. Applied delivery — production-shaped data science with a real civic partner. And communication — three simultaneous ambassadorships spent teaching other people to build.',
+      'Three things sit together in her record that usually do not. Research depth, a publication on privacy leakage in reasoning models. Applied delivery, production-shaped data science with a real civic partner. And communication, three simultaneous ambassadorships spent teaching other people to build.',
       'She also finishes ahead of schedule: an early Virginia Tech graduation, with a math minor attached.',
       'The consistent thread is systems-level thinking. Mainframe fundamentals connected to modern ML, coding theory connected to secure pipelines, urban data connected to policy. She looks for where the layers meet.',
     ],
@@ -307,7 +364,7 @@ export const ENTRIES: Entry[] = [
     ],
     answer: [
       'Email: kinjalpandey18@gmail.com',
-      'LinkedIn: linkedin.com/in/kinjalpandey — she also writes at medium.com/@kinjalpandey18.',
+      'LinkedIn: linkedin.com/in/kinjalpandey, she also writes at medium.com/@kinjalpandey18.',
       'She is based in Amherst, Massachusetts.',
     ],
   },
@@ -331,7 +388,7 @@ export const ENTRIES: Entry[] = [
       'apprenticeship', 'cics', 'github', 'community', 'collaborate',
     ],
     answer: [
-      'She was selected for the UMass CICS Open-Source Apprenticeship Program, Summer 2026 cohort — a competitive program connecting students with experienced open-source contributors and industry mentors.',
+      'She was selected for the UMass CICS Open-Source Apprenticeship Program, Summer 2026 cohort, a competitive program connecting students with experienced open-source contributors and industry mentors.',
       'The apprenticeship focuses on contributing to established projects while strengthening software engineering practice: source control, contribution workflows, technical communication, and engagement with maintainer communities.',
     ],
   },
@@ -356,7 +413,7 @@ export const ENTRIES: Entry[] = [
     ],
     answer: [
       'Her AI productivity calendar was covered by NRV News as a student-built tool.',
-      'She was also featured in coverage of the Eric Carle Museum, where fashion met illustration — the modeling side of her work.',
+      'She was also featured in coverage of the Eric Carle Museum, where fashion met illustration, the modeling side of her work.',
       'She writes at medium.com/@kinjalpandey18.',
     ],
   },
@@ -420,9 +477,9 @@ export function retrieve(query: string): Match | null {
         else if (token.startsWith(keyword) && keyword.length >= 4) score += 1;
       }
     }
-    // Normalise a little so keyword-heavy entries don't always win.
-    const normalised = score / Math.sqrt(entry.keywords.length);
-    if (!best || normalised > best.score) best = { entry, score: normalised };
+    // Normalize a little so keyword-heavy entries don't always win.
+    const normalized = score / Math.sqrt(entry.keywords.length);
+    if (!best || normalized > best.score) best = { entry, score: normalized };
   }
 
   return best && best.score >= 0.5 ? best : null;

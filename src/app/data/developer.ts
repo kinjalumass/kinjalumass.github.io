@@ -1,6 +1,6 @@
 /**
  * Content for the developer landing page (/developer).
- * Sourced from Kinjal's LinkedIn profile — edit freely, the page follows.
+ * Sourced from Kinjal's LinkedIn profile, edit freely, the page follows.
  */
 
 export interface Stat {
@@ -16,7 +16,7 @@ export interface Track {
   lines: string[];
   /** Optional image path relative to the site root */
   image?: string;
-  /** Optional outbound link — a repository, a paper */
+  /** Optional outbound link, a repository, a paper */
   link?: { label: string; href: string };
 }
 
@@ -57,10 +57,12 @@ export const HERO = {
 };
 
 export const INTRO = {
-  headline: 'Building systems that are secure, transparent, and worth trusting.',
+  headline: 'Building systems at the intersection of AI, security, and real-world impact.',
   body:
-    "Master's student in Computer Science at UMass Amherst, after graduating early from Virginia Tech with a B.S. in CS and a minor in Mathematics. " +
-    'My work sits where machine learning meets privacy, security, and public interest — rigorous math on one side, real deployments and real people on the other.',
+    "I'm a Computer Science master's student at UMass Amherst, with a B.S. in Computer Science from Virginia Tech. " +
+    'My work spans machine learning, privacy, security, and responsible AI, with a focus on turning technical ideas ' +
+    'into systems that are useful, trustworthy, and built for real people. Beyond research and engineering, ' +
+    "I'm also interested in entrepreneurship and building technology around problems worth solving.",
 };
 
 export const STATS: Stat[] = [
@@ -81,7 +83,7 @@ export const SECTIONS: SectionCard[] = [
     label: 'education',
     title: 'Education',
     blurb:
-      'Two computer-science degrees, the first finished a year early, with the actual coursework behind each one.',
+      'Graduate and undergraduate computer science education at UMass Amherst and Virginia Tech, with coursework, transcripts, and technical certifications.',
     peek: ['UMass Amherst · M.S.', 'Virginia Tech · B.S.', 'Coursework', 'Transcripts', 'Certifications'],
     meta: '2 degrees · 9 certifications',
   },
@@ -91,9 +93,9 @@ export const SECTIONS: SectionCard[] = [
     label: 'experience',
     title: 'Experience',
     blurb:
-      'Research labs, consulting engagements, and three ambassadorships — what each role actually involved.',
+      'Research, data science, consulting, software engineering, and technology leadership across academic, industry, and community-focused roles.',
     peek: ['UMass CDSAI', 'Steve Fisher Consulting', 'SkyIT', 'Microsoft', 'IBM', 'Google'],
-    meta: '16 roles · 2022 — present',
+    meta: '16 roles · 2022 to present',
   },
   {
     index: '03',
@@ -101,7 +103,7 @@ export const SECTIONS: SectionCard[] = [
     label: 'projects',
     title: 'Projects',
     blurb:
-      'Pulled live from GitHub, so every project on the page has a repository you can open and read.',
+      'Technical work across AI, data science, software engineering, and security, with source code and active repositories available directly through GitHub.',
     peek: ['Boston Cyclists Union', 'MediaTagger', 'Cryptography', 'Live from GitHub'],
     meta: 'Repos only',
   },
@@ -111,9 +113,9 @@ export const SECTIONS: SectionCard[] = [
     label: 'honors',
     title: 'Honors & awards',
     blurb:
-      'Publications, scholarships, and the competitive programmes that selected her.',
+      'Research publications, academic honors, scholarships, and selective programs recognizing work across computing, research, leadership, and innovation.',
     peek: ['arXiv:2601.05076', "Dean's List with Distinction", 'Undergraduate Research Excellence', 'Scholarships'],
-    meta: '6 honors · 3 selections',
+    meta: '8 honors · 4 selections',
   },
   {
     index: '05',
@@ -121,7 +123,7 @@ export const SECTIONS: SectionCard[] = [
     label: 'resume',
     title: 'Résumé',
     blurb:
-      'Three versions, weighted differently depending on what you are hiring for. Preview in place or download.',
+      'Role-focused versions highlighting experience in AI/ML, software engineering, and data science, available to preview or download.',
     peek: ['AI / ML', 'Software Engineering', 'Data Science', 'PDF download'],
     meta: '3 versions',
   },
@@ -131,7 +133,7 @@ export const SECTIONS: SectionCard[] = [
     label: 'contact',
     title: 'Contact',
     blurb:
-      'Where to reach her, what she is currently open to, and how quickly she tends to reply.',
+      'Ways to connect for professional opportunities, collaborations, research, and other inquiries, with current availability and preferred contact channels.',
     peek: ['Email', 'LinkedIn', 'GitHub', 'Availability'],
     meta: 'Open to roles',
   },
@@ -140,13 +142,13 @@ export const SECTIONS: SectionCard[] = [
 export const TRACKS: Track[] = [
   {
     tag: 'FLAGSHIP',
-    title: 'Boston Cyclists Union — graph analysis',
+    title: 'Boston Cyclists Union: graph analysis',
     org: 'UMass Center for Data Science and AI',
     window: 'Data Science for the Common Good, 2026',
     lines: [
       'Graph analysis over Boston’s road and cycling network, in partnership with the Boston Cyclists Union.',
       'Turning urban mobility and road-safety data into evidence that holds up in a policy conversation.',
-      'Built reproducibly — DVC pipeline, pytest suite, CI on every pull request.',
+      'Built reproducibly, DVC pipeline, pytest suite, CI on every pull request.',
     ],
     link: {
       label: 'Five case studies',
@@ -167,7 +169,7 @@ export const TRACKS: Track[] = [
     tag: 'RESEARCH',
     title: 'Coding & Cryptography',
     org: 'Commonwealth Cyber Initiative, SW Virginia',
-    window: '2023 — 2024',
+    window: '2023 to 2024',
     lines: [
       'Built anomaly-detection algorithms and secure data pipelines for sensitive information.',
       'Designed fault-tolerant encoding from coding theory; published and presented findings.',
@@ -175,7 +177,7 @@ export const TRACKS: Track[] = [
   },
   {
     tag: 'PRIVACY',
-    title: 'MediaTagger — membership inference',
+    title: 'MediaTagger: membership inference',
     org: 'COMPSCI 690F · Trustworthy and Responsible AI',
     window: '2025',
     lines: [
@@ -191,7 +193,7 @@ export const TRACKS: Track[] = [
     tag: 'OPEN SOURCE',
     title: 'Open-Source Apprentice',
     org: 'UMass CICS',
-    window: '2026 — present',
+    window: '2026 to present',
     lines: [
       'Competitive mentor-guided cohort contributing to established open-source projects.',
       'Source control, contribution workflows, technical communication, community.',
@@ -201,7 +203,7 @@ export const TRACKS: Track[] = [
     tag: 'ADVOCACY',
     title: 'Google · Microsoft · IBM',
     org: 'DSC Lead · Learn Ambassador · Z Ambassador',
-    window: '2023 — 2024',
+    window: '2023 to 2024',
     lines: [
       'Ran hackathons, bootcamps, and workshops on Google Cloud, Azure, AI, and IBM Z.',
       'Connected mainframe fundamentals to modern ML pipelines for hundreds of students.',
@@ -220,7 +222,7 @@ export const TRACKS: Track[] = [
 ];
 
 export const TIMELINE: TimelineRow[] = [
-  { year: '2026', org: 'UMass CICS', role: 'Course Grader — Trustworthy & Responsible AI' },
+  { year: '2026', org: 'UMass CICS', role: 'Course Grader: Trustworthy & Responsible AI' },
   { year: '2026', org: 'UMass CICS', role: 'Open-Source Apprentice' },
   { year: '2026', org: 'UMass CDSAI', role: 'Data Scientist' },
   { year: '2025', org: 'Steve Fisher Consulting', role: 'Technology Consultant' },

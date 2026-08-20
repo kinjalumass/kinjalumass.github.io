@@ -31,8 +31,8 @@
 
        GitHub Pages serves static files and cannot set response headers, so
        everything enforceable from the document itself is set here. The two
-       that genuinely cannot be done this way — Strict-Transport-Security and
-       X-Frame-Options — are covered by GitHub's "Enforce HTTPS" setting and
+       that genuinely cannot be done this way: Strict-Transport-Security and
+       X-Frame-Options: are covered by GitHub's "Enforce HTTPS" setting and
        by frame-ancestors below, which supersedes X-Frame-Options anyway.
        =================================================================== -->
 
@@ -45,7 +45,7 @@
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: blob:;
-    connect-src 'self' https://api.github.com https://kinjal-assistant.kinjalpandey.workers.dev;
+    connect-src 'self' https://api.github.com https://kinjal-assistant.kinjalpandey.workers.dev https://api.emailjs.com;
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'none';
@@ -56,7 +56,11 @@
   <!-- Don't leak the full URL to third parties -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Monogram, not Angular's default. SVG first for crisp rendering at any
+       size, .ico as the fallback older browsers and Windows still ask for. -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="48x48" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,7 +71,7 @@
        Structured data
 
        This is what tells Google that the site, the LinkedIn profile, the
-       GitHub account and the arXiv paper are all the same person — which is
+       GitHub account and the arXiv paper are all the same person: which is
        the thing that decides whether a name search returns one strong result
        or several weak ones. `sameAs` does most of that work.
        =================================================================== -->

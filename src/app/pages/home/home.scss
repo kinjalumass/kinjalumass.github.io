@@ -255,14 +255,14 @@
   .panel__ordinal,
   .panel__edge { color: rgba(26, 22, 24, 0.42); }
 
-  /* Grey wash pulled across the paper */
+  /* Gray wash pulled across the paper */
   .panel__spot { mix-blend-mode: multiply; }
 
   &:not(:first-child)::before { background: rgba(26, 22, 24, 0.14); }
 }
 
 /* Cursor tint. Screen on the two dark tiles so it reads as light; multiply on
-   the model tile so it reads as a wash of colour across paper. */
+   the model tile so it reads as a wash of color across paper. */
 .panel__spot {
   position: absolute;
   inset: 0;

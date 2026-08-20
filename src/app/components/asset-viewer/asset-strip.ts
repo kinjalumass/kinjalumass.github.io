@@ -4,7 +4,7 @@ import { AssetService } from './asset.service';
 
 /**
  * Row of clickable tiles for a set of attached documents and photos.
- * Images render as thumbnails; PDFs render as labelled document chips.
+ * Images render as thumbnails; PDFs render as labeled document chips.
  */
 @Component({
   selector: 'app-asset-strip',

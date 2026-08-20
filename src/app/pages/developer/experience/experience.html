@@ -1,10 +1,10 @@
 <div class="dev-page">
   <header class="dev-head">
-    <span class="dev-eyebrow">// 02 — experience</span>
+    <span class="dev-eyebrow">// 02: experience</span>
     <h1 class="dev-title">Experience</h1>
     <p class="dev-lede">
       {{ total }} roles across research, applied data science, developer advocacy, and
-      community leadership — three of them running at the same time.
+      community leadership, three of them running at the same time.
     </p>
   </header>
 
@@ -42,7 +42,7 @@
               [href]="role.url"
               target="_blank"
               rel="noopener noreferrer"
-              [attr.aria-label]="role.org + ' — opens the organisation website in a new tab'"
+              [attr.aria-label]="role.org + ': opens the organization website in a new tab'"
             >{{ role.org }}<span class="role__org-arrow" aria-hidden="true">↗</span></a>
           } @else {
             {{ role.org }}

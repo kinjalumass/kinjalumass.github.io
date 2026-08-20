@@ -55,15 +55,15 @@ export const KEEP_FORKS = new Set(['BCU-Graph-Analysis']);
  */
 export const NOTES: Record<string, Note> = {
   'BCU-Graph-Analysis': {
-    title: 'Boston Cyclists Union — graph analysis',
+    title: 'Boston Cyclists Union: graph analysis',
     blurb:
-      'Data science for safer and more equitable biking infrastructure in Boston, built with the Boston Cyclists Union through the 2026 Data Science for the Common Good programme. Graph analysis over the city road and cycling network, turning urban mobility and road-safety data into evidence that holds up in a policy conversation. Engineered as a reproducible project rather than a notebook dump: a DVC pipeline, a pytest suite, GitHub Actions running tests on every pull request, and Sphinx documentation.',
+      'Data science for safer and more equitable biking infrastructure in Boston, built with the Boston Cyclists Union through the 2026 Data Science for the Common Good program. Graph analysis over the city road and cycling network, turning urban mobility and road-safety data into evidence that holds up in a policy conversation. Engineered as a reproducible project rather than a notebook dump: a DVC pipeline, a pytest suite, GitHub Actions running tests on every pull request, and Sphinx documentation.',
     topics: ['Python', 'Graph analysis', 'DVC', 'pytest', 'CI', 'Civic data'],
     featured: true,
     rank: 0,
   },
   CS690FStartup: {
-    title: 'MediaTagger — membership inference',
+    title: 'MediaTagger: membership inference',
     blurb:
       'Built for COMPSCI 690F, Trustworthy and Responsible AI. A synthetic image-and-caption dataset of ten classes, a baseline classifier trained on it, and membership inference attacks run against that classifier to test what it leaks about its own training data. The same question as her published research, approached from the attack side.',
     topics: ['Python', 'Jupyter', 'Privacy', 'Membership inference', 'ML security'],
@@ -71,13 +71,13 @@ export const NOTES: Record<string, Note> = {
     rank: 1,
   },
   CryptoProj1: {
-    title: 'Cryptography — project 1',
+    title: 'Cryptography: project 1',
     blurb:
       'Implementation work from MATH 4175, Cryptography at Virginia Tech: classical and symmetric-key ciphers built from the primitives rather than called from a library.',
     topics: ['Python', 'Cryptography'],
   },
   'Crypto-Proj2': {
-    title: 'Cryptography — project 2',
+    title: 'Cryptography: project 2',
     blurb:
       'The second cryptography project from MATH 4175, continuing into cryptanalysis and public-key constructions.',
     topics: ['Python', 'Cryptography'],
@@ -85,21 +85,21 @@ export const NOTES: Record<string, Note> = {
   'kinjalumass.github.io': {
     title: 'This website',
     blurb:
-      'Angular 22, built from scratch. Three sections with separate design languages, lazy-loaded per route, and an assistant grounded in a corpus generated from the same data that renders the pages — running on Cloudflare Workers AI.',
+      'Angular 22, built from scratch. Three sections with separate design languages, lazy-loaded per route, and an assistant grounded in a corpus generated from the same data that renders the pages, running on Cloudflare Workers AI.',
     topics: ['Angular', 'TypeScript', 'SCSS', 'Cloudflare Workers'],
     featured: true,
   },
   'Project-Report-3-602-Phenomena-Exploration': {
-    title: 'Phenomena exploration — COMPSCI 602',
+    title: 'Phenomena exploration: COMPSCI 602',
     blurb:
       'Research methods coursework for COMPSCI 602: exploring a phenomenon empirically and writing it up to the standard the field expects.',
     topics: ['Research methods', 'Data analysis'],
     featured: true,
   },
   CODSOFT: {
-    title: 'Applied AI projects — CodSoft',
+    title: 'Applied AI projects: CodSoft',
     blurb:
-      'The project set built during the CodSoft AI internship, covering natural language processing, computer vision, and neural networks — each taking an algorithm from paper to working code.',
+      'The project set built during the CodSoft AI internship, covering natural language processing, computer vision, and neural networks, each taking an algorithm from paper to working code.',
     topics: ['Python', 'NLP', 'Computer vision', 'Neural networks'],
     featured: true,
   },
@@ -125,12 +125,12 @@ export const NOTES: Record<string, Note> = {
     topics: ['C'],
   },
   '3114-proj2': {
-    title: 'Data structures — project 2',
+    title: 'Data structures: project 2',
     blurb: 'Coursework for CS 3114, Data Structures and Algorithms at Virginia Tech.',
     topics: ['Java', 'Data structures'],
   },
   Proj3: {
-    title: 'Data structures — project 3',
+    title: 'Data structures: project 3',
     blurb: 'Coursework for CS 3114, Data Structures and Algorithms at Virginia Tech.',
     topics: ['Java', 'Data structures'],
   },

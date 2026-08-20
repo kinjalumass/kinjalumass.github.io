@@ -28,7 +28,7 @@ export class Model implements OnDestroy {
   protected readonly id = IDENTITY;
   protected readonly stats = STATS;
 
-  /** Keeps a cover-cropped tile centred on the face rather than the torso. */
+  /** Keeps a cover-cropped tile centered on the face rather than the torso. */
   protected readonly focusOf = focusOf;
   protected readonly digitals = DIGITALS;
   protected readonly shoots = SHOOTS;
@@ -64,9 +64,9 @@ export class Model implements OnDestroy {
 
   private readonly frames: Frame[] = [
     ...IDENTITY.hero.map((src) => ({ src, caption: 'Kinjal Pandey' })),
-    ...DIGITALS.map((d) => ({ src: d.src, caption: `Digitals — ${d.label}` })),
+    ...DIGITALS.map((d) => ({ src: d.src, caption: `Digitals, ${d.label}` })),
     ...SHOOTS.flatMap((s) =>
-      s.images.map((src, i) => ({ src, caption: `${s.title} — ${i + 1} of ${s.images.length}` })),
+      s.images.map((src, i) => ({ src, caption: `${s.title}, ${i + 1} of ${s.images.length}` })),
     ),
   ];
 

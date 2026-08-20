@@ -39,7 +39,7 @@ export class ConsoleBot implements OnDestroy {
     this.push(
       'system',
       this.live
-        ? 'Ask anything about Kinjal. Answers come from a model reading her profile — it will tell you when something is outside what it knows.'
+        ? 'Ask anything about Kinjal. Answers come from a model reading her profile, it will tell you when something is outside what it knows.'
         : 'Ask anything about Kinjal. Running offline against a written profile, so answers are brief and factual.',
     );
   }

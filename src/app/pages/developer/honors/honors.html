@@ -1,6 +1,6 @@
 <div class="dev-page">
   <header class="dev-head">
-    <span class="dev-eyebrow">// 04 — honors &amp; awards</span>
+    <span class="dev-eyebrow">// 04: honors &amp; awards</span>
     <h1 class="dev-title">Honors &amp; Awards</h1>
     <p class="dev-lede">
       Academic distinction, scholarships and grants, a publication, and a run of
@@ -63,7 +63,7 @@
                   [href]="pick.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  [attr.aria-label]="pick.title + ' — opens the programme page in a new tab'"
+                  [attr.aria-label]="pick.title + ': opens the program page in a new tab'"
                 >{{ pick.title }}<span class="pick__arrow" aria-hidden="true">↗</span></a>
               } @else {
                 {{ pick.title }}
@@ -88,7 +88,7 @@
           target="_blank"
           rel="noopener noreferrer"
           [style.--stagger]="i"
-          [attr.aria-label]="cert.name + ', ' + cert.issuer + ' — opens the certificate in a new tab'"
+          [attr.aria-label]="cert.name + ', ' + cert.issuer + ': opens the certificate in a new tab'"
         >
           <span class="cert__shot">
             <img
@@ -117,7 +117,7 @@
         </p>
         <ul class="dev-tags">
           @for (cert of undocumented; track cert.name) {
-            <li>{{ cert.name }} <small>— {{ cert.issuer }}</small></li>
+            <li>{{ cert.name }} <small>, {{ cert.issuer }}</small></li>
           }
         </ul>
       </div>
