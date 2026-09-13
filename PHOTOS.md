@@ -35,10 +35,17 @@ files.
 | `model/snow/` | `snow-01` … `snow-04` | Shoot 04 — Snow |
 | `model/black-dress/` | `black-dress-01` … `-03` | Shoot 05 — Little Black Dress |
 | `model/cheer/` | `cheer-01` … `cheer-05` | Shoot 06 — Hokies Cheer |
+| `model/walk/` | `walk-01` + `walk.mp4` | Shoot 07 — The Walk (still + runway clip) |
 | `model/digitals/` | `digital-01` … `digital-06` | The Digitals sheet beside your stats |
 
-**The opening portrait** at the top of the model page is `model/carle/carle-01.jpg`.
+**The opening portrait** at the top of the model page is `model/hero.jpg`.
 To lead with something else, change `IDENTITY.hero` in `src/app/data/model.ts`.
+
+**The Walk** is the one shoot with a video. `model/walk/walk.mp4` plays inline
+with `model/walk/walk-poster.jpg` as its cover frame, beside `walk-01.jpg` as
+the still. The `video` field lives on that shoot's entry in `SHOOTS`
+(`src/app/data/model.ts`) — add the same `{ src, poster }` shape to any other
+shoot that gets a clip.
 
 **Digital labels** are fixed in order — 01 full length, 02 three-quarter,
 03 waist up, 04 headshot, 05 profile, 06 three-quarter face. Swap the files and

@@ -38,6 +38,8 @@ export interface Shoot {
   accent: string;
   /** All frames. The first four show by default, the rest behind "show all". */
   images: string[];
+  /** An optional clip shown beside the stills — a walk, not a still frame. */
+  video?: { src: string; poster: string };
 }
 
 export const IDENTITY = {
@@ -135,7 +137,7 @@ export const SHOOTS: Shoot[] = [
     place: 'Add location',
     year: '',
     note:
-      'Full makeup, styled hair, shallow depth of field, the close work, where the face carries the frame on its own. The opening portrait at the top of this page is from the same sitting.',
+      'Full makeup, styled hair, shallow depth of field, the close work, where the face carries the frame on its own.',
     accent: '206, 96, 128',
     images: frames('beauty', 5),
   },
@@ -174,6 +176,19 @@ export const SHOOTS: Shoot[] = [
       'Collegiate cheer in maroon and orange, field, court, and one obligatory frame with the HokieBird. Add the seasons you competed.',
     accent: '206, 112, 76',
     images: frames('cheer', 5),
+  },
+  {
+    index: '07',
+    slug: 'walk',
+    title: 'The Walk',
+    kind: 'Runway · Movement',
+    place: 'Add location',
+    year: '',
+    note:
+      'A full runway walk shot in the round, brick and window light, the camera holding steady through the turn.',
+    accent: '86, 74, 132',
+    images: frames('walk', 1),
+    video: { src: 'img/model/walk/walk.mp4', poster: 'img/model/walk/walk-poster.jpg' },
   },
 ];
 

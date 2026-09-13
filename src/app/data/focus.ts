@@ -1,35 +1,35 @@
 /**
- * Where the face is in each frame â€” GENERATED, do not hand-edit.
+ * Where the face is in each frame — GENERATED, do not hand-edit.
  *
  * The gallery tiles crop with `object-fit: cover`. Left to itself that crops to
  * the middle of the image, which on a full-length fashion frame is the torso.
- * These values move the crop to the subjectâ€™s face instead, as an
+ * These values move the crop to the subject’s face instead, as an
  * `object-position` pair.
  *
  * Regenerate after adding photos:
  *     python3 tools/face-focus.py
  *
- * The detector is a Haar cascade, so it is not infallible â€” a handful of these
+ * The detector is a Haar cascade, so it is not infallible — a handful of these
  * were corrected by eye where it locked onto another model in a group frame.
  * Those corrections live in `tools/face-focus.py` under OVERRIDE.
  */
 
 export const FOCUS: Record<string, string> = {
   // top level
-  'img/model/hero.jpg': '58% 36%',
+  'img/model/hero.jpg': '46% 20%',
 
   // carle
-  'img/model/carle/carle-01.jpg': '44% 29%',
+  'img/model/carle/carle-01.jpg': '45% 29%',
   'img/model/carle/carle-02.jpg': '50% 28%',
-  'img/model/carle/carle-03.jpg': '64% 70%',
+  'img/model/carle/carle-03.jpg': '64% 69%',
   'img/model/carle/carle-04.jpg': '53% 26%',
   'img/model/carle/carle-05.jpg': '66% 18%',
   'img/model/carle/carle-06.jpg': '60% 18%',
   'img/model/carle/carle-07.jpg': '28% 59%',
-  'img/model/carle/carle-08.jpg': '35% 26%',
+  'img/model/carle/carle-08.jpg': '35% 25%',
   'img/model/carle/carle-09.jpg': '74% 57%',
   'img/model/carle/carle-10.jpg': '42% 26%',
-  'img/model/carle/carle-11.jpg': '78% 44%',
+  'img/model/carle/carle-11.jpg': '78% 43%',
 
   // pagoda
   'img/model/pagoda/pagoda-01.jpg': '47% 58%',
@@ -63,6 +63,10 @@ export const FOCUS: Record<string, string> = {
   'img/model/cheer/cheer-03.jpg': '50% 28%',
   'img/model/cheer/cheer-04.jpg': '52% 29%',
   'img/model/cheer/cheer-05.jpg': '45% 24%',
+
+  // walk
+  'img/model/walk/walk-01.jpg': '50% 21%',
+  'img/model/walk/walk-poster.jpg': '43% 64%',
 
   // digitals
   'img/model/digitals/digital-01.jpg': '54% 15%',

@@ -100,12 +100,22 @@
             {{ shoot.place }}@if (shoot.year) { · {{ shoot.year }} }
           </p>
           <p class="story__note">{{ shoot.note }}</p>
-          <span class="story__tally">{{ shoot.images.length }} frames</span>
+          <span class="story__tally">
+            {{ shoot.images.length }} frame{{ shoot.images.length === 1 ? '' : 's' }}
+            @if (shoot.video) { · plus the walk clip }
+          </span>
         </div>
 
         <div class="story__grid" [class.is-open]="isOpen(shoot.slug)">
+          @if (shoot.video; as clip) {
+            <figure class="plate plate--video" [style.--i]="0">
+              <video [poster]="clip.poster" controls preload="none" playsinline>
+                <source [src]="clip.src" type="video/mp4" />
+              </video>
+            </figure>
+          }
           @for (src of shown(shoot.slug, shoot.images); track src; let i = $index) {
-            <figure class="plate" [style.--i]="i" (click)="open(src)">
+            <figure class="plate" [style.--i]="shoot.video ? i + 1 : i" (click)="open(src)">
               <img
                 [src]="src"
                 [style.object-position]="focusOf(src)"

@@ -51,7 +51,7 @@ OVERRIDE: dict[str, tuple[float, float]] = {
 
 # Order the output the way the page orders the shoots.
 SHOOT_ORDER = [
-    "carle", "pagoda", "beauty", "snow", "black-dress", "cheer", "digitals",
+    "carle", "pagoda", "beauty", "snow", "black-dress", "cheer", "walk", "digitals",
 ]
 
 
