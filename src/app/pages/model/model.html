@@ -38,7 +38,7 @@
   </section>
 
   <!-- ========================================================
-       Spec: stats and digitals side by side on a color block
+       Spec: measurements, the walk, and digitals in three columns
        ======================================================== -->
   <section class="spec">
     <div class="spec__inner">
@@ -55,17 +55,17 @@
             </div>
           }
         </dl>
+      </div>
 
-        <div class="movement">
-          <span class="spec__label">Movement</span>
-          <figure class="movement__clip" (click)="open(walk.src)">
-            <video [poster]="walk.poster" [muted]="true" autoplay loop playsinline preload="auto">
-              <source [src]="walk.src" type="video/mp4" />
-            </video>
-            <figcaption class="movement__cue">Expand</figcaption>
-          </figure>
-          <p class="movement__note">{{ walk.note }}</p>
-        </div>
+      <div class="spec__movement">
+        <span class="spec__label">Movement</span>
+        <figure class="movement__clip" (click)="open(walk.src)">
+          <video [poster]="walk.poster" [muted]="true" autoplay loop playsinline preload="auto">
+            <source [src]="walk.src" type="video/mp4" />
+          </video>
+          <figcaption class="movement__cue">Expand</figcaption>
+        </figure>
+        <p class="movement__note">{{ walk.note }}</p>
       </div>
 
       <div class="spec__digitals">

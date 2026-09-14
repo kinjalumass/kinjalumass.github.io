@@ -280,8 +280,8 @@
 
 .spec__inner {
   display: grid;
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 0.95fr) minmax(0, 1.55fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: start;
   max-width: 92rem;
   margin: 0 auto;
@@ -334,17 +334,13 @@
   }
 }
 
-/* --- the walk clip, under the measurements -------------------------------- */
-
-.movement {
-  margin-top: clamp(2rem, 5vw, 3rem);
-}
+/* --- the walk clip, its own column between stats and digitals ------------- */
 
 .movement__clip {
   position: relative;
   margin: 0;
   width: 100%;
-  max-width: 24rem;
+  max-width: 22rem;
   aspect-ratio: 9 / 16;
   overflow: hidden;
   border-radius: 16px;
