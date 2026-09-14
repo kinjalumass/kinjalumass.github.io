@@ -66,7 +66,7 @@ export const FOCUS: Record<string, string> = {
 
   // walk
   'img/model/walk/walk-01.jpg': '50% 21%',
-  'img/model/walk/walk-poster.jpg': '43% 64%',
+  'img/model/walk/walk-poster.jpg': '48% 22%',
 
   // digitals
   'img/model/digitals/digital-01.jpg': '54% 15%',

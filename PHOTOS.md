@@ -29,13 +29,13 @@ files.
 
 | Folder | Files | Shows as |
 |---|---|---|
-| `model/carle/` | `carle-01` … `carle-11` | Shoot 01 — Fashion Meets Illustration |
-| `model/pagoda/` | `pagoda-01` … `pagoda-06` | Shoot 02 — New England Peace Pagoda |
-| `model/beauty/` | `beauty-01` … `beauty-06` | Shoot 03 — Beauty |
-| `model/snow/` | `snow-01` … `snow-04` | Shoot 04 — Snow |
-| `model/black-dress/` | `black-dress-01` … `-03` | Shoot 05 — Little Black Dress |
-| `model/cheer/` | `cheer-01` … `cheer-05` | Shoot 06 — Hokies Cheer |
-| `model/walk/` | `walk-01` + `walk.mp4` | Shoot 07 — The Walk (still + runway clip) |
+| `model/walk/` | `walk-01` + `walk.mp4` | Shoot 01 — The Walk (still + runway clip) |
+| `model/carle/` | `carle-01` … `carle-11` | Shoot 02 — Fashion Meets Illustration |
+| `model/pagoda/` | `pagoda-01` … `pagoda-06` | Shoot 03 — New England Peace Pagoda |
+| `model/beauty/` | `beauty-01` … `beauty-06` | Shoot 04 — Beauty |
+| `model/snow/` | `snow-01` … `snow-04` | Shoot 05 — Snow |
+| `model/black-dress/` | `black-dress-01` … `-03` | Shoot 06 — Little Black Dress |
+| `model/cheer/` | `cheer-01` … `cheer-05` | Shoot 07 — Hokies Cheer |
 | `model/digitals/` | `digital-01` … `digital-06` | The Digitals sheet beside your stats |
 
 **The opening portrait** at the top of the model page is `model/hero.jpg`.
