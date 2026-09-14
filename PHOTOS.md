@@ -36,16 +36,17 @@ files.
 | `model/black-dress/` | `black-dress-01` … `-03` | Shoot 05 — Little Black Dress |
 | `model/cheer/` | `cheer-01` … `cheer-05` | Shoot 06 — Hokies Cheer |
 | `model/digitals/` | `digital-01` … `digital-06` | The Digitals sheet beside your stats |
-| `model/walk/` | `walk-01` + `walk.mp4` | Appended to the Digitals sheet, not a shoot |
+| `model/walk/` | `walk.mp4` | Under the measurements, not a shoot |
 
 **The opening portrait** at the top of the model page is `model/hero.jpg`.
 To lead with something else, change `IDENTITY.hero` in `src/app/data/model.ts`.
 
-**The walk photo and clip** sit at the end of the Digitals sheet, beside stats
-near the top of the page — reference material, not a story in the book.
-`model/walk/walk.mp4` autoplays muted and looped, with
-`model/walk/walk-poster.jpg` as its first-paint frame, next to `walk-01.jpg`
-as the still. Both come from the `WALK` export in `src/app/data/model.ts`.
+**The walk clip** sits directly under the measurements, in the stats column —
+reference material, not a story in the book. `model/walk/walk.mp4` autoplays
+muted and looped there, with `model/walk/walk-poster.jpg` as its first-paint
+frame, and clicking it opens the same lightbox the photos use, playing larger
+with sound and controls. Both come from the `WALK` export in
+`src/app/data/model.ts`.
 
 **Digital labels** are fixed in order — 01 full length, 02 three-quarter,
 03 waist up, 04 headshot, 05 profile, 06 three-quarter face. Swap the files and

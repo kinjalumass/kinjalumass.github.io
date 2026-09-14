@@ -334,6 +334,60 @@
   }
 }
 
+/* --- the walk clip, under the measurements -------------------------------- */
+
+.movement {
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.movement__clip {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  max-width: 24rem;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 16px;
+  cursor: pointer;
+  background: #0c0a10;
+  box-shadow: 0 30px 70px -36px rgba(var(--rose), 0.55);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+
+  video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 36px 80px -34px rgba(var(--rose), 0.7);
+    .movement__cue { opacity: 1; transform: none; }
+  }
+}
+
+.movement__cue {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translate(-50%, 0.6rem);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(253, 251, 248, 0.92);
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-block);
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.5s var(--ease-out);
+}
+
+.movement__note {
+  margin-top: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 236, 0.5);
+}
+
 /* --- digitals row --------------------------------------------------------- */
 
 /* Three across, two rows — big enough to actually read as photographs. */
@@ -351,14 +405,10 @@
   &:hover {
     transform: translateY(-0.45rem);
     .card__img { box-shadow: 0 24px 50px -26px rgba(0, 0, 0, 0.85); }
-    .card__img img,
-    .card__img video { transform: scale(1.05); }
+    .card__img img { transform: scale(1.05); }
     .card__label { color: rgb(var(--rose)); }
   }
 }
-
-/* the looping walk clip — playing on its own, not a click-to-enlarge frame */
-.card--video { cursor: auto; }
 
 .card__img {
   position: relative;
@@ -368,8 +418,7 @@
   background: color-mix(in srgb, rgb(var(--rose)) 12%, #241e29);
   transition: box-shadow 0.5s;
 
-  img,
-  video { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
+  img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
 }
 
 .card figcaption {

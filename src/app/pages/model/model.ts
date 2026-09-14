@@ -7,6 +7,9 @@ import { BOOKING, DIGITALS, IDENTITY, SHOOTS, STATS, WALK } from '../../data/mod
 interface Frame {
   src: string;
   caption: string;
+  /** Set only for the walk clip — the lightbox renders a <video> instead of an <img>. */
+  video?: boolean;
+  poster?: string;
 }
 
 /** How many frames of each shoot show before "show all". */
@@ -66,7 +69,7 @@ export class Model implements OnDestroy {
   private readonly frames: Frame[] = [
     ...IDENTITY.hero.map((src) => ({ src, caption: 'Kinjal Pandey' })),
     ...DIGITALS.map((d) => ({ src: d.src, caption: `Digitals, ${d.label}` })),
-    { src: WALK.photo.src, caption: `Digitals, ${WALK.photo.label}` },
+    { src: WALK.src, caption: WALK.label, video: true, poster: WALK.poster },
     ...SHOOTS.flatMap((s) =>
       s.images.map((src, i) => ({ src, caption: `${s.title}, ${i + 1} of ${s.images.length}` })),
     ),

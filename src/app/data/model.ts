@@ -83,23 +83,15 @@ export const DIGITALS: Digital[] = [
 ].map((d) => ({ ...d, src: `img/model/${'digitals'}/${d.slug}.jpg` }));
 
 /**
- * The walk — a still and a looping clip, appended to the digitals sheet
- * rather than given a shoot of its own in the book. It isn't a story with a
- * place and a note; it's reference material, same as the digitals above.
+ * The walk — a looping clip shown under the measurements, not a shoot of its
+ * own in the book. It isn't a story with a place and a note; it's reference
+ * material, same as the digitals beside it.
  */
 export const WALK = {
-  photo: {
-    slug: 'walk-01',
-    label: 'Runway walk',
-    note: 'Full length · in motion',
-    src: 'img/model/walk/walk-01.jpg',
-  },
-  video: {
-    label: 'The walk',
-    note: 'Runway · looped',
-    src: 'img/model/walk/walk.mp4',
-    poster: 'img/model/walk/walk-poster.jpg',
-  },
+  label: 'The walk',
+  note: 'Runway · looped',
+  src: 'img/model/walk/walk.mp4',
+  poster: 'img/model/walk/walk-poster.jpg',
 };
 
 /** Builds the frame paths for one shoot. */
