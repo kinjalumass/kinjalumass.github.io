@@ -2,7 +2,7 @@ import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { focusOf } from '../../data/focus';
-import { BOOKING, DIGITALS, IDENTITY, SHOOTS, STATS } from '../../data/model';
+import { BOOKING, DIGITALS, IDENTITY, SHOOTS, STATS, WALK } from '../../data/model';
 
 interface Frame {
   src: string;
@@ -31,6 +31,7 @@ export class Model implements OnDestroy {
   /** Keeps a cover-cropped tile centered on the face rather than the torso. */
   protected readonly focusOf = focusOf;
   protected readonly digitals = DIGITALS;
+  protected readonly walk = WALK;
   protected readonly shoots = SHOOTS;
   protected readonly booking = BOOKING;
   protected readonly visible = VISIBLE;
@@ -65,6 +66,7 @@ export class Model implements OnDestroy {
   private readonly frames: Frame[] = [
     ...IDENTITY.hero.map((src) => ({ src, caption: 'Kinjal Pandey' })),
     ...DIGITALS.map((d) => ({ src: d.src, caption: `Digitals, ${d.label}` })),
+    { src: WALK.photo.src, caption: `Digitals, ${WALK.photo.label}` },
     ...SHOOTS.flatMap((s) =>
       s.images.map((src, i) => ({ src, caption: `${s.title}, ${i + 1} of ${s.images.length}` })),
     ),

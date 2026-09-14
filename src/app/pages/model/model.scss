@@ -351,10 +351,14 @@
   &:hover {
     transform: translateY(-0.45rem);
     .card__img { box-shadow: 0 24px 50px -26px rgba(0, 0, 0, 0.85); }
-    .card__img img { transform: scale(1.05); }
+    .card__img img,
+    .card__img video { transform: scale(1.05); }
     .card__label { color: rgb(var(--rose)); }
   }
 }
+
+/* the looping walk clip — playing on its own, not a click-to-enlarge frame */
+.card--video { cursor: auto; }
 
 .card__img {
   position: relative;
@@ -364,7 +368,8 @@
   background: color-mix(in srgb, rgb(var(--rose)) 12%, #241e29);
   transition: box-shadow 0.5s;
 
-  img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
+  img,
+  video { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
 }
 
 .card figcaption {
@@ -603,18 +608,6 @@
 @keyframes bloom {
   from { opacity: 0; transform: translateY(1.25rem) scale(0.98); }
   to { opacity: 1; transform: none; }
-}
-
-/* the one video tile — a clip, not a click-to-enlarge frame. Selector doubled
-   on .plate so it outweighs the nth-child aspect-ratio rules above. */
-.plate.plate--video {
-  cursor: auto;
-  aspect-ratio: 9 / 16;
-  background: #0c0a10;
-
-  video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  &:hover { transform: none; box-shadow: 0 18px 40px -30px rgba(18, 14, 22, 0.5); }
 }
 
 .plate__n {
@@ -915,16 +908,6 @@
     &:nth-child(5n + 3),
     &:nth-child(5n + 4),
     &:nth-child(5n + 5) { grid-column: span 1; aspect-ratio: 3 / 4; }
-  }
-
-  /* the walk clip stays tall and full-width even in the two-up mobile grid,
-     and its lone companion still runs full-width beneath it rather than
-     stranding a half-width tile beside empty space */
-  .plate.plate--video { grid-column: 1 / -1; aspect-ratio: 9 / 16; }
-
-  .story__grid:has(> .plate--video):has(> .plate:nth-child(2):last-child) > .plate:last-child {
-    grid-column: 1 / -1;
-    aspect-ratio: 4 / 5;
   }
 
   .view__nav { display: none; }

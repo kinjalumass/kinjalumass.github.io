@@ -38,8 +38,6 @@ export interface Shoot {
   accent: string;
   /** All frames. The first four show by default, the rest behind "show all". */
   images: string[];
-  /** An optional clip shown beside the stills — a walk, not a still frame. */
-  video?: { src: string; poster: string };
 }
 
 export const IDENTITY = {
@@ -84,6 +82,26 @@ export const DIGITALS: Digital[] = [
   { slug: 'digital-06', label: 'Three-quarter', note: 'Angled · looking away' },
 ].map((d) => ({ ...d, src: `img/model/${'digitals'}/${d.slug}.jpg` }));
 
+/**
+ * The walk — a still and a looping clip, appended to the digitals sheet
+ * rather than given a shoot of its own in the book. It isn't a story with a
+ * place and a note; it's reference material, same as the digitals above.
+ */
+export const WALK = {
+  photo: {
+    slug: 'walk-01',
+    label: 'Runway walk',
+    note: 'Full length · in motion',
+    src: 'img/model/walk/walk-01.jpg',
+  },
+  video: {
+    label: 'The walk',
+    note: 'Runway · looped',
+    src: 'img/model/walk/walk.mp4',
+    poster: 'img/model/walk/walk-poster.jpg',
+  },
+};
+
 /** Builds the frame paths for one shoot. */
 const frames = (slug: string, n: number): string[] =>
   Array.from(
@@ -92,11 +110,11 @@ const frames = (slug: string, n: number): string[] =>
   );
 
 /**
- * Eight shoots, one per Drive folder. "Museum supplemental" is folded into the
+ * Six shoots, one per Drive folder. "Museum supplemental" is folded into the
  * Eric Carle set because it is the same event.
  *
- * The Walk leads on movement and video before anything else, then the two
- * location editorials, then the concept and athletic sets close.
+ * Ordered strongest first — the two location editorials lead, the concept and
+ * athletic sets close.
  *
  * Years come from the file timestamps. The Carle, pagoda and studio sets are
  * original camera files, so those dates are the shoot dates. The rest arrived
@@ -107,19 +125,6 @@ const frames = (slug: string, n: number): string[] =>
 export const SHOOTS: Shoot[] = [
   {
     index: '01',
-    slug: 'walk',
-    title: 'The Walk',
-    kind: 'Runway · Movement',
-    place: 'Add location',
-    year: '',
-    note:
-      'A full runway walk shot in the round, brick and window light, the camera holding steady through the turn.',
-    accent: '86, 74, 132',
-    images: frames('walk', 1),
-    video: { src: 'img/model/walk/walk.mp4', poster: 'img/model/walk/walk-poster.jpg' },
-  },
-  {
-    index: '02',
     slug: 'carle',
     title: 'Fashion Meets Illustration',
     kind: 'Runway · Editorial',
@@ -131,7 +136,7 @@ export const SHOOTS: Shoot[] = [
     images: frames('carle', 11),
   },
   {
-    index: '03',
+    index: '02',
     slug: 'pagoda',
     title: 'New England Peace Pagoda',
     kind: 'Editorial · On location',
@@ -143,7 +148,7 @@ export const SHOOTS: Shoot[] = [
     images: frames('pagoda', 6),
   },
   {
-    index: '04',
+    index: '03',
     slug: 'beauty',
     title: 'Beauty',
     kind: 'Beauty · Close-up',
@@ -155,7 +160,7 @@ export const SHOOTS: Shoot[] = [
     images: frames('beauty', 5),
   },
   {
-    index: '05',
+    index: '04',
     slug: 'snow',
     title: 'Snow',
     kind: 'Studio · Movement',
@@ -167,7 +172,7 @@ export const SHOOTS: Shoot[] = [
     images: frames('snow', 4),
   },
   {
-    index: '06',
+    index: '05',
     slug: 'black-dress',
     title: 'Little Black Dress',
     kind: 'Test · Natural light',
@@ -179,7 +184,7 @@ export const SHOOTS: Shoot[] = [
     images: frames('black-dress', 3),
   },
   {
-    index: '07',
+    index: '06',
     slug: 'cheer',
     title: 'Hokies Cheer',
     kind: 'Athletic · Uniform',

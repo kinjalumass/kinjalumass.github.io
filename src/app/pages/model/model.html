@@ -76,6 +76,33 @@
               </figcaption>
             </figure>
           }
+
+          <figure class="card" [style.--i]="digitals.length" (click)="open(walk.photo.src)">
+            <div class="card__img">
+              <img
+                [src]="walk.photo.src"
+                [style.object-position]="focusOf(walk.photo.src)"
+                [alt]="walk.photo.label"
+                loading="lazy"
+              />
+            </div>
+            <figcaption>
+              <span class="card__label">{{ walk.photo.label }}</span>
+              <span class="card__note">{{ walk.photo.note }}</span>
+            </figcaption>
+          </figure>
+
+          <figure class="card card--video" [style.--i]="digitals.length + 1">
+            <div class="card__img">
+              <video [poster]="walk.video.poster" [muted]="true" autoplay loop playsinline preload="auto">
+                <source [src]="walk.video.src" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption>
+              <span class="card__label">{{ walk.video.label }}</span>
+              <span class="card__note">{{ walk.video.note }}</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -100,22 +127,12 @@
             {{ shoot.place }}@if (shoot.year) { · {{ shoot.year }} }
           </p>
           <p class="story__note">{{ shoot.note }}</p>
-          <span class="story__tally">
-            {{ shoot.images.length }} frame{{ shoot.images.length === 1 ? '' : 's' }}
-            @if (shoot.video) { · plus the walk clip }
-          </span>
+          <span class="story__tally">{{ shoot.images.length }} frames</span>
         </div>
 
         <div class="story__grid" [class.is-open]="isOpen(shoot.slug)">
-          @if (shoot.video; as clip) {
-            <figure class="plate plate--video" [style.--i]="0">
-              <video [poster]="clip.poster" controls preload="none" playsinline>
-                <source [src]="clip.src" type="video/mp4" />
-              </video>
-            </figure>
-          }
           @for (src of shown(shoot.slug, shoot.images); track src; let i = $index) {
-            <figure class="plate" [style.--i]="shoot.video ? i + 1 : i" (click)="open(src)">
+            <figure class="plate" [style.--i]="i" (click)="open(src)">
               <img
                 [src]="src"
                 [style.object-position]="focusOf(src)"
